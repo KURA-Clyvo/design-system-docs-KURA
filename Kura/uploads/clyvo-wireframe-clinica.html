@@ -1,0 +1,2102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wireframe Lo-Fi · Sistema Clínica · Clyvo Vet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEECE7;
+    --paper:#FFFFFF;
+    --ink:#1A1A1A;
+    --ink-soft:#555555;
+    --ink-mute:#8A8A85;
+    --ink-faint:#BBB6A8;
+    --line:#CCCCCC;
+    --line-soft:#E3DFD3;
+    --note:#C03030;
+    --note-bg:#F8E6E3;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, sans-serif;
+    font-size:14px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"kern","ss01";
+  }
+
+  /* grid paper background */
+  body::before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:-1;
+    background-image:
+      linear-gradient(to right, rgba(0,0,0,.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,.035) 1px, transparent 1px);
+    background-size:16px 16px;
+  }
+
+  .mono{font-family:'JetBrains Mono', ui-monospace, monospace}
+
+  /* =========== Header =========== */
+  .doc-head{
+    max-width:1320px;
+    margin:0 auto;
+    padding:56px clamp(24px,4vw,56px) 32px;
+    border-bottom:1px dashed var(--line);
+  }
+  .doc-head .kicker{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--note);
+    margin-bottom:16px;
+  }
+  .doc-head h1{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:clamp(32px, 4vw, 48px);
+    line-height:1.1;letter-spacing:-.03em;
+    margin:0 0 14px 0;
+    color:var(--ink);
+  }
+  .doc-head .sub{
+    font-size:16px;line-height:1.5;
+    color:var(--ink-soft);max-width:70ch;margin:0 0 28px 0;
+  }
+  .doc-head .meta{
+    display:flex;flex-wrap:wrap;gap:6px 28px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.06em;
+    color:var(--ink-mute);
+    padding-top:20px;
+    border-top:1px solid var(--line-soft);
+  }
+  .doc-head .meta strong{color:var(--ink);font-weight:500}
+
+  /* =========== Legend =========== */
+  .legend{
+    max-width:1320px;
+    margin:0 auto;
+    padding:28px clamp(24px,4vw,56px) 48px;
+    border-bottom:1px dashed var(--line);
+  }
+  .legend-title{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-mute);
+    margin-bottom:16px;
+  }
+  .legend-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:14px;
+  }
+  @media(max-width:900px){ .legend-grid{grid-template-columns:repeat(2, 1fr)} }
+
+  .lg-item{
+    display:flex;flex-direction:column;gap:8px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+  .lg-item .swatch{
+    height:32px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lg-container{border:1px solid var(--line);background:var(--paper);width:100%;height:100%}
+  .lg-content{width:100%;height:12px;background:var(--line-soft)}
+  .lg-image{
+    width:100%;height:100%;
+    border:1px solid var(--line);
+    background:
+      linear-gradient(45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%),
+      linear-gradient(-45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%);
+  }
+  .lg-note{
+    width:100%;background:var(--note-bg);
+    border:1px solid var(--note);border-left:3px solid var(--note);
+    height:100%;display:flex;align-items:center;justify-content:center;
+    color:var(--note);font-weight:600;font-size:10px;
+  }
+  .lg-required{
+    width:100%;color:var(--note);display:flex;align-items:center;gap:4px;
+    justify-content:center;font-size:12px;
+  }
+  .lg-required .ast{color:var(--note);font-size:14px}
+  .lg-optional{color:var(--ink-mute);font-size:11px;font-style:italic}
+
+  /* =========== Group section =========== */
+  .group{
+    max-width:1320px;
+    margin:0 auto;
+    padding:64px clamp(24px,4vw,56px) 48px;
+    border-bottom:1px dashed var(--line);
+  }
+  .group:last-of-type{border-bottom:none}
+  .group-head{
+    margin-bottom:40px;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:20px;
+  }
+  .group-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--note);font-weight:600;
+    padding:4px 10px;border:1px solid var(--note);
+  }
+  .group-title{
+    font-family:'Inter',sans-serif;font-weight:600;
+    font-size:24px;letter-spacing:-.02em;
+    margin:0;
+  }
+  .group-hint{
+    font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--ink-mute);margin-left:auto;
+  }
+
+  /* =========== Screen frame =========== */
+  .screens{
+    display:flex;flex-wrap:wrap;gap:40px 32px;align-items:flex-start;
+  }
+  .screen{
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .screen-cap{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-mute);
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--line);
+  }
+  .screen-cap .n{color:var(--note);font-weight:600}
+  .screen-cap .type{font-style:italic;color:var(--ink-faint);text-transform:none;letter-spacing:0}
+
+  /* mobile device frame */
+  .mobile{
+    width:320px;
+    min-height:640px;
+    background:var(--paper);
+    border:1px solid var(--ink);
+    display:flex;flex-direction:column;
+    position:relative;
+  }
+  .statusbar{
+    height:22px;
+    background:var(--paper);
+    border-bottom:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;align-items:center;
+    padding:0 12px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:var(--ink-mute);
+  }
+  .statusbar::before{content:"09:41"}
+  .statusbar::after{content:"●●● ⌬ 85%"}
+
+  /* desktop frame */
+  .desktop{
+    background:var(--paper);
+    border:1px solid var(--ink);
+    display:flex;
+    width:100%;max-width:940px;min-height:560px;
+  }
+  .desktop.tall{min-height:680px}
+
+  /* sidebar */
+  .sidebar{
+    width:180px;flex-shrink:0;
+    background:var(--bg);
+    border-right:1px solid var(--line);
+    padding:20px 0;
+    display:flex;flex-direction:column;
+  }
+  .sidebar-logo{
+    padding:0 20px 24px;
+    border-bottom:1px dashed var(--line);
+    margin-bottom:16px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.08em;
+    color:var(--ink);font-weight:600;
+  }
+  .sidebar nav{display:flex;flex-direction:column}
+  .sidebar nav a{
+    padding:10px 20px;
+    font-size:13px;color:var(--ink-soft);
+    border-left:3px solid transparent;
+    text-decoration:none;
+    font-family:'Inter',sans-serif;
+  }
+  .sidebar nav a.active{
+    border-left-color:var(--ink);
+    color:var(--ink);font-weight:600;
+    background:var(--paper);
+  }
+
+  .main{flex:1;padding:22px 26px;overflow:hidden;min-width:0}
+  .main-topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:14px;border-bottom:1px solid var(--line-soft);
+    margin-bottom:22px;
+  }
+  .crumb{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--ink-mute);letter-spacing:.06em;
+  }
+
+  /* header (mobile app) */
+  .app-header{
+    padding:10px 14px;border-bottom:1px solid var(--line-soft);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .app-header .tit{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;letter-spacing:.08em;
+    color:var(--ink);font-weight:600;
+  }
+  .app-header .icons{display:flex;gap:8px;color:var(--ink-mute);font-size:14px}
+
+  /* content placeholders */
+  .ph{background:var(--line-soft);border-radius:2px}
+  .ph-line{height:10px;background:var(--line-soft);margin:4px 0;border-radius:2px}
+  .ph-line.w-30{width:30%}
+  .ph-line.w-50{width:50%}
+  .ph-line.w-70{width:70%}
+  .ph-line.w-90{width:90%}
+  .ph-img{
+    background:
+      linear-gradient(45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%),
+      linear-gradient(-45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%);
+    border:1px solid var(--line);
+  }
+  .ph-chart{
+    background:
+      linear-gradient(45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%),
+      linear-gradient(-45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-mute);font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:.08em;
+  }
+  .ph-chart .tag{background:var(--paper);padding:4px 10px;border:1px solid var(--line)}
+
+  /* avatar placeholder */
+  .avatar{
+    width:36px;height:36px;flex-shrink:0;
+    border:1px solid var(--line);
+    background:
+      linear-gradient(45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%),
+      linear-gradient(-45deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%);
+    border-radius:50%;
+  }
+  .avatar.sm{width:28px;height:28px}
+  .avatar.lg{width:72px;height:72px}
+
+  /* form elements */
+  .field{margin-bottom:14px}
+  .field .lbl{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);
+    display:flex;align-items:center;gap:4px;
+    margin-bottom:5px;
+  }
+  .field .lbl.req::after{content:"*";color:var(--note);font-weight:700;font-size:12px}
+  .field .input{
+    width:100%;height:32px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    display:flex;align-items:center;padding:0 10px;
+    font-size:12px;color:var(--ink-mute);font-style:italic;
+  }
+  .field .input.sel::after{content:"▾";margin-left:auto;color:var(--ink-mute);font-style:normal}
+  .field .input.sm{height:28px}
+  .field textarea.input{height:68px;align-items:flex-start;padding-top:8px;font-family:'Inter',sans-serif}
+
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:8px 14px;
+    font-family:'Inter',sans-serif;font-size:12.5px;font-weight:600;
+    border:1px solid var(--ink);
+    background:var(--ink);color:var(--paper);
+    cursor:default;min-height:32px;
+  }
+  .btn.ghost{background:var(--paper);color:var(--ink)}
+  .btn.block{width:100%}
+  .btn-link{
+    display:inline-block;
+    font-size:12px;color:var(--ink-soft);
+    text-decoration:underline;cursor:default;
+    margin-top:8px;
+  }
+
+  /* badges */
+  .badge{
+    display:inline-block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:9.5px;letter-spacing:.06em;
+    padding:2px 7px;border:1px solid var(--line);
+    color:var(--ink-soft);
+    background:var(--paper);
+    white-space:nowrap;
+  }
+  .badge.ok{border-style:solid}
+  .badge.alert{border-color:var(--note);color:var(--note)}
+  .badge.warn{border-style:dashed}
+  .badge.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+  /* chip/tab */
+  .tabs{
+    display:flex;gap:0;border-bottom:1px solid var(--line);
+    margin-bottom:14px;
+    overflow-x:auto;
+  }
+  .tab{
+    padding:8px 14px;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-mute);
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+  }
+  .tab.active{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+
+  /* bottom nav */
+  .bnav{
+    margin-top:auto;
+    border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4, 1fr);
+    background:var(--bg);
+  }
+  .bnav .bn{
+    padding:10px 0;
+    text-align:center;
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;letter-spacing:.06em;
+    color:var(--ink-mute);
+  }
+  .bnav .bn.active{color:var(--ink);font-weight:600;border-top:2px solid var(--ink);margin-top:-1px;padding-top:8px}
+  .bnav .bn-ic{
+    width:18px;height:18px;border:1px solid var(--ink-mute);
+    margin:0 auto 4px;
+  }
+  .bnav .bn.active .bn-ic{border-color:var(--ink)}
+
+  /* metric card */
+  .mcard{
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:14px 16px;
+    min-height:76px;
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .mcard .ml{
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);
+  }
+  .mcard .mv{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:28px;
+    color:var(--ink);line-height:1;margin-top:8px;
+  }
+  .mcard .md{font-size:10.5px;color:var(--ink-mute);margin-top:4px}
+
+  /* list row */
+  .lrow{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 0;
+    border-bottom:1px dashed var(--line-soft);
+  }
+  .lrow:last-child{border-bottom:none}
+  .lrow .body{flex:1;min-width:0}
+  .lrow .body .l1{font-size:12.5px;font-weight:500;color:var(--ink)}
+  .lrow .body .l2{font-size:10.5px;color:var(--ink-mute);margin-top:2px}
+
+  /* table */
+  .tbl{width:100%;border-collapse:collapse;font-size:12px}
+  .tbl th{
+    font-family:'JetBrains Mono',monospace;
+    font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-mute);font-weight:500;
+    text-align:left;padding:8px 10px;
+    border-bottom:1px solid var(--ink);
+  }
+  .tbl td{
+    padding:10px 10px;
+    border-bottom:1px dashed var(--line-soft);
+    vertical-align:middle;
+    color:var(--ink-soft);
+  }
+
+  /* FAB */
+  .fab{
+    position:absolute;bottom:64px;right:14px;
+    width:44px;height:44px;border-radius:50%;
+    background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-size:20px;font-weight:300;line-height:1;
+  }
+
+  /* search bar */
+  .search{
+    width:100%;height:32px;
+    border:1px solid var(--line);background:var(--paper);
+    display:flex;align-items:center;padding:0 10px;gap:8px;
+    font-size:12px;color:var(--ink-mute);font-style:italic;
+  }
+  .search::before{content:"⌕";font-style:normal;color:var(--ink-mute)}
+
+  /* =========== Annotations =========== */
+  .note{
+    margin-top:14px;
+    background:var(--note-bg);
+    border:1px solid var(--note);
+    border-left:3px solid var(--note);
+    padding:10px 12px;
+    font-family:'Inter',sans-serif;
+    font-size:12px;line-height:1.4;
+    color:var(--ink);
+    max-width:320px;
+    position:relative;
+  }
+  .note::before{
+    content:"⚑ ANOT. LÍDER";
+    display:block;
+    font-family:'JetBrains Mono',monospace;
+    font-size:9px;letter-spacing:.12em;
+    color:var(--note);font-weight:700;
+    margin-bottom:4px;
+  }
+  .note code{
+    font-family:'JetBrains Mono',monospace;
+    background:var(--paper);
+    padding:1px 5px;border:1px solid var(--note);
+    font-size:11px;color:var(--ink);
+  }
+
+  /* =========== WhatsApp fake frame (Luna) =========== */
+  .wa{
+    width:320px;min-height:580px;
+    background:#ECE5DD;
+    border:1px solid var(--ink);
+    display:flex;flex-direction:column;
+  }
+  .wa-head{
+    background:var(--ink);color:var(--paper);
+    padding:10px 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .wa-head .av{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--paper);opacity:.35;
+  }
+  .wa-head .tit{
+    font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  }
+  .wa-head .subtit{font-size:9.5px;opacity:.7;font-family:'JetBrains Mono',monospace}
+  .wa-body{
+    flex:1;padding:14px 12px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .bubble{
+    max-width:80%;
+    padding:8px 10px;
+    font-size:11.5px;line-height:1.4;
+    position:relative;
+    border-radius:6px;
+  }
+  .bubble.bot{
+    background:var(--paper);border:1px solid var(--line);
+    align-self:flex-start;
+  }
+  .bubble.user{
+    background:#D9FDD3;border:1px solid #B9E5B0;
+    align-self:flex-end;
+  }
+  .bubble .t{
+    font-family:'JetBrains Mono',monospace;font-size:8.5px;
+    color:var(--ink-mute);display:block;margin-top:4px;
+    text-align:right;
+  }
+  .bubble .qr{
+    display:flex;gap:4px;margin-top:8px;flex-wrap:wrap;
+  }
+  .bubble .qr .r{
+    font-family:'Inter',sans-serif;font-size:11px;font-weight:500;
+    padding:4px 10px;border:1px solid var(--ink);
+    color:var(--ink);background:var(--paper);
+  }
+  .bubble .ai-tag{
+    display:inline-block;margin-top:6px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:var(--note);
+    padding:1px 6px;border:1px solid var(--note);
+  }
+  .wa-input{
+    background:var(--paper);
+    padding:8px 12px;
+    border-top:1px solid var(--line);
+    font-family:'Inter',sans-serif;font-size:11px;font-style:italic;
+    color:var(--ink-mute);
+  }
+
+  /* =========== Nav map SVG =========== */
+  .navmap{
+    max-width:1320px;margin:0 auto;
+    padding:64px clamp(24px,4vw,56px) 48px;
+    border-top:2px solid var(--ink);
+    border-bottom:1px dashed var(--line);
+  }
+  .navmap svg{
+    display:block;
+    width:100%;height:auto;
+    background:var(--paper);
+    border:1px solid var(--line);
+  }
+  .navmap .legend-row{
+    margin-top:20px;
+    display:flex;flex-wrap:wrap;gap:18px;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    color:var(--ink-soft);
+  }
+  .navmap .legend-row .itm{display:flex;align-items:center;gap:8px}
+  .navmap .legend-row .swp{display:inline-block;width:28px;height:2px;background:var(--ink)}
+  .navmap .legend-row .swp.dash{background:transparent;border-top:2px dashed var(--ink)}
+
+  /* =========== Notas Figma =========== */
+  .figma-notes{
+    max-width:1320px;margin:0 auto;
+    padding:56px clamp(24px,4vw,56px) 80px;
+  }
+  .fn-title{
+    font-family:'Inter',sans-serif;font-weight:600;
+    font-size:22px;margin:0 0 24px 0;letter-spacing:-.02em;
+  }
+  .fn-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  }
+  @media(max-width:800px){ .fn-grid{grid-template-columns:1fr} }
+  .fn-col{
+    background:var(--paper);
+    border:1px solid var(--line);
+    padding:20px 22px 24px;
+  }
+  .fn-col .fn-h{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-mute);
+    padding-bottom:10px;border-bottom:1px solid var(--line);
+    margin-bottom:14px;
+  }
+  .fn-col.open .fn-h{color:var(--note)}
+  .fn-col ul{margin:0;padding:0;list-style:none}
+  .fn-col li{
+    padding:10px 0 10px 22px;
+    position:relative;
+    font-size:13.5px;line-height:1.45;
+    color:var(--ink);
+    border-bottom:1px dashed var(--line-soft);
+  }
+  .fn-col li:last-child{border-bottom:none}
+  .fn-col li::before{
+    position:absolute;left:0;top:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+  }
+  .fn-col.closed li::before{content:"✓";color:var(--ink)}
+  .fn-col.open li::before{content:"?";color:var(--note);font-weight:700}
+
+  /* utility */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .stack{display:flex;flex-direction:column;gap:10px}
+  .row{display:flex;gap:10px;align-items:center}
+
+  .scr-wrap-desktop-mobile{
+    display:flex;flex-wrap:wrap;gap:32px 28px;align-items:flex-start;
+  }
+
+  /* sr-only status bar content replacement */
+  .statusbar{position:relative}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ HEADER -->
+<header class="doc-head">
+  <div class="kicker">INTERNO · SPRINT 1 · BACKEND CLÍNICA</div>
+  <h1>Wireframe Lo-Fi · Sistema Clínica · CLYVO VET</h1>
+  <p class="sub">Documento de escopo visual sem cor, tipografia refinada ou estética — só cinzas, retângulos e anotações. Serve como base para o hi-fi no Figma, que o time de UX vai polir a partir destas 17 telas + mapa de navegação.</p>
+  <div class="meta">
+    <div><strong>Autor</strong> · Felipe Ferrete (líder técnico)</div>
+    <div><strong>Data</strong> · 24 · 04 · 2026</div>
+    <div><strong>Versão</strong> · v1 · lo-fi</div>
+    <div><strong>Próxima etapa</strong> · hi-fi Figma · @Guilherme</div>
+  </div>
+</header>
+
+<!-- ============================================================ LEGENDA -->
+<section class="legend">
+  <div class="legend-title">Legenda visual</div>
+  <div class="legend-grid">
+    <div class="lg-item">
+      <div class="swatch"><div class="lg-container"></div></div>
+      <span>Container / card</span>
+    </div>
+    <div class="lg-item">
+      <div class="swatch"><div class="lg-content"></div></div>
+      <span>Placeholder de conteúdo</span>
+    </div>
+    <div class="lg-item">
+      <div class="swatch"><div class="lg-image"></div></div>
+      <span>Imagem / avatar</span>
+    </div>
+    <div class="lg-item">
+      <div class="swatch"><div class="lg-note">ANOT.</div></div>
+      <span>Anotação do líder técnico</span>
+    </div>
+    <div class="lg-item">
+      <div class="swatch"><div class="lg-required"><span class="ast">*</span> campo obrigatório</div></div>
+      <span>Campo obrigatório</span>
+    </div>
+    <div class="lg-item">
+      <div class="swatch"><div class="lg-optional">campo opcional</div></div>
+      <span>Campo opcional</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 1 · ACESSO -->
+<section class="group" id="g1">
+  <div class="group-head">
+    <div class="group-num">Grupo 01</div>
+    <h2 class="group-title">Fluxo de acesso</h2>
+    <div class="group-hint">2 telas · mobile-first · acesso da clínica</div>
+  </div>
+
+  <div class="screens">
+
+    <!-- TELA 01 -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 01</span> · Login da clínica</span>
+        <span class="type">mobile · 320px</span>
+      </div>
+      <div class="mobile">
+        <div class="statusbar"></div>
+        <div style="padding:48px 24px 24px;display:flex;flex-direction:column;align-items:center;gap:24px;flex:1">
+          <div style="width:120px;height:40px;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--ink);font-weight:700;margin-top:40px">CLYVO · VET</div>
+
+          <div style="width:100%;margin-top:20px">
+            <div class="field">
+              <div class="lbl req">email</div>
+              <div class="input">email@clinica.com</div>
+            </div>
+            <div class="field">
+              <div class="lbl req">senha</div>
+              <div class="input">••••••••</div>
+            </div>
+            <button class="btn block" style="margin-top:10px">Entrar</button>
+            <div style="text-align:center"><span class="btn-link">Esqueci minha senha</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="note">Clínica cadastrada pelo admin Clyvo — <strong>não é self-service público</strong>. Onboarding feito em reunião comercial; vet/recep. recebe convite por email.</div>
+    </div>
+
+    <!-- TELA 02 -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 02</span> · Seleção de veterinário</span>
+        <span class="type">mobile · pós-login</span>
+      </div>
+      <div class="mobile">
+        <div class="statusbar"></div>
+        <div class="app-header">
+          <div>
+            <div class="tit">PetLife · Moema</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-mute)">Quem vai atender?</div>
+          </div>
+        </div>
+        <div style="padding:16px;flex:1;display:flex;flex-direction:column;gap:10px">
+          <div class="lrow" style="border:1px solid var(--line);padding:10px;border-radius:2px">
+            <div class="avatar"></div>
+            <div class="body">
+              <div class="l1">Dra. Ana Ribeiro</div>
+              <div class="l2" style="font-family:'JetBrains Mono',monospace">CRMV-SP 12.458</div>
+            </div>
+            <div class="badge">ativo</div>
+          </div>
+          <div class="lrow" style="border:1px solid var(--line);padding:10px;border-radius:2px">
+            <div class="avatar"></div>
+            <div class="body">
+              <div class="l1">Dr. Lucas Martins</div>
+              <div class="l2" style="font-family:'JetBrains Mono',monospace">CRMV-SP 18.221</div>
+            </div>
+            <div class="badge">ativo</div>
+          </div>
+          <div class="lrow" style="border:1px solid var(--line);padding:10px;border-radius:2px">
+            <div class="avatar"></div>
+            <div class="body">
+              <div class="l1">Dra. Camila Tanaka</div>
+              <div class="l2" style="font-family:'JetBrains Mono',monospace">CRMV-SP 22.901</div>
+            </div>
+            <div class="badge">ativo</div>
+          </div>
+          <button class="btn ghost block" style="margin-top:10px">+ Adicionar veterinário</button>
+        </div>
+      </div>
+      <div class="note"><strong>RBAC</strong> — cada vet tem permissões próprias (admin da clínica / vet / recepção / auxiliar). Registro do vet logado fica no AsyncStorage do app móvel.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 2 · DASHBOARD -->
+<section class="group" id="g2">
+  <div class="group-head">
+    <div class="group-num">Grupo 02</div>
+    <h2 class="group-title">Dashboard</h2>
+    <div class="group-hint">desktop (web) + mobile · visão geral do dia</div>
+  </div>
+
+  <div class="scr-wrap-desktop-mobile">
+
+    <!-- TELA 03 - DESKTOP -->
+    <div class="screen" style="flex:1;min-width:600px">
+      <div class="screen-cap">
+        <span><span class="n">Tela 03</span> · Dashboard · desktop</span>
+        <span class="type">940 × 560</span>
+      </div>
+      <div class="desktop">
+        <aside class="sidebar">
+          <div class="sidebar-logo">CLYVO · VET</div>
+          <nav>
+            <a href="#" class="active">◉ Home</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Agenda</a>
+            <a href="#">Prontuário</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+          </nav>
+          <div style="margin-top:auto;padding:16px 20px;border-top:1px dashed var(--line);font-size:10.5px;color:var(--ink-mute);font-family:'JetBrains Mono',monospace">
+            Dra. Ana R.<br>
+            <span style="font-size:9px">CRMV 12.458</span>
+          </div>
+        </aside>
+        <div class="main">
+          <div class="main-topbar">
+            <div class="crumb">HOME › PAINEL DO DIA · 24 · 04 · 26 (QUI)</div>
+            <div class="row">
+              <div class="badge">● online</div>
+              <div class="avatar sm"></div>
+            </div>
+          </div>
+
+          <div class="grid-3" style="margin-bottom:24px">
+            <div class="mcard">
+              <div class="ml">Consultas hoje</div>
+              <div class="mv">12</div>
+              <div class="md">+3 vs ontem</div>
+            </div>
+            <div class="mcard" style="border-color:var(--note);border-width:1px 1px 1px 3px">
+              <div class="ml" style="color:var(--note)">Alertas ativos</div>
+              <div class="mv" style="color:var(--note)">04</div>
+              <div class="md">vacinas vencendo</div>
+            </div>
+            <div class="mcard">
+              <div class="ml">Retornos pendentes</div>
+              <div class="mv">07</div>
+              <div class="md">até sexta-feira</div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px">Últimos atendidos</div>
+              <div style="border-top:1px solid var(--line)">
+                <div class="lrow">
+                  <div class="avatar sm"></div>
+                  <div class="body">
+                    <div class="l1">Luna · Border Collie</div>
+                    <div class="l2">Consulta · 08:30 · Ana R.</div>
+                  </div>
+                  <div class="badge">OK</div>
+                </div>
+                <div class="lrow">
+                  <div class="avatar sm"></div>
+                  <div class="body">
+                    <div class="l1">Thor · Labrador</div>
+                    <div class="l2">Vacina V10 · 09:15 · Ana R.</div>
+                  </div>
+                  <div class="badge">OK</div>
+                </div>
+                <div class="lrow">
+                  <div class="avatar sm"></div>
+                  <div class="body">
+                    <div class="l1">Mia · SRD</div>
+                    <div class="l2">Prescrição · 09:50 · Lucas M.</div>
+                  </div>
+                  <div class="badge alert">revisar</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px">Próximos agendamentos</div>
+              <div style="border-top:1px solid var(--line)">
+                <div class="lrow">
+                  <div style="width:52px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);font-weight:600">10:30</div>
+                  <div class="body">
+                    <div class="l1">Bolt · Poodle</div>
+                    <div class="l2">Retorno · tutor João C.</div>
+                  </div>
+                </div>
+                <div class="lrow">
+                  <div style="width:52px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);font-weight:600">11:00</div>
+                  <div class="body">
+                    <div class="l1">Nina · Persa</div>
+                    <div class="l2">Vacina antirrábica</div>
+                  </div>
+                </div>
+                <div class="lrow">
+                  <div style="width:52px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink);font-weight:600">14:00</div>
+                  <div class="body">
+                    <div class="l1">Rex · Golden Retriever</div>
+                    <div class="l2">Exame sangue · jejum</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Fonte de dados</strong> · todos esses números e listas vêm de uma única chamada: <code>GET /dashboard/hoje?clinicaId=&amp;vetId=</code>. Payload único para reduzir round-trips do mobile.</div>
+    </div>
+
+    <!-- TELA 04 - MOBILE -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 04</span> · Dashboard · mobile</span>
+        <span class="type">bottom nav</span>
+      </div>
+      <div class="mobile">
+        <div class="statusbar"></div>
+        <div class="app-header">
+          <div class="tit">CLYVO · VET</div>
+          <div class="icons mono">◉ ≡</div>
+        </div>
+        <div style="padding:14px;flex:1;display:flex;flex-direction:column;gap:12px">
+          <div class="mcard" style="border-color:var(--note);border-width:1px 1px 1px 3px;padding:12px 14px">
+            <div class="ml" style="color:var(--note)">⚑ Alertas ativos</div>
+            <div class="mv" style="color:var(--note);font-size:22px">4 vacinas vencendo</div>
+            <div class="md">Luna (V10), Thor (gripe), Mia (raiva), Bolt (giárdia)</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute)">Próximos atendimentos</div>
+          <div style="border-top:1px solid var(--line)">
+            <div class="lrow">
+              <div style="width:44px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink);font-weight:600">10:30</div>
+              <div class="body">
+                <div class="l1">Bolt · Poodle</div>
+                <div class="l2">Retorno</div>
+              </div>
+            </div>
+            <div class="lrow">
+              <div style="width:44px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink);font-weight:600">11:00</div>
+              <div class="body">
+                <div class="l1">Nina · Persa</div>
+                <div class="l2">Vacina antirrábica</div>
+              </div>
+            </div>
+            <div class="lrow">
+              <div style="width:44px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink);font-weight:600">14:00</div>
+              <div class="body">
+                <div class="l1">Rex · Golden</div>
+                <div class="l2">Exame sangue</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bnav">
+          <div class="bn active"><div class="bn-ic"></div>Home</div>
+          <div class="bn"><div class="bn-ic"></div>Pacientes</div>
+          <div class="bn"><div class="bn-ic"></div>Agenda</div>
+          <div class="bn"><div class="bn-ic"></div>Prontuário</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 3 · PACIENTES -->
+<section class="group" id="g3">
+  <div class="group-head">
+    <div class="group-num">Grupo 03</div>
+    <h2 class="group-title">Gestão de pacientes</h2>
+    <div class="group-hint">4 telas · lista + prontuário · desktop + mobile</div>
+  </div>
+
+  <div class="scr-wrap-desktop-mobile">
+
+    <!-- TELA 05 - Lista desktop -->
+    <div class="screen" style="flex:1;min-width:600px">
+      <div class="screen-cap">
+        <span><span class="n">Tela 05</span> · Lista de pacientes · desktop</span>
+        <span class="type">tabela + filtros</span>
+      </div>
+      <div class="desktop">
+        <aside class="sidebar">
+          <div class="sidebar-logo">CLYVO · VET</div>
+          <nav>
+            <a href="#">Home</a>
+            <a href="#" class="active">◉ Pacientes</a>
+            <a href="#">Agenda</a>
+            <a href="#">Prontuário</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+          </nav>
+        </aside>
+        <div class="main">
+          <div class="main-topbar">
+            <div class="crumb">PACIENTES › TODOS · 1.247 REGISTROS</div>
+            <button class="btn">+ Novo paciente</button>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 140px 140px 140px;gap:10px;margin-bottom:18px">
+            <div class="search">Buscar por nome, tutor ou CPF…</div>
+            <div class="field" style="margin:0"><div class="input sel">Espécie</div></div>
+            <div class="field" style="margin:0"><div class="input sel">Status</div></div>
+            <div class="field" style="margin:0"><div class="input sel">Veterinário</div></div>
+          </div>
+
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th style="width:36px"></th>
+                <th>Pet</th>
+                <th>Espécie · Raça · Idade</th>
+                <th>Tutor</th>
+                <th>Último atendimento</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="avatar sm"></div></td>
+                <td><strong style="color:var(--ink)">Luna</strong></td>
+                <td>Cão · Border Collie · 3a</td>
+                <td>Marina S.</td>
+                <td>24/04 · Ana R.</td>
+                <td><span class="badge">OK</span></td>
+              </tr>
+              <tr>
+                <td><div class="avatar sm"></div></td>
+                <td><strong style="color:var(--ink)">Thor</strong></td>
+                <td>Cão · Labrador · 5a</td>
+                <td>Paulo M.</td>
+                <td>24/04 · Ana R.</td>
+                <td><span class="badge alert">alerta</span></td>
+              </tr>
+              <tr>
+                <td><div class="avatar sm"></div></td>
+                <td><strong style="color:var(--ink)">Mia</strong></td>
+                <td>Gato · SRD · 7a</td>
+                <td>Juliana F.</td>
+                <td>24/04 · Lucas M.</td>
+                <td><span class="badge warn">vencido</span></td>
+              </tr>
+              <tr>
+                <td><div class="avatar sm"></div></td>
+                <td><strong style="color:var(--ink)">Bolt</strong></td>
+                <td>Cão · Poodle · 2a</td>
+                <td>João C.</td>
+                <td>22/04 · Ana R.</td>
+                <td><span class="badge">OK</span></td>
+              </tr>
+              <tr>
+                <td><div class="avatar sm"></div></td>
+                <td><strong style="color:var(--ink)">Nina</strong></td>
+                <td>Gato · Persa · 4a</td>
+                <td>Rafaela B.</td>
+                <td>20/04 · Camila T.</td>
+                <td><span class="badge">OK</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:12px;border-top:1px solid var(--line-soft)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-mute)">Mostrando 1–20 de 1.247</div>
+            <div class="row">
+              <span class="badge">‹</span>
+              <span class="badge solid">1</span>
+              <span class="badge">2</span>
+              <span class="badge">3</span>
+              <span class="badge">…</span>
+              <span class="badge">63</span>
+              <span class="badge">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>API</strong> · <code>GET /pacientes?page=1&amp;size=20&amp;status=alerta&amp;vetId=</code> · filtros são query params. Status = badge derivado do próximo evento (vacina vencendo em 30d = alerta; vencida = vencido).</div>
+    </div>
+
+    <!-- TELA 06 - Lista mobile -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 06</span> · Lista pacientes · mobile</span>
+        <span class="type">cards + FAB</span>
+      </div>
+      <div class="mobile">
+        <div class="statusbar"></div>
+        <div class="app-header">
+          <div class="tit">PACIENTES</div>
+          <div class="icons mono">⏱ ≡</div>
+        </div>
+        <div style="padding:14px">
+          <div class="search" style="margin-bottom:12px">Buscar por nome ou tutor…</div>
+          <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto">
+            <span class="badge solid">Todos</span>
+            <span class="badge">Cães</span>
+            <span class="badge">Gatos</span>
+            <span class="badge alert">Alertas</span>
+          </div>
+          <div class="stack">
+            <div style="border:1px solid var(--line);padding:10px;display:flex;gap:10px;align-items:center">
+              <div class="avatar"></div>
+              <div class="body" style="flex:1">
+                <div class="l1">Luna</div>
+                <div class="l2">Border Collie · Marina S.</div>
+              </div>
+              <div class="badge">OK</div>
+            </div>
+            <div style="border:1px solid var(--line);padding:10px;display:flex;gap:10px;align-items:center">
+              <div class="avatar"></div>
+              <div class="body" style="flex:1">
+                <div class="l1">Thor</div>
+                <div class="l2">Labrador · Paulo M.</div>
+              </div>
+              <div class="badge alert">alerta</div>
+            </div>
+            <div style="border:1px solid var(--line);padding:10px;display:flex;gap:10px;align-items:center">
+              <div class="avatar"></div>
+              <div class="body" style="flex:1">
+                <div class="l1">Mia</div>
+                <div class="l2">SRD · Juliana F.</div>
+              </div>
+              <div class="badge warn">vencido</div>
+            </div>
+            <div style="border:1px solid var(--line);padding:10px;display:flex;gap:10px;align-items:center">
+              <div class="avatar"></div>
+              <div class="body" style="flex:1">
+                <div class="l1">Bolt</div>
+                <div class="l2">Poodle · João C.</div>
+              </div>
+              <div class="badge">OK</div>
+            </div>
+            <div style="border:1px solid var(--line);padding:10px;display:flex;gap:10px;align-items:center">
+              <div class="avatar"></div>
+              <div class="body" style="flex:1">
+                <div class="l1">Nina</div>
+                <div class="l2">Persa · Rafaela B.</div>
+              </div>
+              <div class="badge">OK</div>
+            </div>
+          </div>
+        </div>
+        <div class="fab">+</div>
+        <div class="bnav">
+          <div class="bn"><div class="bn-ic"></div>Home</div>
+          <div class="bn active"><div class="bn-ic"></div>Pacientes</div>
+          <div class="bn"><div class="bn-ic"></div>Agenda</div>
+          <div class="bn"><div class="bn-ic"></div>Prontuário</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height:48px"></div>
+
+  <div class="scr-wrap-desktop-mobile">
+
+    <!-- TELA 07 - Prontuário desktop -->
+    <div class="screen" style="flex:1;min-width:600px">
+      <div class="screen-cap">
+        <span><span class="n">Tela 07</span> · Prontuário do pet · desktop</span>
+        <span class="type">2 colunas 30/70</span>
+      </div>
+      <div class="desktop tall">
+        <aside class="sidebar">
+          <div class="sidebar-logo">CLYVO · VET</div>
+          <nav>
+            <a href="#">Home</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Agenda</a>
+            <a href="#" class="active">◉ Prontuário</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+          </nav>
+        </aside>
+        <div class="main" style="padding:0;display:flex;flex-direction:row">
+          <!-- col esquerda -->
+          <div style="width:32%;flex-shrink:0;padding:22px;border-right:1px solid var(--line-soft)">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:10px;padding-bottom:20px;border-bottom:1px dashed var(--line)">
+              <div class="ph-img" style="width:120px;height:120px;border-radius:50%"></div>
+              <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:22px;color:var(--ink)">Luna</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-mute);letter-spacing:.06em">ID · PET-00421</div>
+            </div>
+            <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;font-size:12.5px">
+              <div><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">ESPÉCIE</span>Cão</div>
+              <div><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">RAÇA</span>Border Collie</div>
+              <div><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">IDADE · NASC.</span>3a · 12/05/2022</div>
+              <div><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">PESO ATUAL</span>18,4 kg</div>
+              <div><span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">CASTRADO</span>Sim · 2023</div>
+              <div style="padding-top:10px;border-top:1px dashed var(--line-soft)">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">TUTOR</span>
+                <div style="font-weight:500;color:var(--ink)">Marina Silva</div>
+                <div style="font-size:11.5px;color:var(--ink-mute)">(11) 98765-4321</div>
+              </div>
+              <div>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);letter-spacing:.08em;display:block">CLÍNICA</span>
+                PetLife · Moema
+              </div>
+            </div>
+          </div>
+          <!-- col direita -->
+          <div style="flex:1;padding:22px;display:flex;flex-direction:column;min-width:0">
+            <div class="main-topbar" style="margin-bottom:16px;padding-bottom:12px">
+              <div class="crumb">PACIENTES › LUNA · PRONTUÁRIO</div>
+            </div>
+            <div class="tabs">
+              <div class="tab active">Timeline</div>
+              <div class="tab">Vacinas</div>
+              <div class="tab">Receitas</div>
+              <div class="tab">Exames</div>
+              <div class="tab">Peso</div>
+            </div>
+            <div style="flex:1;overflow-y:auto">
+              <div class="lrow">
+                <div style="width:40px;height:40px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px">CON</div>
+                <div class="body">
+                  <div class="l1">Consulta de rotina <span class="badge" style="margin-left:6px">presencial</span></div>
+                  <div class="l2">24/04/2026 · Dra. Ana Ribeiro · sem alterações</div>
+                </div>
+              </div>
+              <div class="lrow">
+                <div style="width:40px;height:40px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px">VAC</div>
+                <div class="body">
+                  <div class="l1">Vacina V10 · dose 2/2 <span class="badge" style="margin-left:6px">presencial</span></div>
+                  <div class="l2">18/03/2026 · Dra. Ana R. · lote #B8821 · vál. 10/2026</div>
+                </div>
+              </div>
+              <div class="lrow">
+                <div style="width:40px;height:40px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px">PRE</div>
+                <div class="body">
+                  <div class="l1">Prescrição · Bravecto <span class="badge warn" style="margin-left:6px">tele-orient.</span></div>
+                  <div class="l2">02/03/2026 · Dr. Lucas M. · antiparasitário</div>
+                </div>
+              </div>
+              <div class="lrow">
+                <div style="width:40px;height:40px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px">EXA</div>
+                <div class="body">
+                  <div class="l1">Exame de sangue <span class="badge" style="margin-left:6px">presencial</span></div>
+                  <div class="l2">28/02/2026 · Lab. externo · hemograma normal</div>
+                </div>
+              </div>
+              <div class="lrow">
+                <div style="width:40px;height:40px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px">CON</div>
+                <div class="body">
+                  <div class="l1">Consulta · coceira recorrente</div>
+                  <div class="l2">15/02/2026 · Dra. Ana R. · dermatite suspeita</div>
+                </div>
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--line);padding-top:14px;margin-top:10px;display:flex;justify-content:flex-end">
+              <button class="btn">+ Registrar evento</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Timeline</strong> · <code>GET /eventos?petId={id}&amp;order=desc</code>. Badge de modalidade (presencial / teleorientação) vem da coluna <code>modalidade</code> do evento — regulamentação CFMV 1.465/2022.</div>
+    </div>
+
+    <!-- TELA 08 - Prontuário mobile -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 08</span> · Prontuário · mobile</span>
+        <span class="type">abas roláveis</span>
+      </div>
+      <div class="mobile">
+        <div class="statusbar"></div>
+        <div class="app-header">
+          <div class="row" style="gap:6px">
+            <span class="mono" style="font-size:13px">‹</span>
+            <div class="tit">Luna</div>
+          </div>
+          <div class="icons mono">⋯</div>
+        </div>
+        <div style="padding:12px 14px;border-bottom:1px solid var(--line-soft);display:flex;gap:10px;align-items:center">
+          <div class="avatar lg"></div>
+          <div>
+            <div style="font-weight:600;color:var(--ink);font-size:14px">Luna</div>
+            <div style="font-size:11px;color:var(--ink-mute)">Border Collie · 3a · 18,4kg</div>
+            <div style="font-size:10.5px;color:var(--ink-mute);font-family:'JetBrains Mono',monospace;margin-top:2px">tutor · Marina S.</div>
+          </div>
+        </div>
+        <div class="tabs" style="padding:0 14px;margin-bottom:0">
+          <div class="tab active">Timeline</div>
+          <div class="tab">Vacinas</div>
+          <div class="tab">Receitas</div>
+          <div class="tab">Exames</div>
+          <div class="tab">Peso</div>
+        </div>
+        <div style="padding:10px 14px;flex:1;overflow-y:auto">
+          <div class="lrow">
+            <div style="width:32px;height:32px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px">CON</div>
+            <div class="body">
+              <div class="l1">Consulta rotina</div>
+              <div class="l2">24/04 · Ana R.</div>
+            </div>
+          </div>
+          <div class="lrow">
+            <div style="width:32px;height:32px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px">VAC</div>
+            <div class="body">
+              <div class="l1">Vacina V10</div>
+              <div class="l2">18/03 · dose 2/2</div>
+            </div>
+          </div>
+          <div class="lrow">
+            <div style="width:32px;height:32px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px">PRE</div>
+            <div class="body">
+              <div class="l1">Bravecto</div>
+              <div class="l2">02/03 · tele</div>
+            </div>
+          </div>
+          <div class="lrow">
+            <div style="width:32px;height:32px;border:1px solid var(--ink);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:9px">EXA</div>
+            <div class="body">
+              <div class="l1">Sangue</div>
+              <div class="l2">28/02 · normal</div>
+            </div>
+          </div>
+        </div>
+        <div class="bnav">
+          <div class="bn"><div class="bn-ic"></div>Home</div>
+          <div class="bn"><div class="bn-ic"></div>Pacientes</div>
+          <div class="bn"><div class="bn-ic"></div>Agenda</div>
+          <div class="bn active"><div class="bn-ic"></div>Prontuário</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 4 · EVENTOS -->
+<section class="group" id="g4">
+  <div class="group-head">
+    <div class="group-num">Grupo 04</div>
+    <h2 class="group-title">Registro de eventos</h2>
+    <div class="group-hint">modal desktop + tela cheia mobile · payload tipado</div>
+  </div>
+
+  <div class="scr-wrap-desktop-mobile">
+
+    <!-- TELA 09 - Modal desktop -->
+    <div class="screen" style="flex:1;min-width:520px">
+      <div class="screen-cap">
+        <span><span class="n">Tela 09</span> · Novo evento · modal desktop</span>
+        <span class="type">overlay sobre prontuário</span>
+      </div>
+      <div style="background:rgba(26,26,26,.08);padding:32px;border:1px solid var(--line);position:relative">
+        <div style="max-width:520px;margin:0 auto;background:var(--paper);border:1px solid var(--ink);padding:24px 26px">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:18px">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute)">PACIENTE · LUNA</div>
+              <div style="font-family:'Inter',sans-serif;font-weight:700;font-size:18px;margin-top:4px">Registrar evento</div>
+            </div>
+            <div class="mono" style="font-size:14px;color:var(--ink-mute)">✕</div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <div class="lbl req">tipo de evento</div>
+              <div class="input sel">Vacina</div>
+            </div>
+            <div class="field">
+              <div class="lbl req">data e hora</div>
+              <div class="input">24/04/2026 · 14:30</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="lbl req">veterinário responsável</div>
+            <div class="input sel">Dra. Ana Ribeiro · CRMV-SP 12.458</div>
+          </div>
+          <div class="field">
+            <div class="lbl">cid-10-vet · classificação</div>
+            <div class="input">⌕ buscar código ou descrição…</div>
+          </div>
+
+          <!-- condicional VACINA -->
+          <div style="border:1px dashed var(--line);padding:12px;background:var(--bg);margin:14px 0">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px">◉ campos condicionais · tipo = Vacina</div>
+            <div class="grid-2">
+              <div class="field" style="margin:0">
+                <div class="lbl req">lote</div>
+                <div class="input">#B8821</div>
+              </div>
+              <div class="field" style="margin:0">
+                <div class="lbl req">validade</div>
+                <div class="input">10/2026</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="lbl">observações</div>
+            <div class="input" style="height:64px;align-items:flex-start;padding-top:8px">Animal reagiu bem à aplicação. Sem sinais de efeito adverso.</div>
+          </div>
+
+          <div style="padding:10px 12px;border:1px solid var(--line);display:flex;align-items:center;gap:10px;margin-bottom:18px">
+            <div style="width:14px;height:14px;border:1px solid var(--ink);background:var(--ink);position:relative"><span style="position:absolute;top:-2px;left:2px;color:var(--paper);font-size:11px">✓</span></div>
+            <div style="flex:1;font-size:12.5px">Notificar tutor via <strong>WhatsApp (Luna)</strong></div>
+            <div class="badge">auto</div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px">
+            <button class="btn ghost">Cancelar</button>
+            <button class="btn">Salvar evento</button>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>API</strong> · <code>POST /eventos</code> · payload discriminado por <code>event_type</code>. Campos condicionais viram estrutura aninhada no JSON (<code>vacina: {lote, validade}</code> · <code>prescricao: {medicamentos[]}</code>). Validação por tipo no backend.</div>
+    </div>
+
+    <!-- TELA 10 - Mobile -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 10</span> · Registrar evento · mobile</span>
+        <span class="type">tela cheia · scroll</span>
+      </div>
+      <div class="mobile">
+        <div class="statusbar"></div>
+        <div class="app-header">
+          <div class="row" style="gap:6px">
+            <span class="mono" style="font-size:13px">✕</span>
+            <div class="tit">NOVO EVENTO</div>
+          </div>
+          <div class="icons mono" style="font-size:10px">LUNA</div>
+        </div>
+        <div style="padding:14px;flex:1;overflow-y:auto">
+          <div class="field">
+            <div class="lbl req">tipo</div>
+            <div class="input sel">Prescrição</div>
+          </div>
+          <div class="field">
+            <div class="lbl req">data · hora</div>
+            <div class="input">24/04/2026 · 14:30</div>
+          </div>
+          <div class="field">
+            <div class="lbl req">veterinário</div>
+            <div class="input sel">Dra. Ana R.</div>
+          </div>
+
+          <div style="border:1px dashed var(--line);padding:10px;background:var(--bg);margin:10px 0">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px">◉ condicional · Prescrição</div>
+            <div class="stack">
+              <div style="display:flex;gap:6px;align-items:center">
+                <div class="input sm" style="flex:1;height:28px">Bravecto · 1 comp.</div>
+                <span class="mono" style="color:var(--note);font-size:14px">−</span>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center">
+                <div class="input sm" style="flex:1;height:28px">Meloxicam · 7 dias</div>
+                <span class="mono" style="color:var(--note);font-size:14px">−</span>
+              </div>
+              <div style="display:flex;justify-content:flex-end"><span class="btn ghost" style="min-height:24px;padding:4px 10px">+ medicamento</span></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="lbl">observações</div>
+            <div class="input" style="height:52px;align-items:flex-start;padding-top:6px">Administrar após refeição…</div>
+          </div>
+
+          <div style="padding:8px 10px;border:1px solid var(--line);display:flex;align-items:center;gap:8px;margin:8px 0">
+            <div style="width:12px;height:12px;border:1px solid var(--ink)"></div>
+            <div style="flex:1;font-size:11.5px">Notificar tutor via Luna</div>
+          </div>
+        </div>
+        <div style="padding:12px 14px;border-top:1px solid var(--line);display:flex;gap:8px">
+          <button class="btn ghost" style="flex:1">Cancelar</button>
+          <button class="btn" style="flex:2">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 5 · AGENDA -->
+<section class="group" id="g5">
+  <div class="group-head">
+    <div class="group-num">Grupo 05</div>
+    <h2 class="group-title">Agenda</h2>
+    <div class="group-hint">desktop · visão semanal</div>
+  </div>
+
+  <div class="screens">
+    <div class="screen" style="flex:1">
+      <div class="screen-cap">
+        <span><span class="n">Tela 11</span> · Agenda semanal · desktop</span>
+        <span class="type">grid 7 dias × horários + lateral</span>
+      </div>
+      <div class="desktop tall">
+        <aside class="sidebar">
+          <div class="sidebar-logo">CLYVO · VET</div>
+          <nav>
+            <a href="#">Home</a>
+            <a href="#">Pacientes</a>
+            <a href="#" class="active">◉ Agenda</a>
+            <a href="#">Prontuário</a>
+            <a href="#">Relatórios</a>
+            <a href="#">Configurações</a>
+          </nav>
+        </aside>
+        <div class="main">
+          <div class="main-topbar">
+            <div class="row" style="gap:14px">
+              <div class="crumb">AGENDA › SEMANA 17 · 2026</div>
+              <span class="badge">‹</span>
+              <span class="mono" style="font-size:11px;color:var(--ink)">20 → 26 abr</span>
+              <span class="badge">›</span>
+            </div>
+            <div class="row">
+              <div class="field" style="margin:0;width:140px"><div class="input sel sm" style="height:28px">Todos vets</div></div>
+              <button class="btn">+ Agendar</button>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 220px;gap:16px">
+            <!-- grid semana -->
+            <div style="border:1px solid var(--line);min-width:0;overflow-x:auto">
+              <div style="display:grid;grid-template-columns:40px repeat(7, 1fr);background:var(--bg);border-bottom:1px solid var(--line)">
+                <div></div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);border-left:1px solid var(--line-soft)">SEG 20</div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);border-left:1px solid var(--line-soft)">TER 21</div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);border-left:1px solid var(--line-soft)">QUA 22</div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);border-left:1px solid var(--line-soft)">QUI 23</div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink);border-left:1px solid var(--line-soft);background:var(--paper);font-weight:700">SEX 24 ●</div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);border-left:1px solid var(--line-soft)">SÁB 25</div>
+                <div style="padding:6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink-mute);border-left:1px solid var(--line-soft)">DOM 26</div>
+              </div>
+              <!-- linhas de horário -->
+              <div style="display:grid;grid-template-columns:40px repeat(7, 1fr)">
+                <!-- 08 -->
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line-soft)">08</div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Thor · Vac</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Mia · Cons</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Luna · Cons</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <!-- 09 -->
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line-soft)">09</div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Nina · Vac</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Thor · Vac</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Rex · Cirur</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <!-- 10 -->
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line-soft)">10</div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Mia · Exa</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Bolt · Ret</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Bolt · Ret</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <!-- 11 -->
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line-soft)">11</div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Nina · Vac</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <!-- 14 -->
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-mute);text-align:right;padding:8px 6px;border-bottom:1px solid var(--line-soft)">14</div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Rex · Exa</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"><div style="border:1px solid var(--ink);background:var(--paper);padding:3px 4px;font-size:9px;line-height:1.15">Rex · Exa</div></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+                <div style="border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);min-height:44px;padding:3px"></div>
+              </div>
+            </div>
+            <!-- lateral -->
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px">Sex 24 · hoje</div>
+              <div style="border-top:1px solid var(--line)">
+                <div class="lrow" style="padding:8px 0">
+                  <div style="width:40px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600">08:00</div>
+                  <div class="body">
+                    <div class="l1" style="font-size:11.5px">Luna · Cons</div>
+                    <div class="l2" style="font-size:10px">Ana R.</div>
+                  </div>
+                </div>
+                <div class="lrow" style="padding:8px 0">
+                  <div style="width:40px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600">09:00</div>
+                  <div class="body">
+                    <div class="l1" style="font-size:11.5px">Thor · Vac</div>
+                    <div class="l2" style="font-size:10px">Ana R.</div>
+                  </div>
+                </div>
+                <div class="lrow" style="padding:8px 0">
+                  <div style="width:40px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600">10:30</div>
+                  <div class="body">
+                    <div class="l1" style="font-size:11.5px">Bolt · Ret</div>
+                    <div class="l2" style="font-size:10px">Ana R.</div>
+                  </div>
+                </div>
+                <div class="lrow" style="padding:8px 0">
+                  <div style="width:40px;text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600">14:00</div>
+                  <div class="body">
+                    <div class="l1" style="font-size:11.5px">Rex · Exa</div>
+                    <div class="l2" style="font-size:10px">Lucas M.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>API</strong> · <code>GET /agenda?semana=2026-W17&amp;vetId=</code>. Conflito de horário (mesmo vet, mesmo slot) valida no backend com erro 409. Arrastar card entre slots = <code>PATCH /agendamentos/{id}</code>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 6 · RELATÓRIOS -->
+<section class="group" id="g6">
+  <div class="group-head">
+    <div class="group-num">Grupo 06</div>
+    <h2 class="group-title">Relatórios</h2>
+    <div class="group-hint">desktop · serve a disciplina de BD</div>
+  </div>
+
+  <div class="screens">
+    <div class="screen" style="flex:1">
+      <div class="screen-cap">
+        <span><span class="n">Tela 12</span> · Dashboard de relatórios · desktop</span>
+        <span class="type">cards + tabela + gráfico</span>
+      </div>
+      <div class="desktop tall">
+        <aside class="sidebar">
+          <div class="sidebar-logo">CLYVO · VET</div>
+          <nav>
+            <a href="#">Home</a>
+            <a href="#">Pacientes</a>
+            <a href="#">Agenda</a>
+            <a href="#">Prontuário</a>
+            <a href="#" class="active">◉ Relatórios</a>
+            <a href="#">Configurações</a>
+          </nav>
+        </aside>
+        <div class="main">
+          <div class="main-topbar">
+            <div class="crumb">RELATÓRIOS › VISÃO GERAL · ABR 2026</div>
+            <button class="btn ghost">↓ Exportar CSV</button>
+          </div>
+
+          <div class="grid-3" style="margin-bottom:22px">
+            <div class="mcard">
+              <div class="ml">Vacinas vencendo · 30d</div>
+              <div class="mv">38</div>
+              <div class="md">pets na zona de alerta</div>
+            </div>
+            <div class="mcard">
+              <div class="ml">Retornos pendentes</div>
+              <div class="mv">21</div>
+              <div class="md">sem confirmação do tutor</div>
+            </div>
+            <div class="mcard">
+              <div class="ml">Sem atendimento · 90d+</div>
+              <div class="mv">127</div>
+              <div class="md">pets sumidos</div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px">Top diagnósticos · CID-10-VET</div>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th style="text-align:right">Casos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="mono">A22.0</td><td>Dermatite atópica</td><td style="text-align:right"><strong>42</strong></td></tr>
+                  <tr><td class="mono">K02.9</td><td>Gengivite / doença periodontal</td><td style="text-align:right"><strong>31</strong></td></tr>
+                  <tr><td class="mono">N39.0</td><td>Infecção urinária</td><td style="text-align:right"><strong>24</strong></td></tr>
+                  <tr><td class="mono">M17.0</td><td>Displasia coxofemoral</td><td style="text-align:right"><strong>18</strong></td></tr>
+                  <tr><td class="mono">J06.9</td><td>Traqueobronquite infecciosa</td><td style="text-align:right"><strong>15</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px">Eventos / mês · últimos 6 meses</div>
+              <div class="ph-chart" style="height:220px"><span class="tag">gráfico de barras · eventos/mês</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note"><strong>Queries de BD</strong> · esta tela serve diretamente a disciplina de Banco Relacional. Cada número é uma query com <code>GROUP BY + ORDER BY</code>. Top CID-10 usa <code>COUNT(*)</code> + join em <code>eventos</code>. Exportar CSV = cursor explícito no backend.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ GRUPO 7 · LUNA -->
+<section class="group" id="g7">
+  <div class="group-head">
+    <div class="group-num">Grupo 07</div>
+    <h2 class="group-title">Fluxo Luna · WhatsApp</h2>
+    <div class="group-hint">5 telas mobile · braço de comunicação</div>
+  </div>
+
+  <div class="screens">
+
+    <!-- TELA 13 - Lembrete -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 13</span> · Lembrete automático</span>
+        <span class="type">disparo por cron</span>
+      </div>
+      <div class="wa">
+        <div class="wa-head">
+          <span class="mono" style="font-size:13px">‹</span>
+          <div class="av"></div>
+          <div>
+            <div class="tit">Luna · Clyvo Vet</div>
+            <div class="subtit">online</div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="bubble bot">
+            Oi Marina! 👋 Passando pra lembrar: a <strong>vacina V10 da Luna</strong> vence em 12 dias. Quer agendar com a PetLife?
+            <span class="t">10:30</span>
+            <div class="qr">
+              <span class="r">Sim</span>
+              <span class="r">Depois</span>
+            </div>
+          </div>
+        </div>
+        <div class="wa-input">Digite uma mensagem</div>
+      </div>
+      <div class="note"><strong>Gatilho</strong> · job noturno dispara quando <code>dias_para_vencer = 12</code>. Texto é template do backend; botões mapeiam para intents. Sem resposta em 48h → nova tentativa.</div>
+    </div>
+
+    <!-- TELA 14 - Resposta -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 14</span> · Resposta e confirmação</span>
+        <span class="type">agendamento</span>
+      </div>
+      <div class="wa">
+        <div class="wa-head">
+          <span class="mono" style="font-size:13px">‹</span>
+          <div class="av"></div>
+          <div>
+            <div class="tit">Luna · Clyvo Vet</div>
+            <div class="subtit">online</div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="bubble bot">
+            Oi Marina! 👋 A vacina V10 da Luna vence em 12 dias. Quer agendar com a PetLife?
+            <span class="t">10:30</span>
+          </div>
+          <div class="bubble user">
+            Sim
+            <span class="t" style="color:#6B8F5A">10:31 ✓✓</span>
+          </div>
+          <div class="bubble bot">
+            Ótimo! <strong>Intenção de agendamento registrada.</strong> A PetLife vai confirmar o horário até amanhã.
+            <span class="t">10:31</span>
+          </div>
+        </div>
+        <div class="wa-input">Digite uma mensagem</div>
+      </div>
+      <div class="note"><code>POST /agendamentos {status: "intencao", origem: "whatsapp", petId, vacinaId}</code>. Recepção confirma no desktop (Tela 11) antes de virar <code>status: "confirmado"</code>.</div>
+    </div>
+
+    <!-- TELA 15 - Histórico -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 15</span> · Consulta de histórico</span>
+        <span class="type">NLU · intent lookup</span>
+      </div>
+      <div class="wa">
+        <div class="wa-head">
+          <span class="mono" style="font-size:13px">‹</span>
+          <div class="av"></div>
+          <div>
+            <div class="tit">Luna · Clyvo Vet</div>
+            <div class="subtit">online</div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="bubble user">
+            Quando foi a última vacina da Luna?
+            <span class="t" style="color:#6B8F5A">14:22 ✓✓</span>
+          </div>
+          <div class="bubble bot">
+            A última foi <strong>antirrábica em 28/10/2025</strong>, lote <span class="mono">#A4421</span>. A próxima está prevista para <strong>outubro de 2026</strong>.
+            <span class="t">14:22</span>
+          </div>
+        </div>
+        <div class="wa-input">Digite uma mensagem</div>
+      </div>
+      <div class="note"><code>GET /eventos?petId=&amp;tipo=vacina&amp;limit=1&amp;order=desc</code>. Luna só responde sobre pets vinculados ao número do WhatsApp (validação via <code>tutor.telefone</code>).</div>
+    </div>
+
+    <!-- TELA 16 - Red flag -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 16</span> · Red flag · sintoma grave</span>
+        <span class="type">conformidade CFMV</span>
+      </div>
+      <div class="wa">
+        <div class="wa-head">
+          <span class="mono" style="font-size:13px">‹</span>
+          <div class="av"></div>
+          <div>
+            <div class="tit">Luna · Clyvo Vet</div>
+            <div class="subtit">online</div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="bubble user">
+            Meu cão vomitou 3 vezes e não está comendo desde ontem
+            <span class="t" style="color:#6B8F5A">08:15 ✓✓</span>
+          </div>
+          <div class="bubble bot" style="border-color:var(--note);background:var(--note-bg)">
+            <strong style="color:var(--note)">⚠ Esses sintomas precisam de avaliação presencial.</strong><br>
+            Leve a Luna à clínica hoje. PetLife Moema: <strong>(11) 99999-0000</strong>. Quer que eu registre essa queixa no histórico?
+            <span class="t">08:15</span>
+            <div class="qr">
+              <span class="r">Registrar</span>
+              <span class="r">Ligar</span>
+            </div>
+          </div>
+        </div>
+        <div class="wa-input">Digite uma mensagem</div>
+      </div>
+      <div class="note"><strong>Sem diagnóstico.</strong> Classificação de urgência apenas. Luna nunca prescreve nem fecha hipótese clínica — <em>conformidade com CFMV 1.465/2022</em>. Triage → orientação presencial sempre.</div>
+    </div>
+
+    <!-- TELA 17 - CV -->
+    <div class="screen">
+      <div class="screen-cap">
+        <span><span class="n">Tela 17</span> · Detecção por câmera · IA</span>
+        <span class="type">visão computacional</span>
+      </div>
+      <div class="wa">
+        <div class="wa-head">
+          <span class="mono" style="font-size:13px">‹</span>
+          <div class="av"></div>
+          <div>
+            <div class="tit">Luna · Clyvo Vet</div>
+            <div class="subtit">online</div>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="bubble user" style="padding:4px;width:180px">
+            <div class="ph-img" style="width:100%;height:140px;border-color:#B9E5B0"></div>
+            <span class="t" style="color:#6B8F5A;padding:0 6px">15:40 ✓✓</span>
+          </div>
+          <div class="bubble bot">
+            Identifiquei: <strong>Labrador Retriever</strong>, adulto. Labradores têm predisposição a <strong>displasia coxofemoral</strong> e <strong>obesidade</strong>. Quando foi o último check-up?
+            <span class="ai-tag">Análise por IA · conf. 92%</span>
+            <span class="t">15:40</span>
+          </div>
+        </div>
+        <div class="wa-input">Digite uma mensagem</div>
+      </div>
+      <div class="note"><strong>Python + YOLOv8 ou MobileNet.</strong> Disciplina Disruptive IoT/IA. Foto → pipeline CV → raça + confiança. Output vira seed para conversa; tutor valida/corrige.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================ MAPA DE NAVEGAÇÃO -->
+<section class="navmap" id="map">
+  <div class="group-head" style="margin-bottom:24px">
+    <div class="group-num">Mapa</div>
+    <h2 class="group-title">Fluxo de navegação entre as 17 telas</h2>
+    <div class="group-hint">linha cheia · fluxo primário · tracejada · secundário</div>
+  </div>
+
+  <svg viewBox="0 0 1240 780" xmlns="http://www.w3.org/2000/svg" aria-label="Mapa de navegação das 17 telas">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#1A1A1A"/>
+      </marker>
+      <marker id="arrR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#C03030"/>
+      </marker>
+      <pattern id="gridp" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E3DFD3" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="1240" height="780" fill="url(#gridp)"/>
+
+    <!-- Grupo 1 · Acesso -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="40" y="58" font-size="10" fill="#8A8A85" letter-spacing="2">GRUPO 01 · ACESSO</text>
+      <rect x="40" y="68" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="100" y="92" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 01</text>
+      <text x="100" y="108" font-size="9" fill="#555" text-anchor="middle">Login clínica</text>
+      <text x="100" y="122" font-size="8" fill="#8A8A85" text-anchor="middle">mobile</text>
+
+      <rect x="180" y="68" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="240" y="92" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 02</text>
+      <text x="240" y="108" font-size="9" fill="#555" text-anchor="middle">Sel. vet (RBAC)</text>
+      <text x="240" y="122" font-size="8" fill="#8A8A85" text-anchor="middle">mobile</text>
+    </g>
+
+    <!-- Grupo 2 · Dashboard -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="380" y="58" font-size="10" fill="#8A8A85" letter-spacing="2">GRUPO 02 · DASHBOARD</text>
+      <rect x="380" y="68" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="440" y="92" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 03</text>
+      <text x="440" y="108" font-size="9" fill="#555" text-anchor="middle">Dash desktop</text>
+      <text x="440" y="122" font-size="8" fill="#8A8A85" text-anchor="middle">web / hub</text>
+
+      <rect x="520" y="68" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="580" y="92" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 04</text>
+      <text x="580" y="108" font-size="9" fill="#555" text-anchor="middle">Dash mobile</text>
+      <text x="580" y="122" font-size="8" fill="#8A8A85" text-anchor="middle">hub mobile</text>
+    </g>
+
+    <!-- Grupo 3 · Pacientes -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="40" y="208" font-size="10" fill="#8A8A85" letter-spacing="2">GRUPO 03 · PACIENTES</text>
+      <rect x="40" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="100" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 05</text>
+      <text x="100" y="258" font-size="9" fill="#555" text-anchor="middle">Lista desktop</text>
+      <text x="100" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">tabela + filtros</text>
+
+      <rect x="180" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="240" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 06</text>
+      <text x="240" y="258" font-size="9" fill="#555" text-anchor="middle">Lista mobile</text>
+      <text x="240" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">cards + FAB</text>
+
+      <rect x="320" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="380" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 07</text>
+      <text x="380" y="258" font-size="9" fill="#555" text-anchor="middle">Prontuário desk</text>
+      <text x="380" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">timeline</text>
+
+      <rect x="460" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="520" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 08</text>
+      <text x="520" y="258" font-size="9" fill="#555" text-anchor="middle">Prontuário mob</text>
+      <text x="520" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">abas</text>
+    </g>
+
+    <!-- Grupo 4 · Eventos -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="660" y="208" font-size="10" fill="#8A8A85" letter-spacing="2">GRUPO 04 · EVENTOS</text>
+      <rect x="660" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="720" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 09</text>
+      <text x="720" y="258" font-size="9" fill="#555" text-anchor="middle">Modal desktop</text>
+      <text x="720" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">tipado</text>
+
+      <rect x="800" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="860" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 10</text>
+      <text x="860" y="258" font-size="9" fill="#555" text-anchor="middle">Evento mobile</text>
+      <text x="860" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">tela cheia</text>
+    </g>
+
+    <!-- Grupo 5 · Agenda -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="960" y="208" font-size="10" fill="#8A8A85" letter-spacing="2">GRUPO 05</text>
+      <rect x="960" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="1020" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 11</text>
+      <text x="1020" y="258" font-size="9" fill="#555" text-anchor="middle">Agenda semanal</text>
+      <text x="1020" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">desktop</text>
+    </g>
+
+    <!-- Grupo 6 · Relatórios -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="1100" y="208" font-size="10" fill="#8A8A85" letter-spacing="2">GRUPO 06</text>
+      <rect x="1100" y="218" width="120" height="70" fill="#FFFFFF" stroke="#1A1A1A"/>
+      <text x="1160" y="242" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TELA 12</text>
+      <text x="1160" y="258" font-size="9" fill="#555" text-anchor="middle">Relatórios</text>
+      <text x="1160" y="272" font-size="8" fill="#8A8A85" text-anchor="middle">desktop</text>
+    </g>
+
+    <!-- Grupo 7 · Luna -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="40" y="458" font-size="10" fill="#C03030" letter-spacing="2" font-weight="700">GRUPO 07 · LUNA · WHATSAPP</text>
+
+      <rect x="40" y="468" width="120" height="70" fill="#FFFFFF" stroke="#C03030"/>
+      <text x="100" y="492" font-size="11" font-weight="700" fill="#C03030" text-anchor="middle">TELA 13</text>
+      <text x="100" y="508" font-size="9" fill="#555" text-anchor="middle">Lembrete auto</text>
+      <text x="100" y="522" font-size="8" fill="#8A8A85" text-anchor="middle">disparo cron</text>
+
+      <rect x="180" y="468" width="120" height="70" fill="#FFFFFF" stroke="#C03030"/>
+      <text x="240" y="492" font-size="11" font-weight="700" fill="#C03030" text-anchor="middle">TELA 14</text>
+      <text x="240" y="508" font-size="9" fill="#555" text-anchor="middle">Confirmação</text>
+      <text x="240" y="522" font-size="8" fill="#8A8A85" text-anchor="middle">intenção</text>
+
+      <rect x="320" y="468" width="120" height="70" fill="#FFFFFF" stroke="#C03030"/>
+      <text x="380" y="492" font-size="11" font-weight="700" fill="#C03030" text-anchor="middle">TELA 15</text>
+      <text x="380" y="508" font-size="9" fill="#555" text-anchor="middle">Histórico</text>
+      <text x="380" y="522" font-size="8" fill="#8A8A85" text-anchor="middle">NLU lookup</text>
+
+      <rect x="460" y="468" width="120" height="70" fill="#FFFFFF" stroke="#C03030"/>
+      <text x="520" y="492" font-size="11" font-weight="700" fill="#C03030" text-anchor="middle">TELA 16</text>
+      <text x="520" y="508" font-size="9" fill="#555" text-anchor="middle">Red flag</text>
+      <text x="520" y="522" font-size="8" fill="#8A8A85" text-anchor="middle">CFMV compliance</text>
+
+      <rect x="600" y="468" width="120" height="70" fill="#FFFFFF" stroke="#C03030"/>
+      <text x="660" y="492" font-size="11" font-weight="700" fill="#C03030" text-anchor="middle">TELA 17</text>
+      <text x="660" y="508" font-size="9" fill="#555" text-anchor="middle">Detecção IA</text>
+      <text x="660" y="522" font-size="8" fill="#8A8A85" text-anchor="middle">visão comp.</text>
+    </g>
+
+    <!-- Backend block (conceptual) -->
+    <g font-family="JetBrains Mono, monospace">
+      <rect x="820" y="460" width="380" height="90" fill="none" stroke="#1A1A1A" stroke-dasharray="4 3"/>
+      <text x="1010" y="484" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">API BACKEND CLÍNICA · .NET</text>
+      <text x="1010" y="504" font-size="10" fill="#555" text-anchor="middle">GET /dashboard/hoje · /pacientes · /eventos · /agenda · /relatorios</text>
+      <text x="1010" y="522" font-size="10" fill="#555" text-anchor="middle">POST /eventos · /agendamentos</text>
+      <text x="1010" y="540" font-size="9" fill="#C03030" text-anchor="middle">Luna consome esta mesma API</text>
+    </g>
+
+    <!-- Legend in SVG -->
+    <g font-family="JetBrains Mono, monospace">
+      <text x="40" y="700" font-size="10" fill="#8A8A85" letter-spacing="2">FLUXOS</text>
+      <line x1="40" y1="720" x2="90" y2="720" stroke="#1A1A1A" stroke-width="1.5"/>
+      <text x="100" y="724" font-size="10" fill="#1A1A1A">primário</text>
+      <line x1="180" y1="720" x2="230" y2="720" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="240" y="724" font-size="10" fill="#1A1A1A">secundário</text>
+      <line x1="340" y1="720" x2="390" y2="720" stroke="#C03030" stroke-width="1.5"/>
+      <text x="400" y="724" font-size="10" fill="#C03030">Luna ↔ API</text>
+    </g>
+
+    <!-- ARROWS primary -->
+    <!-- 01 → 02 -->
+    <line x1="160" y1="103" x2="180" y2="103" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 02 → 04 (mobile post-login) -->
+    <path d="M 300 103 Q 440 103 520 103" fill="none" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 01 → 03 (desktop post-login, secondary) -->
+    <path d="M 160 130 Q 280 180 380 130" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+
+    <!-- 03 ↔ 05 (Pacientes desktop) -->
+    <line x1="440" y1="140" x2="100" y2="218" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 04 ↔ 06 (Pacientes mobile) -->
+    <line x1="580" y1="140" x2="240" y2="218" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 05 → 07 -->
+    <line x1="160" y1="253" x2="320" y2="253" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 06 → 08 -->
+    <path d="M 300 268 Q 400 320 520 288" fill="none" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- 07 → 09 (Novo evento) -->
+    <line x1="440" y1="253" x2="660" y2="253" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 08 → 10 -->
+    <line x1="580" y1="253" x2="800" y2="253" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- 03 → 11 (agenda desktop) -->
+    <path d="M 500 103 Q 760 103 1020 218" fill="none" stroke="#1A1A1A" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- 03 → 12 (relatórios) -->
+    <path d="M 500 90 Q 900 30 1160 218" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+    <!-- 11 → 09 (agendar vira evento — secundário) -->
+    <path d="M 960 253 Q 900 340 780 288" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+
+    <!-- Luna flow internal -->
+    <line x1="160" y1="503" x2="180" y2="503" stroke="#C03030" stroke-width="1.5" marker-end="url(#arrR)"/>
+    <line x1="300" y1="503" x2="320" y2="503" stroke="#C03030" stroke-width="1.5" marker-end="url(#arrR)"/>
+    <!-- 15, 16, 17 são independentes (chegam pelo tutor) -->
+    <path d="M 380 468 Q 380 420 380 388" fill="none" stroke="#C03030" stroke-width="1.5" stroke-dasharray="5 4"/>
+
+    <!-- Luna → API -->
+    <path d="M 720 503 L 820 503" fill="none" stroke="#C03030" stroke-width="1.5" marker-end="url(#arrR)"/>
+    <!-- API → Luna (dashboard alert triggers Luna) -->
+    <path d="M 1010 460 Q 1010 400 580 210" fill="none" stroke="#1A1A1A" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+
+    <!-- 13 → 11 (intenção confirma na agenda) -->
+    <path d="M 100 538 Q 100 650 960 288" fill="none" stroke="#C03030" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrR)"/>
+  </svg>
+
+  <div class="legend-row">
+    <div class="itm"><span class="swp"></span> Fluxo primário · ação direta do usuário</div>
+    <div class="itm"><span class="swp dash"></span> Fluxo secundário · disparado por evento ou navegação lateral</div>
+    <div class="itm"><span class="swp" style="background:#C03030"></span> Fluxo Luna · WhatsApp ↔ API</div>
+  </div>
+</section>
+
+<!-- ============================================================ NOTAS PARA O FIGMA -->
+<section class="figma-notes">
+  <h2 class="fn-title">Notas para o hi-fi · Figma</h2>
+
+  <div class="fn-grid">
+    <div class="fn-col closed">
+      <div class="fn-h">Decisões tomadas neste wireframe</div>
+      <ul>
+        <li>Sistema é <strong>web-first para a clínica</strong> — desktop com sidebar é a experiência principal; mobile é companion.</li>
+        <li>Mobile da clínica tem <strong>bottom nav de 4 itens</strong> (Home, Pacientes, Agenda, Prontuário). Configurações vive no header, não na navegação.</li>
+        <li>Eventos clínicos são <strong>tipados com campos condicionais</strong> por tipo (vacina tem lote/validade; prescrição tem lista de medicamentos; etc).</li>
+        <li>Luna <strong>não diagnostica</strong> — apenas orienta atendimento presencial. Conformidade explícita com CFMV 1.465/2022.</li>
+        <li>Tutor é cadastrado <strong>via invite da clínica</strong>, não por self-service público.</li>
+        <li>Timeline do prontuário ordena <strong>do mais recente para o mais antigo</strong>, com badge de modalidade (presencial / teleorientação).</li>
+        <li>Tela de agenda tem <strong>visão semanal padrão</strong> + lateral do dia selecionado; não há visão mensal no MVP.</li>
+      </ul>
+    </div>
+
+    <div class="fn-col open">
+      <div class="fn-h">Perguntas abertas para resolver no hi-fi</div>
+      <ul>
+        <li>Cores do sistema da clínica no hi-fi — mesmas do app tutor ou paleta distinta (tom mais neutro/profissional)?</li>
+        <li>Ícones de cada tipo de evento: consulta, vacina, prescrição, exame, procedimento, teleorientação — set próprio ou biblioteca (Lucide / Phosphor)?</li>
+        <li>Estado vazio das listas — como apresentar "zero pacientes" ou "nenhum agendamento hoje" sem parecer quebrado?</li>
+        <li>Fluxo de erro de conexão com o banco — mensagem genérica, retry automático, ou tela dedicada?</li>
+        <li>Tela de configurações da clínica — entra no escopo da Sprint 1 ou fica para Sprint 2?</li>
+        <li>Avatar do pet — permite upload real ou só placeholder? (Tem implicação de storage e LGPD.)</li>
+        <li>Como Luna se diferencia visualmente no WhatsApp? (Foto de perfil, verificação, tom de voz do bot.)</li>
+        <li>Tema escuro — entra no escopo ou fica como "nice-to-have" futuro?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:40px;padding:20px 22px;border:1px solid var(--ink);background:var(--paper);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.04em;line-height:1.5;color:var(--ink-soft)">
+    <strong style="color:var(--ink)">Próximos passos</strong>
+    <br>
+    01 · Revisão em reunião de quarta (30/04) com o time — validar fluxos e anotações.
+    <br>
+    02 · Guilherme gera hi-fi no Figma até 30/04 (deadline M1 — desbloqueia Gustavo e Nikolas).
+    <br>
+    02b · Clayton entrega DER v1 aprovado em reunião até 30/04 — bloqueante para Felipe (.NET) e Nikolas (Java).
+    <br>
+    03 · Hi-fi vira referência visual para Gustavo (RN Clínica) e para a integração da Luna.
+    <br>
+    04 · Felipe documenta os contratos de API correspondentes a cada tela no Swagger.
+  </div>
+</section>
+
+</body>
+</html>

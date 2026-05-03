@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe Lo-Fi · Portal do Tutor · CLYVO VET</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EEECE7;
+    --paper: #FFFFFF;
+    --ink: #1A1A1A;
+    --ink-soft: #555;
+    --ink-mute: #888;
+    --ink-faint: #B8B8B8;
+    --line: #CCCCCC;
+    --line-soft: #E5E5E5;
+    --frame: #2A2A2A;
+    --annotation: #C03030;
+    --annotation-bg: #FFF4F4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 40px 24px;
+    background-image: 
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: -1px -1px;
+  }
+
+  /* === HEADER === */
+  .doc-header {
+    max-width: 1400px;
+    margin: 0 auto 48px;
+    padding: 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    position: relative;
+  }
+
+  .doc-header .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .doc-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .doc-header .sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 24px;
+    max-width: 800px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-box { 
+    width: 24px; 
+    height: 14px; 
+    display: inline-block;
+    border: 1px solid var(--line);
+  }
+  .legend-box.filled { background: var(--ink-faint); }
+  .legend-box.dashed { border: 1px dashed var(--ink-mute); background: transparent; }
+  .legend-box.annot { background: var(--annotation); border-color: var(--annotation); }
+
+  /* === SECTIONS === */
+  .section {
+    max-width: 1400px;
+    margin: 0 auto 64px;
+  }
+
+  .section-head {
+    padding: 20px 24px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-head .title {
+    font-weight: 700;
+  }
+
+  .section-head .count {
+    opacity: 0.6;
+    font-size: 11px;
+  }
+
+  /* === MOBILE GRID === */
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 48px;
+    padding: 48px 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: none;
+  }
+
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .phone-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+  }
+
+  .phone-label .num {
+    color: var(--annotation);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  .phone {
+    width: 280px;
+    height: 560px;
+    background: var(--frame);
+    border-radius: 28px;
+    padding: 10px;
+    box-shadow: 0 2px 0 var(--line);
+    position: relative;
+  }
+
+  .phone::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 6px;
+    background: var(--frame);
+    border-radius: 3px;
+    z-index: 2;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: var(--paper);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* === SCREEN INTERNALS === */
+  .status-bar {
+    padding: 8px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--line-soft);
+  }
+
+  .app-header {
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .app-header .logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .app-header .icons {
+    display: flex;
+    gap: 8px;
+  }
+
+  .icon-box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-mute);
+  }
+
+  .content {
+    flex: 1;
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .content h2 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .content .muted {
+    color: var(--ink-mute);
+    font-size: 11px;
+    margin-bottom: 14px;
+  }
+
+  .bar {
+    height: 8px;
+    background: var(--line-soft);
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+  .bar.sm { height: 6px; width: 60%; }
+  .bar.xs { width: 40%; }
+  .bar.lg { width: 80%; }
+
+  .input-ghost {
+    border: 1px solid var(--line);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    background: var(--paper);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .btn-ghost.outline {
+    background: transparent;
+    color: var(--ink);
+  }
+
+  .text-link {
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 8px;
+  }
+
+  /* Pet card */
+  .pet-card {
+    border: 1px solid var(--line);
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .pet-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--line-soft);
+    border: 1px dashed var(--line);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-mute);
+  }
+
+  .pet-info { flex: 1; }
+  .pet-name { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+  .pet-meta { font-size: 10px; color: var(--ink-mute); }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .badge.alert {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Timeline */
+  .timeline-item {
+    border-left: 1px solid var(--line);
+    padding: 0 0 16px 12px;
+    margin-left: 4px;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 4px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    border-radius: 50%;
+  }
+
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-mute);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+  }
+
+  .timeline-title {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .timeline-meta {
+    font-size: 10px;
+    color: var(--ink-soft);
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 0;
+    background: var(--paper);
+  }
+
+  .nav-item {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-mute);
+    padding: 4px;
+  }
+
+  .nav-item.active { color: var(--ink); font-weight: 700; }
+
+  .nav-item .ic {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--ink-faint);
+    margin: 0 auto 3px;
+  }
+
+  .nav-item.active .ic { border-color: var(--ink); background: var(--ink-faint); }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--line);
+    margin: 0 -16px 12px;
+    padding: 0 16px;
+    gap: 2px;
+  }
+
+  .tab {
+    padding: 8px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    border-bottom: 2px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* Annotations */
+  .annotation {
+    margin-top: 16px;
+    padding: 10px 12px;
+    background: var(--annotation-bg);
+    border: 1px solid var(--annotation);
+    border-left-width: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.5;
+    color: var(--annotation);
+    max-width: 280px;
+  }
+
+  .annotation .annot-label {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-size: 9px;
+  }
+
+  /* Alert/callout inside screen */
+  .inline-alert {
+    border: 1px dashed var(--ink);
+    padding: 8px;
+    margin-bottom: 12px;
+    font-size: 10px;
+  }
+
+  .inline-alert strong { display: block; font-size: 10px; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Consent row */
+  .consent-row {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .consent-row:last-child { border-bottom: none; }
+
+  .consent-info {
+    flex: 1;
+  }
+
+  .consent-title {
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .consent-date {
+    font-size: 9px;
+    color: var(--ink-mute);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .toggle {
+    width: 28px;
+    height: 16px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 12px;
+    height: 12px;
+    background: var(--paper);
+  }
+
+  .toggle.off {
+    background: var(--paper);
+  }
+
+  .toggle.off::after {
+    right: auto;
+    left: 1px;
+    background: var(--ink);
+  }
+
+  /* === DESKTOP GRID === */
+  .desktop-grid {
+    padding: 48px 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .desktop-wrap .phone-label { margin-bottom: 16px; }
+
+  .desktop-frame {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--frame);
+    border-radius: 8px 8px 0 0;
+    padding: 8px 8px 0;
+    box-shadow: 0 2px 0 var(--line);
+  }
+
+  .desktop-bar {
+    display: flex;
+    gap: 6px;
+    padding: 6px 4px 8px;
+  }
+
+  .desktop-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+  }
+
+  .desktop-screen {
+    background: var(--paper);
+    min-height: 520px;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+  }
+
+  .side-nav {
+    background: var(--bg);
+    border-right: 1px solid var(--line);
+    padding: 16px 0;
+  }
+
+  .side-nav .side-logo {
+    padding: 0 16px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+
+  .side-item {
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    border-left: 2px solid transparent;
+  }
+
+  .side-item.active {
+    border-left-color: var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .main-area {
+    padding: 24px;
+  }
+
+  .main-area h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .main-area .muted { font-size: 12px; color: var(--ink-mute); margin-bottom: 20px; }
+
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .dash-card {
+    border: 1px solid var(--line);
+    padding: 16px;
+  }
+
+  .dash-card .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+  }
+
+  .dash-card .value {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .dash-card .delta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+  }
+
+  .main-two-col {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+  }
+
+  .block {
+    border: 1px solid var(--line);
+    padding: 16px;
+  }
+
+  .block-head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  /* === NAV MAP === */
+  .nav-map {
+    padding: 48px 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-top: none;
+  }
+
+  .nav-map svg {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* === NOTES === */
+  .notes {
+    max-width: 1400px;
+    margin: 0 auto 48px;
+    padding: 32px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+
+  .notes h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .notes-col h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .notes-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .notes-col ul li {
+    padding: 8px 0 8px 20px;
+    border-bottom: 1px dashed var(--line);
+    font-size: 13px;
+    color: var(--ink-soft);
+    position: relative;
+  }
+
+  .notes-col ul li:last-child { border-bottom: none; }
+
+  .notes-col ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--ink);
+    font-weight: 700;
+  }
+
+  .notes-col.open ul li::before {
+    content: '?';
+    color: var(--annotation);
+  }
+
+  @media (max-width: 780px) {
+    .notes-grid { grid-template-columns: 1fr; }
+    .main-two-col { grid-template-columns: 1fr; }
+    .dash-grid { grid-template-columns: 1fr; }
+    .desktop-screen { grid-template-columns: 1fr; }
+    .side-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== DOC HEADER ========== -->
+<div class="doc-header">
+  <div class="meta">
+    <span>CLYVO VET · CHALLENGE FIAP</span>
+    <span>WIREFRAME LO-FI · V.0.1</span>
+  </div>
+  <h1>Portal do Tutor — Wireframe de baixa fidelidade</h1>
+  <p class="sub">Estrutura e fluxo de navegação para discussão do time. <strong>Este documento é intencionalmente sem cor, tipografia refinada ou estética.</strong> Foco em hierarquia, conteúdo e fluxo — não em design final.</p>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-box"></span>Container / bloco</div>
+    <div class="legend-item"><span class="legend-box filled"></span>Placeholder de conteúdo</div>
+    <div class="legend-item"><span class="legend-box dashed"></span>Imagem / avatar placeholder</div>
+    <div class="legend-item"><span class="legend-box annot"></span>Anotação do líder técnico</div>
+  </div>
+</div>
+
+<!-- ========== MOBILE ========== -->
+<div class="section">
+  <div class="section-head">
+    <span class="title">01 · Fluxo Mobile (primário)</span>
+    <span class="count">8 telas · viewport 375px</span>
+  </div>
+  <div class="mobile-grid">
+
+    <!-- TELA 1: LOGIN -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">01</span>Login / Acesso</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="content" style="justify-content: center; display: flex; flex-direction: column;">
+            <div style="text-align: center; margin-bottom: 28px;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.15em; margin-bottom: 4px;">[ CLYVO ]</div>
+              <div style="font-size: 10px; color: var(--ink-mute); letter-spacing: 0.1em; text-transform: uppercase;">Portal do Tutor</div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="font-size: 10px; color: var(--ink-mute); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace;">EMAIL</div>
+              <div class="input-ghost">seu@email.com</div>
+              <div style="font-size: 10px; color: var(--ink-mute); margin-bottom: 4px; font-family: 'JetBrains Mono', monospace;">SENHA</div>
+              <div class="input-ghost">••••••••</div>
+            </div>
+            <div class="btn-ghost">Entrar</div>
+            <div class="btn-ghost outline">Criar conta</div>
+            <div class="text-link">Esqueci minha senha</div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Decisão</div>
+        Clínica cadastra tutor e envia link de primeiro acesso. Evita tutor tentando se cadastrar "no nada" sem vínculo com clínica.
+      </div>
+    </div>
+
+    <!-- TELA 2: HOME / LISTA DE PETS -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">02</span>Home · Meus Pets</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div class="logo">[ CLYVO ]</div>
+            <div class="icons">
+              <div class="icon-box">🔔</div>
+              <div class="icon-box">≡</div>
+            </div>
+          </div>
+          <div class="content">
+            <h2>Olá, Felipe</h2>
+            <div class="muted">2 pets cadastrados</div>
+
+            <div class="inline-alert">
+              <strong>⚠ Próximo evento</strong>
+              Vacina V10 da Luna vence em 12 dias
+            </div>
+
+            <div class="pet-card">
+              <div class="pet-avatar">[img]</div>
+              <div class="pet-info">
+                <div class="pet-name">Luna</div>
+                <div class="pet-meta">Cão · Labrador · 3 anos</div>
+              </div>
+              <span class="badge alert">!</span>
+            </div>
+
+            <div class="pet-card">
+              <div class="pet-avatar">[img]</div>
+              <div class="pet-info">
+                <div class="pet-name">Simba</div>
+                <div class="pet-meta">Gato · SRD · 7 anos</div>
+              </div>
+              <span class="badge">OK</span>
+            </div>
+
+            <div class="btn-ghost outline" style="margin-top: 16px;">+ Adicionar pet</div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item active"><span class="ic"></span>Home</div>
+            <div class="nav-item"><span class="ic"></span>Agenda</div>
+            <div class="nav-item"><span class="ic"></span>Receitas</div>
+            <div class="nav-item"><span class="ic"></span>Perfil</div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Decisão</div>
+        Alerta proativo no topo = gancho para tutor voltar sempre. É o que PetsApp faz bem.
+      </div>
+    </div>
+
+    <!-- TELA 3: PERFIL DO PET (TIMELINE) -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">03</span>Perfil do Pet · Timeline</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">← Voltar</div>
+            <div class="icons"><div class="icon-box">⋯</div></div>
+          </div>
+          <div class="content">
+            <div style="display: flex; gap: 12px; margin-bottom: 14px; align-items: center;">
+              <div class="pet-avatar" style="width: 56px; height: 56px;">[img]</div>
+              <div>
+                <h2>Luna</h2>
+                <div class="muted" style="margin: 0;">Labrador · 3 anos · 28kg</div>
+              </div>
+            </div>
+
+            <div class="tabs">
+              <div class="tab active">Timeline</div>
+              <div class="tab">Vacinas</div>
+              <div class="tab">Receitas</div>
+              <div class="tab">Exames</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">12 NOV 2025 · TELEORIENTAÇÃO</div>
+              <div class="timeline-title">Consulta de retorno</div>
+              <div class="timeline-meta">Dr. Paulo · Clínica PetLife</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">05 NOV 2025 · CONSULTA</div>
+              <div class="timeline-title">Dermatite alérgica</div>
+              <div class="timeline-meta">CID-10-VET · Dra. Ana</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">28 OUT 2025 · VACINA</div>
+              <div class="timeline-title">Antirrábica aplicada</div>
+              <div class="timeline-meta">Lote #A4421 · Clínica PetLife</div>
+            </div>
+
+            <div class="timeline-item" style="border-left: none;">
+              <div class="timeline-date" style="color: var(--annotation);">Ver mais eventos...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Técnico</div>
+        Timeline vem direto da tabela de eventos clínicos (F6 do backlog). Mesma estrutura serve front do vet e front do tutor — economia de dev.
+      </div>
+    </div>
+
+    <!-- TELA 4: DETALHE DE CONSULTA -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">04</span>Detalhe de Atendimento</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">← Timeline</div>
+            <div class="icons"><div class="icon-box">↓</div></div>
+          </div>
+          <div class="content">
+            <span class="badge" style="margin-bottom: 8px;">Teleorientação · CFMV</span>
+            <h2 style="margin-top: 6px;">Consulta de retorno</h2>
+            <div class="muted">12 Nov 2025 · 14:30 · Dr. Paulo</div>
+
+            <div style="margin: 14px 0; padding: 12px; border: 1px solid var(--line-soft); background: var(--bg);">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--ink-mute); margin-bottom: 6px;">DIAGNÓSTICO</div>
+              <div style="font-size: 11px; font-weight: 600;">Dermatite alérgica — seguimento</div>
+              <div style="font-size: 10px; color: var(--ink-mute); margin-top: 2px;">CID-10-VET · L23.0</div>
+            </div>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--ink-mute); margin-bottom: 6px;">ORIENTAÇÕES AO TUTOR</div>
+            <div class="bar"></div>
+            <div class="bar lg"></div>
+            <div class="bar sm"></div>
+            <div class="bar xs" style="margin-bottom: 14px;"></div>
+
+            <div style="border: 1px solid var(--line); padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-size: 11px; font-weight: 600;">Receita digital</div>
+                <div style="font-size: 10px; color: var(--ink-mute);">2 medicamentos</div>
+              </div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--annotation);">Ver →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Regulatório</div>
+        Badge "Teleorientação · CFMV" deixa explícito que não foi consulta presencial. Transparência com o tutor = redução de risco jurídico.
+      </div>
+    </div>
+
+    <!-- TELA 5: PRESCRIÇÕES -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">05</span>Prescrições</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div class="logo">RECEITAS</div>
+            <div class="icons"><div class="icon-box">⚲</div></div>
+          </div>
+          <div class="content">
+            <div class="tabs">
+              <div class="tab active">Ativas (2)</div>
+              <div class="tab">Histórico</div>
+            </div>
+
+            <div style="border: 1px solid var(--line); padding: 12px; margin-bottom: 10px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <div style="font-weight: 600; font-size: 12px;">Apoquel 16mg</div>
+                <span class="badge alert">Ativa</span>
+              </div>
+              <div style="font-size: 10px; color: var(--ink-soft); margin-bottom: 4px;">1 comp. · 12/12h · 14 dias</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute);">Luna · emitida 12 Nov</div>
+              <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <div style="flex:1; padding: 6px; text-align: center; border: 1px solid var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em;">Download PDF</div>
+                <div style="flex:1; padding: 6px; text-align: center; border: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft);">Compartilhar</div>
+              </div>
+            </div>
+
+            <div style="border: 1px solid var(--line); padding: 12px; margin-bottom: 10px;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <div style="font-weight: 600; font-size: 12px;">Shampoo antifúngico</div>
+                <span class="badge alert">Ativa</span>
+              </div>
+              <div style="font-size: 10px; color: var(--ink-soft); margin-bottom: 4px;">Uso tópico · 2x/sem · 30 dias</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute);">Luna · emitida 05 Nov</div>
+            </div>
+          </div>
+          <div class="bottom-nav">
+            <div class="nav-item"><span class="ic"></span>Home</div>
+            <div class="nav-item"><span class="ic"></span>Agenda</div>
+            <div class="nav-item active"><span class="ic"></span>Receitas</div>
+            <div class="nav-item"><span class="ic"></span>Perfil</div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Escopo MVP</div>
+        "Download PDF" no MVP. Assinatura ICP-Brasil entra só em fase 2 — não tenta resolver tudo em 8 semanas.
+      </div>
+    </div>
+
+    <!-- TELA 6: VACINAS -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">06</span>Calendário de Vacinas</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">← Luna</div>
+            <div class="icons"><div class="icon-box">+</div></div>
+          </div>
+          <div class="content">
+            <h2>Vacinas</h2>
+            <div class="muted">Luna · Labrador</div>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--annotation); margin: 14px 0 8px;">PRÓXIMAS</div>
+
+            <div class="inline-alert" style="border-color: var(--annotation); color: var(--annotation);">
+              <strong>V10 vence em 12 dias</strong>
+              <span style="color: var(--ink-soft);">Agendar com clínica PetLife</span>
+            </div>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--ink-mute); margin: 14px 0 8px;">HISTÓRICO</div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">28 OUT 2025</div>
+              <div class="timeline-title">Antirrábica</div>
+              <div class="timeline-meta">Lote #A4421 · Próx. Out/2026</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">15 NOV 2024</div>
+              <div class="timeline-title">V10 (Polivalente)</div>
+              <div class="timeline-meta">Lote #B7733 · Próx. Nov/2025 ⚠</div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-date">10 OUT 2024</div>
+              <div class="timeline-title">Giárdia</div>
+              <div class="timeline-meta">Lote #G2218</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Hook</div>
+        Lembrete de vacina é o principal motivo recorrente do tutor voltar ao app. Notificação push 30/15/7/1 dia antes.
+      </div>
+    </div>
+
+    <!-- TELA 7: CONSENTIMENTOS LGPD -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">07</span>Consentimentos · LGPD</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px;">← Perfil</div>
+            <div class="icons"><div class="icon-box">?</div></div>
+          </div>
+          <div class="content">
+            <h2>Meus dados</h2>
+            <div class="muted">Gerenciar privacidade e consentimentos</div>
+
+            <div class="consent-row">
+              <div class="consent-info">
+                <div class="consent-title">Teleorientação</div>
+                <div class="consent-date">Aceito em 12/11/2025</div>
+              </div>
+              <div class="toggle"></div>
+            </div>
+
+            <div class="consent-row">
+              <div class="consent-info">
+                <div class="consent-title">Lembretes por e-mail / push</div>
+                <div class="consent-date">Aceito em 12/11/2025</div>
+              </div>
+              <div class="toggle"></div>
+            </div>
+
+            <div class="consent-row">
+              <div class="consent-info">
+                <div class="consent-title">Dados anônimos para pesquisa</div>
+                <div class="consent-date">Não aceito</div>
+              </div>
+              <div class="toggle off"></div>
+            </div>
+
+            <div class="consent-row">
+              <div class="consent-info">
+                <div class="consent-title">Compartilhar com seguradora</div>
+                <div class="consent-date">Não aceito</div>
+              </div>
+              <div class="toggle off"></div>
+            </div>
+
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);">
+              <div class="btn-ghost outline">Baixar meus dados</div>
+              <div class="btn-ghost outline" style="margin-top: 4px;">Excluir conta</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">LGPD · Obrigatório</div>
+        Tutor precisa ver, editar e revogar consentimentos a qualquer momento. "Baixar meus dados" e "Excluir conta" são direitos do titular — não dá pra esconder.
+      </div>
+    </div>
+
+    <!-- TELA 8: NOTIFICAÇÕES -->
+    <div class="phone-wrap">
+      <div class="phone-label"><span class="num">08</span>Notificações</div>
+      <div class="phone">
+        <div class="screen">
+          <div class="status-bar"><span>09:41</span><span>⌁ ⌁ ◱</span></div>
+          <div class="app-header">
+            <div class="logo">AVISOS</div>
+            <div class="icons"><div class="icon-box">⚙</div></div>
+          </div>
+          <div class="content">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-mute); letter-spacing: 0.1em; margin-bottom: 10px;">NÃO LIDAS · 3</div>
+
+            <div style="border-left: 3px solid var(--annotation); padding: 10px 12px; margin-bottom: 8px; background: var(--bg);">
+              <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">Vacina da Luna vence em 12 dias</div>
+              <div style="font-size: 10px; color: var(--ink-soft);">V10 polivalente · próx. aplicação 28/11</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute); margin-top: 4px;">HÁ 2 HORAS</div>
+            </div>
+
+            <div style="border-left: 3px solid var(--ink); padding: 10px 12px; margin-bottom: 8px; background: var(--bg);">
+              <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">Nova receita disponível</div>
+              <div style="font-size: 10px; color: var(--ink-soft);">Dr. Paulo emitiu 2 medicamentos</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute); margin-top: 4px;">ONTEM</div>
+            </div>
+
+            <div style="border-left: 3px solid var(--ink); padding: 10px 12px; margin-bottom: 8px; background: var(--bg);">
+              <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">Mensagem da Clínica PetLife</div>
+              <div style="font-size: 10px; color: var(--ink-soft);">"Confirmar retorno para o dia 20/11"</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute); margin-top: 4px;">ONTEM</div>
+            </div>
+
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-mute); letter-spacing: 0.1em; margin: 16px 0 10px;">ANTERIORES</div>
+
+            <div style="padding: 10px 12px; margin-bottom: 8px; opacity: 0.6;">
+              <div style="font-size: 11px; margin-bottom: 2px;">Antirrábica aplicada</div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--ink-mute);">28/10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="annotation">
+        <div class="annot-label">Pergunta aberta</div>
+        Notificações só in-app? Ou também WhatsApp + e-mail? WhatsApp tem custo (Meta cobra por template) e complexidade técnica.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== DESKTOP ========== -->
+<div class="section">
+  <div class="section-head">
+    <span class="title">02 · Fluxo Desktop (secundário)</span>
+    <span class="count">2 telas · viewport 1280px</span>
+  </div>
+  <div class="desktop-grid">
+
+    <!-- DESKTOP 1: HOME -->
+    <div class="desktop-wrap">
+      <div class="phone-label"><span class="num">D1</span>Home · Desktop</div>
+      <div class="desktop-frame">
+        <div class="desktop-bar">
+          <div class="desktop-dot"></div>
+          <div class="desktop-dot"></div>
+          <div class="desktop-dot"></div>
+        </div>
+        <div class="desktop-screen">
+          <div class="side-nav">
+            <div class="side-logo">[ CLYVO ]</div>
+            <div class="side-item active">Home</div>
+            <div class="side-item">Meus pets</div>
+            <div class="side-item">Agenda</div>
+            <div class="side-item">Receitas</div>
+            <div class="side-item">Vacinas</div>
+            <div class="side-item">Notificações</div>
+            <div class="side-item" style="margin-top: 24px; border-top: 1px solid var(--line); padding-top: 20px;">Meus dados (LGPD)</div>
+            <div class="side-item">Sair</div>
+          </div>
+          <div class="main-area">
+            <h3>Olá, Felipe</h3>
+            <div class="muted">Visão geral · 2 pets cadastrados</div>
+
+            <div class="dash-grid">
+              <div class="dash-card">
+                <div class="label">Próxima vacina</div>
+                <div class="value">12d</div>
+                <div class="delta">Luna · V10</div>
+              </div>
+              <div class="dash-card">
+                <div class="label">Receitas ativas</div>
+                <div class="value">2</div>
+                <div class="delta">Apoquel + shampoo</div>
+              </div>
+              <div class="dash-card">
+                <div class="label">Último atendimento</div>
+                <div class="value">5d</div>
+                <div class="delta">Dr. Paulo · Teleorientação</div>
+              </div>
+            </div>
+
+            <div class="main-two-col">
+              <div class="block">
+                <div class="block-head">Meus pets</div>
+                <div class="pet-card">
+                  <div class="pet-avatar">[img]</div>
+                  <div class="pet-info">
+                    <div class="pet-name">Luna</div>
+                    <div class="pet-meta">Labrador · 3 anos · 28kg</div>
+                  </div>
+                  <span class="badge alert">Vacina em 12d</span>
+                </div>
+                <div class="pet-card">
+                  <div class="pet-avatar">[img]</div>
+                  <div class="pet-info">
+                    <div class="pet-name">Simba</div>
+                    <div class="pet-meta">SRD · 7 anos · 4,2kg</div>
+                  </div>
+                  <span class="badge">OK</span>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-head">Próximos eventos</div>
+                <div class="timeline-item">
+                  <div class="timeline-date">28 NOV</div>
+                  <div class="timeline-title">V10 — Luna</div>
+                  <div class="timeline-meta">Agendar na PetLife</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date">20 NOV</div>
+                  <div class="timeline-title">Retorno — Luna</div>
+                  <div class="timeline-meta">Dr. Paulo · 14:30</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESKTOP 2: PET DETAIL -->
+    <div class="desktop-wrap">
+      <div class="phone-label"><span class="num">D2</span>Perfil do Pet · Desktop</div>
+      <div class="desktop-frame">
+        <div class="desktop-bar">
+          <div class="desktop-dot"></div>
+          <div class="desktop-dot"></div>
+          <div class="desktop-dot"></div>
+        </div>
+        <div class="desktop-screen">
+          <div class="side-nav">
+            <div class="side-logo">[ CLYVO ]</div>
+            <div class="side-item">Home</div>
+            <div class="side-item active">Meus pets</div>
+            <div class="side-item">Agenda</div>
+            <div class="side-item">Receitas</div>
+            <div class="side-item">Vacinas</div>
+            <div class="side-item">Notificações</div>
+          </div>
+          <div class="main-area">
+            <div style="display: flex; gap: 16px; align-items: center; margin-bottom: 20px;">
+              <div class="pet-avatar" style="width: 64px; height: 64px;">[img]</div>
+              <div>
+                <h3 style="margin: 0;">Luna</h3>
+                <div class="muted" style="margin: 4px 0 0;">Labrador · Fêmea · 3 anos · 28kg · Castrada</div>
+              </div>
+            </div>
+
+            <div class="tabs" style="margin: 0 0 20px;">
+              <div class="tab active">Timeline</div>
+              <div class="tab">Vacinas</div>
+              <div class="tab">Receitas</div>
+              <div class="tab">Exames</div>
+              <div class="tab">Peso</div>
+            </div>
+
+            <div class="main-two-col">
+              <div class="block">
+                <div class="block-head">Histórico clínico</div>
+                <div class="timeline-item">
+                  <div class="timeline-date">12 NOV · TELEORIENTAÇÃO</div>
+                  <div class="timeline-title">Consulta de retorno</div>
+                  <div class="timeline-meta">Dr. Paulo · Clínica PetLife</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date">05 NOV · CONSULTA</div>
+                  <div class="timeline-title">Dermatite alérgica</div>
+                  <div class="timeline-meta">Dra. Ana · CID-10-VET L23.0</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date">28 OUT · VACINA</div>
+                  <div class="timeline-title">Antirrábica</div>
+                  <div class="timeline-meta">Lote #A4421</div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-date">15 SET · EXAME</div>
+                  <div class="timeline-title">Hemograma completo</div>
+                  <div class="timeline-meta">Lab. VetDiag · PDF anexado</div>
+                </div>
+              </div>
+              <div class="block">
+                <div class="block-head">Resumo</div>
+                <div style="font-size: 11px; color: var(--ink-mute); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">Condições ativas</div>
+                <div style="font-size: 12px; margin-bottom: 12px;">Dermatite alérgica (em tratamento)</div>
+                <div style="font-size: 11px; color: var(--ink-mute); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">Alergias</div>
+                <div style="font-size: 12px; margin-bottom: 12px;">Não informado</div>
+                <div style="font-size: 11px; color: var(--ink-mute); letter-spacing: 0.05em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 4px;">Clínica preferida</div>
+                <div style="font-size: 12px;">PetLife · São Paulo</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== NAV MAP ========== -->
+<div class="section">
+  <div class="section-head">
+    <span class="title">03 · Mapa de Navegação</span>
+    <span class="count">fluxo entre telas</span>
+  </div>
+  <div class="nav-map">
+    <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background grid -->
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#EEE" stroke-width="0.5"/>
+        </pattern>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#555"/>
+        </marker>
+      </defs>
+      <rect width="1000" height="520" fill="url(#grid)"/>
+
+      <!-- Boxes -->
+      <!-- Login -->
+      <g>
+        <rect x="40" y="220" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="100" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">01</text>
+        <text x="100" y="265" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">Login</text>
+      </g>
+
+      <!-- Home -->
+      <g>
+        <rect x="240" y="220" width="120" height="60" fill="#1A1A1A" stroke="#1A1A1A"/>
+        <text x="300" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" fill="#fff">02</text>
+        <text x="300" y="265" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#fff">Home / Pets</text>
+      </g>
+
+      <!-- Pet detail -->
+      <g>
+        <rect x="440" y="120" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="500" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">03</text>
+        <text x="500" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">Perfil Pet</text>
+      </g>
+
+      <!-- Consulta detail -->
+      <g>
+        <rect x="640" y="40" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="700" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">04</text>
+        <text x="700" y="85" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">Atendimento</text>
+      </g>
+
+      <!-- Prescrições -->
+      <g>
+        <rect x="640" y="120" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="700" y="148" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">05</text>
+        <text x="700" y="165" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">Receitas</text>
+      </g>
+
+      <!-- Vacinas -->
+      <g>
+        <rect x="640" y="200" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="700" y="228" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">06</text>
+        <text x="700" y="245" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">Vacinas</text>
+      </g>
+
+      <!-- Notificações -->
+      <g>
+        <rect x="440" y="320" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="500" y="348" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">08</text>
+        <text x="500" y="365" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">Notificações</text>
+      </g>
+
+      <!-- LGPD -->
+      <g>
+        <rect x="440" y="420" width="120" height="60" fill="white" stroke="#333" stroke-width="1.5"/>
+        <text x="500" y="448" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">07</text>
+        <text x="500" y="465" text-anchor="middle" font-family="Inter, sans-serif" font-size="11">LGPD</text>
+      </g>
+
+      <!-- Lines -->
+      <line x1="160" y1="250" x2="240" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="360" y1="240" x2="440" y2="160" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="360" y1="260" x2="440" y2="340" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4"/>
+      <line x1="360" y1="270" x2="440" y2="440" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)" stroke-dasharray="4"/>
+      <line x1="560" y1="140" x2="640" y2="80" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="560" y1="150" x2="640" y2="150" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="560" y1="160" x2="640" y2="220" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="700" y1="100" x2="700" y2="120" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+      <!-- Labels -->
+      <text x="200" y="240" font-family="JetBrains Mono, monospace" font-size="9" fill="#888">auth</text>
+      <text x="800" y="40" font-family="JetBrains Mono, monospace" font-size="9" fill="#888">Entrada principal</text>
+      <text x="800" y="55" font-family="JetBrains Mono, monospace" font-size="9" fill="#888">(tab bar navigation)</text>
+      <text x="40" y="500" font-family="JetBrains Mono, monospace" font-size="10" fill="#888" font-weight="700">─── navegação primária</text>
+      <text x="260" y="500" font-family="JetBrains Mono, monospace" font-size="10" fill="#888" font-weight="700">-- - navegação secundária (menu/perfil)</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ========== NOTES ========== -->
+<div class="notes">
+  <h2>Notas para a reunião</h2>
+  <div class="notes-grid">
+    <div class="notes-col">
+      <h3>Decisões tomadas no wireframe</h3>
+      <ul>
+        <li>Mobile-first, mas com Desktop responsivo (não app nativo) — mantém escopo viável para 3 pessoas</li>
+        <li>Cadastro de tutor é <strong>invite-based</strong> pela clínica, não self-service público</li>
+        <li>Timeline única alimentada pela mesma tabela de eventos clínicos usada pelo front do veterinário (reutilização máxima)</li>
+        <li>Prescrição em MVP é PDF estruturado — assinatura ICP-Brasil fica para pós-challenge</li>
+        <li>Bottom nav com 4 itens (Home, Agenda, Receitas, Perfil) — regra de ouro em mobile</li>
+        <li>LGPD tratada como seção própria, não como checkbox escondido</li>
+      </ul>
+    </div>
+    <div class="notes-col open">
+      <h3>Perguntas em aberto para o time</h3>
+      <ul>
+        <li>Lembretes via WhatsApp entram no MVP? (custo Meta + dev adicional)</li>
+        <li>Tutor pode agendar direto pelo portal ou só pede retorno? (fluxo de agendamento é trabalhoso)</li>
+        <li>Chat tutor ↔ clínica entra no MVP ou é fase 2? (risco de virar teleconsulta clandestina → problema CFMV)</li>
+        <li>Upload de documentos pelo tutor (foto de exame antigo, etc) — precisa para MVP?</li>
+        <li>Stack de front: React + Tailwind? Next.js? Vite? Definir antes da próxima sprint</li>
+        <li>Quem desenha o Figma hi-fi a partir deste lo-fi?</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
