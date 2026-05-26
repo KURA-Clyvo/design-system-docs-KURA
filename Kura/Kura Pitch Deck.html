@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kura · Pitch Deck v2 — FIAP Challenge 2026 · Sprint 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="kura-deck-v2.css?v=2"/>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Esta é a Kura — uma plataforma B2B2C que transforma o cuidado veterinário episódico em uma jornada contínua. Apresente o time rapidamente e contextualize: estamos no Sprint 1 do FIAP Challenge 2026, com duas APIs em produção e fundação técnica entregue. O que veremos a seguir é um produto real, não um deck de slides.",
+  "Três forças do mercado convergem agora para criar a janela: o mercado pet brasileiro é o terceiro maior do mundo, com R$ 68,4 bilhões e crescendo 13% ao ano; a infraestrutura digital nas clínicas independentes é praticamente inexistente; e modelos de Computer Vision agora rodam baratos o suficiente para triagem veterinária. É a primeira vez que essas três coisas existem juntas.",
+  "O problema não é falta de amor pelo pet — é falta de infraestrutura de continuidade. Hoje, a vida do pet acontece em quatro momentos reativos: sintomas agudos, vacinas vencidas, pós-operatório e emergências. Entre eles, o pet desaparece do radar. 65% dos tutores não retornam no prazo, e clínicas perdem 40% da receita recorrente. Prevenção que não acontece vira emergência que custa cinco vezes mais.",
+  "A Kura conecta clínica, veterinário e tutor em um único ecossistema. Para a clínica, é mais receita recorrente e menos churn. Para o tutor, é o histórico completo do pet sempre acessível, com Luna IA disponível para triagem. Para o ecossistema, são dados estruturados que alimentam inteligência clínica preditiva. Tudo em B2B2C, com tutor gratuito e clínica pagante.",
+  "Este é o Kura App — o ponto de contato do tutor. À esquerda, a Home: dashboard de saúde, alertas, próxima consulta. À direita, Luna: nossa IA de triagem que avalia sintomas por texto e foto antes da consulta. Luna não substitui o veterinário — ela torna a consulta mais preparada. Cada interação gera dados estruturados que enriquecem o prontuário.",
+  "Aqui está o Kura Clínica — o sistema B2B que substitui WhatsApp e planilha por uma infraestrutura real. Dashboard com métricas operacionais, agenda inteligente com optimistic locking (sem ghost bookings), Luna integrada com alertas de triagem que chegam antes da consulta, e prontuário SOAP com envio de receita via WhatsApp. Stack .NET / Oracle / Azure.",
+  "O coração clínico da plataforma: prontuário SOAP estruturado, histórico longitudinal que nunca é substituído — é acumulado, e Luna com Computer Vision para análise preliminar de imagens. A receita digital vai via WhatsApp direto para o tutor. Cada componente é integrado nativamente — não é um zoo de SaaS.",
+  "O mercado tem ferramentas fragmentadas: VetSmart só atende clínicas, PetLove só atende tutores, WhatsApp é genérico. Nenhuma plataforma resolve a continuidade dos dois lados com IA e IoT. A Kura ocupa um quadrante vazio no mercado: alta profundidade clínica e alto alcance de tutor.",
+  "Modelo B2B2C: a clínica paga, o tutor não. Três tiers — Starter R$197, Professional R$397 (recomendado), Enterprise R$797. A projeção é R$15k MRR em Sprint 4 com 50 clínicas, R$60k em 12 meses, R$200k em 24 meses no breakeven. Setup baixo, cancelamento livre — o produto retém pela utilidade.",
+  "Sete entregáveis do Sprint 1, todos validados. kura-api em .NET e kura-tutor em Java compartilhando Oracle 19c. Cobertura de testes acima de 70%, Swagger 100%, Docker em Azure VM. Isso não é protótipo. É uma API rodando em produção agora, com banco real e dois sistemas distintos conversando. Mostre o monitoring panel ao vivo se possível.",
+  "Cinco camadas, sem single point of failure. Decisões técnicas importantes: schema compartilhado sem API Gateway (elimina latência e simplifica para o contexto universitário) e optimistic locking cross-API (ETag + 409 Conflict impede ghost bookings). LGPD por design, JWT stateless, Flyway versionado.",
+  "Riscos mapeados antes de virar incidente. Os dois críticos: conflito de schema (mitigado por política de ownership por tabela documentada no README) e Luna falso positivo (mitigado por disclaimer obrigatório em toda resposta da IA). Oracle FIAP indisponível tem fallback H2 documentado. LGPD revogação é idempotente.",
+  "Roadmap em quatro sprints. Sprint 1 entregue. Sprint 2: Luna em produção, IoT, app mobile. Sprint 3: dashboard analítico, score de risco preditivo, testes de carga. Sprint 4: monetização via Stripe, marketplace, relatório LGPD automatizado. Cada sprint tem KPIs concretos — não vendemos sonho, vendemos cronograma.",
+  "Cinco fundadores técnicos da FIAP, todos com stack validada. Projeto ativo em produção na Cerqueira Consultoria (automação WhatsApp com IA) — não é o primeiro produto da equipe. Design system Kura publicado no GitHub. Duas APIs já rodando em Azure agora. É um time que entrega.",
+  "Encerramento. Kura é a infraestrutura que o mercado veterinário brasileiro nunca teve e que o crescimento do setor está exigindo agora. Sete entregáveis validados, duas APIs em produção, quatro sprints planejados. O ecossistema está pronto para crescer. Próximos passos definidos. Obrigado."
+]
+</script>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#4A6944"/>
+  <g transform="translate(60,55)">
+    <rect x="0" y="20" width="80" height="60" rx="4" fill="#F8F2E6"/>
+    <rect x="6" y="26" width="40" height="6" rx="2" fill="#4A6944"/>
+    <rect x="6" y="38" width="60" height="4" rx="2" fill="#C8810D"/>
+    <rect x="6" y="48" width="50" height="3" rx="1.5" fill="#8A7458"/>
+    <rect x="6" y="56" width="55" height="3" rx="1.5" fill="#8A7458"/>
+    <rect x="6" y="64" width="35" height="3" rx="1.5" fill="#8A7458"/>
+  </g>
+  <text x="100" y="160" font-family="serif" font-style="italic" font-size="24" fill="#F8F2E6" text-anchor="middle">Pitch</text>
+</svg>
+</template>
+</head>
+<body>
+
+<!-- ═══════ CHROME ═══════ -->
+<button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+  <span id="themeIcon">☀</span><span id="themeLabel">Claro</span>
+</button>
+<div class="slide-counter">
+  <span class="now" id="slideNow">01</span><span class="sep">/</span><span class="tot">15</span>
+  <span class="sep">·</span><span>Kura · v2</span>
+</div>
+
+<div id="stage"><div id="canvas"><div id="slides-container">
+
+<!-- ───── KURA LOGO TEMPLATE (used inline on each non-bookend slide) ───── -->
+
+<!-- ═════════════════════════ SLIDE 01 — CAPA ═════════════════════════ -->
+<section class="slide bookend active" data-slide="1" data-screen-label="01 Capa">
+  <div class="blob blob-amber" style="width:520px;height:520px;top:-120px;right:-120px;"></div>
+  <div class="blob blob-sage"  style="width:420px;height:420px;bottom:-140px;left:-80px;"></div>
+
+  <div class="bookend-ring r3"></div>
+  <div class="bookend-ring r2"></div>
+  <div class="bookend-ring r1"></div>
+
+  <div class="content-z" style="display:flex; flex-direction:column; align-items:center; gap:38px; max-width:1100px; padding:0 60px;">
+    <span class="kicker anim-up delay-1">FIAP Challenge 2026 · Sprint 1</span>
+
+    <div class="anim-up delay-2" style="display:flex; align-items:center; gap:30px;">
+      <!-- Kura Logomark: botanical leaf-paw -->
+      <svg viewBox="0 0 40 48" width="120" height="144" fill="none" style="color:#8FB088;">
+        <path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.18"/>
+        <path d="M20 44 L20 16" stroke="currentColor" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/>
+        <circle cx="20" cy="8"  r="3.5" fill="currentColor"/>
+        <circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/>
+        <circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/>
+        <path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.7"/>
+      </svg>
+      <h1 class="wordmark" style="font-size:200px; line-height:1;">Ku<em>ra</em></h1>
+    </div>
+
+    <p class="anim-up delay-3" style="font-family:var(--font-display); font-style:italic; font-size:30px; line-height:1.3; text-align:center; max-width:920px; color:#C8BCA0; margin:0; font-weight:300;">
+      Infraestrutura de Continuidade<br/>do <em style="color:#E89C20;">Cuidado Veterinário</em>
+    </p>
+
+    <p class="lede anim-up delay-4" style="text-align:center; max-width:780px; font-size:16px; color:#A89A7B;">
+      A plataforma que transforma o modelo episódico de saúde animal em uma jornada contínua e preventiva — conectando clínica, veterinário e tutor em um único ecossistema.
+    </p>
+
+    <div class="mono-tag anim-up delay-4" style="letter-spacing:.24em; color:#A89A7B;">Uma empresa <span style="color:#E89C20;">Clyvo Vet</span></div>
+
+    <div class="team-row anim-up delay-5" style="margin-top:6px;">
+      <span class="team-chip">Felipe Ferrete <span class="dot-sep">·</span> <span class="rm">RM 562999</span></span>
+      <span class="team-chip">Nikolas Brisola <span class="dot-sep">·</span> <span class="rm">RM 564371</span></span>
+      <span class="team-chip">Guilherme Sola <span class="dot-sep">·</span> <span class="rm">RM 563674</span></span>
+      <span class="team-chip">Gustavo Bosak <span class="dot-sep">·</span> <span class="rm">RM 566315</span></span>
+      <span class="team-chip">Clayton <span class="dot-sep">·</span> <span class="rm">RM 562285</span></span>
+    </div>
+  </div>
+
+  <div class="corner-badge anim-up delay-6">FIAP Challenge 2026 · Sprint 1</div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 02 — POR QUE AGORA ═════════════════════════ -->
+<section class="slide s2" data-slide="2" data-screen-label="02 Por Que Agora">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+  <div class="blob blob-amber" style="width:480px;height:480px;top:-100px;right:-80px;"></div>
+
+  <div class="content-z head anim-up delay-1">
+    <span class="kicker">Timing de Mercado</span>
+    <h2 class="headline anim-up delay-2">Três forças convergindo<br/>para um único <em>momento</em></h2>
+    <p class="lede anim-up delay-3" style="max-width:760px;">Mercado pet em explosão. Clínicas independentes ainda operando em planilha. E pela primeira vez, Computer Vision veterinária roda barato o suficiente para escalar. A janela abriu agora.</p>
+  </div>
+
+  <div class="content-z layout">
+    <div class="left-cards">
+      <div class="force-card anim-up delay-3">
+        <div class="num">R$ 68bi</div>
+        <div class="desc">O mercado pet brasileiro cresce <strong>13% ao ano</strong> e é o <strong>3º maior do mundo</strong>. Clínicas veterinárias independentes respondem por 74% do atendimento — e ainda operam com WhatsApp e planilha como sistema de gestão.</div>
+      </div>
+      <div class="force-card amber anim-up delay-4">
+        <div class="num">65%</div>
+        <div class="desc">Dos tutores <strong>não retornam à clínica</strong> no prazo recomendado pelo veterinário. Não é falta de amor pelo pet — é falta de infraestrutura de continuidade. Esse número representa receita que nenhum sistema atual recupera.</div>
+      </div>
+      <div class="force-card ocean anim-up delay-5">
+        <div class="num">2026</div>
+        <div class="desc">É o primeiro ano em que modelos de Computer Vision leves (YOLOv8n) rodam em servidor de R$200/mês com acurácia adequada para <strong>triagem veterinária de pré-consulta</strong>. A janela técnica abriu.</div>
+      </div>
+    </div>
+
+    <div class="venn-wrap anim-up delay-4">
+      <svg viewBox="0 0 560 520" width="100%" style="max-width:560px;">
+        <defs>
+          <radialGradient id="venn-c" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#4A6944" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#4A6944" stop-opacity="0.04"/>
+          </radialGradient>
+          <radialGradient id="venn-a" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#C8810D" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#C8810D" stop-opacity="0.04"/>
+          </radialGradient>
+          <radialGradient id="venn-o" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#2D5E7E" stop-opacity="0.32"/>
+            <stop offset="100%" stop-color="#2D5E7E" stop-opacity="0.04"/>
+          </radialGradient>
+        </defs>
+
+        <!-- 3 circles -->
+        <circle cx="200" cy="200" r="170" fill="url(#venn-c)" stroke="#4A6944" stroke-width="1.5" opacity="0.85"/>
+        <circle cx="360" cy="200" r="170" fill="url(#venn-a)" stroke="#C8810D" stroke-width="1.5" opacity="0.85"/>
+        <circle cx="280" cy="340" r="170" fill="url(#venn-o)" stroke="#2D5E7E" stroke-width="1.5" opacity="0.85"/>
+
+        <!-- Labels outside -->
+        <text x="120" y="90" font-family="JetBrains Mono" font-size="11" letter-spacing="2.5" fill="#4A6944" font-weight="600">MERCADO PET</text>
+        <text x="120" y="106" font-family="Cormorant" font-style="italic" font-size="15" fill="#1B1006">em explosão</text>
+
+        <text x="320" y="90" font-family="JetBrains Mono" font-size="11" letter-spacing="2.5" fill="#C8810D" font-weight="600">LACUNA DIGITAL</text>
+        <text x="320" y="106" font-family="Cormorant" font-style="italic" font-size="15" fill="#1B1006">em clínicas PME</text>
+
+        <text x="180" y="480" font-family="JetBrains Mono" font-size="11" letter-spacing="2.5" fill="#2D5E7E" font-weight="600">IA VETERINÁRIA</text>
+        <text x="180" y="496" font-family="Cormorant" font-style="italic" font-size="15" fill="#1B1006">acessível e madura</text>
+
+        <!-- Center: KURA -->
+        <g transform="translate(280 260)">
+          <circle r="42" fill="#1C1410"/>
+          <text y="-2" text-anchor="middle" font-family="Cormorant" font-size="26" font-weight="500" fill="#F0E8D8" letter-spacing="-1">Ku<tspan font-style="italic" fill="#8FB088">ra</tspan></text>
+          <text y="16" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="#A89A7B">CONVERGÊNCIA</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 03 — O PROBLEMA ═════════════════════════ -->
+<section class="slide s3" data-slide="3" data-screen-label="03 Problema">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+  <div class="blob blob-clay" style="width:480px;height:480px;top:-100px;right:-80px;"></div>
+
+  <div class="content-z layout">
+    <div class="head">
+      <span class="kicker anim-up delay-1">O Problema</span>
+      <h2 class="headline anim-up delay-2">A jornada do pet acontece em <em>4 momentos reativos</em></h2>
+      <p class="lede anim-up delay-3" style="max-width:520px;">Hoje, clínicas e tutores só se encontram quando algo dá errado. O resto da vida do pet acontece num vácuo de informação que nenhuma plataforma atual resolve.</p>
+
+      <div class="impact-rows">
+        <div class="impact-row anim-up delay-3">
+          <div class="impact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-6 8 6v11M9 21v-7h6v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div class="stat">Clínicas perdem <em>40%</em> de receita recorrente</div>
+            <div class="desc">O veterinário entrega um plano. O tutor sai pela porta. Sem sistema de continuidade, 4 em cada 10 reais possíveis nunca voltam.</div>
+          </div>
+        </div>
+        <div class="impact-row amber anim-up delay-4">
+          <div class="impact-icon amber"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M5 21c1-4 4-6 7-6s6 2 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <div>
+            <div class="stat"><em>65%</em> não retornam no prazo</div>
+            <div class="desc">O tutor ama o pet. Ele simplesmente esquece — ou não sabe que precisa voltar. Nenhuma clínica independente tem estrutura para follow-up ativo.</div>
+          </div>
+        </div>
+        <div class="impact-row clay anim-up delay-5">
+          <div class="impact-icon clay"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.6-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.4-7 11-7 11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div class="stat">Prevenção que não acontece vira <em>emergência 5×</em> mais cara</div>
+            <div class="desc">O modelo episódico não é só ineficiente — é clinicamente pior. Agravamentos evitáveis acontecem porque o sistema foi projetado para reagir, não para prevenir.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-amber anim-up delay-6">Entre os 4 momentos de interação, o pet fica <strong style="font-style:normal; color:var(--amber);">completamente invisível</strong> para o ecossistema veterinário.</div>
+    </div>
+
+    <div style="display:flex; align-items:center; justify-content:center;" class="anim-up delay-4">
+      <svg viewBox="0 0 560 560" width="100%" style="max-width:560px;">
+        <defs>
+          <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="var(--text-mute)"/>
+          </marker>
+        </defs>
+        <g fill="none" stroke="var(--border-strong)" stroke-width="2" stroke-dasharray="6 6" opacity="0.7">
+          <path d="M280,80 A200,200 0 0,1 480,280" marker-end="url(#arr3)"/>
+          <path d="M480,280 A200,200 0 0,1 280,480" marker-end="url(#arr3)"/>
+          <path d="M280,480 A200,200 0 0,1 80,280" marker-end="url(#arr3)"/>
+          <path d="M80,280 A200,200 0 0,1 280,80" marker-end="url(#arr3)"/>
+        </g>
+        <g>
+          <circle cx="280" cy="80" r="64" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="280" y="74" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="var(--clay)" font-weight="600">MOMENTO 1</text>
+          <text x="280" y="93" text-anchor="middle" font-family="Cormorant" font-size="17" font-weight="500" fill="var(--text)">Sintomas Agudos</text>
+        </g>
+        <g>
+          <circle cx="480" cy="280" r="64" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="480" y="274" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="var(--clay)" font-weight="600">MOMENTO 2</text>
+          <text x="480" y="293" text-anchor="middle" font-family="Cormorant" font-size="17" font-weight="500" fill="var(--text)">Vacinas Vencidas</text>
+        </g>
+        <g>
+          <circle cx="280" cy="480" r="64" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="280" y="474" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="var(--clay)" font-weight="600">MOMENTO 3</text>
+          <text x="280" y="493" text-anchor="middle" font-family="Cormorant" font-size="17" font-weight="500" fill="var(--text)">Pós-Operatório</text>
+        </g>
+        <g>
+          <circle cx="80" cy="280" r="64" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="80" y="274" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="var(--clay)" font-weight="600">MOMENTO 4</text>
+          <text x="80" y="293" text-anchor="middle" font-family="Cormorant" font-size="17" font-weight="500" fill="var(--text)">Emergências</text>
+        </g>
+        <g opacity="0.95">
+          <ellipse cx="280" cy="270" rx="165" ry="46" fill="var(--amber-pale)" stroke="var(--amber)" stroke-dasharray="4 3" stroke-width="1.2"/>
+          <text x="280" y="262" text-anchor="middle" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="var(--amber)" font-weight="600">VÁCUO DE INFORMAÇÃO</text>
+          <text x="280" y="288" text-anchor="middle" font-family="Cormorant" font-style="italic" font-size="20" fill="var(--text)">O pet desaparece do radar</text>
+        </g>
+        <g transform="translate(280 360)" opacity="0.45">
+          <path d="M-14,10 Q-22,-8 -10,-12 Q-4,-2 0,-4 Q4,-2 10,-12 Q22,-8 14,10 Q6,16 0,14 Q-6,16 -14,10 Z" fill="var(--text-mute)"/>
+          <circle cx="-10" cy="-16" r="3.5" fill="var(--text-mute)"/>
+          <circle cx="10" cy="-16" r="3.5" fill="var(--text-mute)"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 04 — A SOLUÇÃO ═════════════════════════ -->
+<section class="slide s4" data-slide="4" data-screen-label="04 Solução">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+  <div class="blob blob-amber" style="width:480px;height:480px;top:-100px;right:-100px;"></div>
+  <div class="blob blob-sage" style="width:420px;height:420px;bottom:-140px;left:-80px;"></div>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1" style="align-self:center;">Proposta de Valor</span>
+    <h2 class="headline anim-up delay-2">Kura transforma cuidado reativo<br/>em <em>jornada contínua</em></h2>
+    <p class="lede anim-up delay-3" style="max-width:840px; text-align:center;">
+      Uma plataforma B2B2C que conecta clínica, veterinário e tutor em um ecossistema integrado — com IA de triagem, alertas ativos, prontuário digital e monitoramento IoT.
+    </p>
+  </div>
+
+  <div class="content-z persona-grid">
+    <div class="persona-card anim-up delay-3">
+      <div class="accent"></div>
+      <div class="icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 21V10l8-6 8 6v11M9 21v-7h6v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+      <span class="chip chip-mono chip-sage" style="align-self:flex-start;">Para Clínicas · B2B</span>
+      <div class="name">Mais receita recorrente,<br/>menos churn de pacientes</div>
+      <div class="desc">Kura automatiza o follow-up que sua equipe não tem tempo de fazer. Alertas de vacina, retorno de consulta e lembretes pós-operatório saem sem intervenção humana. Cada alerta é uma oportunidade de agendamento que antes era simplesmente perdida.</div>
+      <div class="tech-chip">kura-api · .NET 10 · Oracle 19c</div>
+    </div>
+
+    <div class="persona-card amber anim-up delay-4">
+      <div class="accent"></div>
+      <div class="icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.8"/><path d="M5 21c1-4 4-6 7-6s6 2 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <span class="chip chip-mono chip-amber" style="align-self:flex-start;">Para Tutores · B2C</span>
+      <div class="name">O histórico completo do pet<br/>— sempre acessível</div>
+      <div class="desc">Um app que centraliza carteira de vacinação, histórico de consultas, prescrições, agendamentos e canal direto com a clínica. Luna, nossa IA de triagem, responde a dúvidas e avalia sintomas antes de uma urgência desnecessária.</div>
+      <div class="tech-chip">kura-tutor · Java/Spring · React Native</div>
+    </div>
+
+    <div class="persona-card ocean anim-up delay-5">
+      <div class="accent"></div>
+      <div class="icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="1.8"/></svg></div>
+      <span class="chip chip-mono chip-ocean" style="align-self:flex-start;">Para o Ecossistema · IA</span>
+      <div class="name">Dados que geram<br/>inteligência clínica</div>
+      <div class="desc">Cada interação alimenta um histórico estruturado que, no Sprint 3, vai treinar um score de risco preditivo por pet. IoT monitora temperatura de internações em tempo real. Luna reduz urgências desnecessárias com Computer Vision.</div>
+      <div class="tech-chip">Python · YOLOv8n · ESP32 · IoT</div>
+    </div>
+  </div>
+
+  <div class="anchor-line anim-up delay-6">B2B2C · JWT Stateless · LGPD by Design · Oracle 19c · Docker + Azure</div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 05 — MOBILE DEMO ═════════════════════════ -->
+<section class="slide s5" data-slide="5" data-screen-label="05 Kura App Tutor">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.18"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.7"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z layout">
+    <!-- Phones stage -->
+    <div class="phones-stage anim-up delay-2">
+      <!-- Phone 1 — Home -->
+      <div class="phone-frame tilt-l">
+        <div class="phone-shell"></div>
+        <div class="phone-side-btn left"></div>
+        <div class="phone-side-btn b1"></div>
+        <div class="phone-side-btn b2"></div>
+        <div class="phone-island"></div>
+        <div class="phone-screen">
+          <div class="scr-home">
+            <div class="scr-statusbar">
+              <span>09:41</span>
+              <div class="icons">
+                <svg width="14" height="9" viewBox="0 0 14 9"><rect x="0" y="6" width="2" height="3" rx=".5" fill="currentColor"/><rect x="3" y="4" width="2" height="5" rx=".5" fill="currentColor"/><rect x="6" y="2" width="2" height="7" rx=".5" fill="currentColor"/><rect x="9" y="0" width="2" height="9" rx=".5" fill="currentColor"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 8a1 1 0 110-2 1 1 0 010 2zM2 5a7 7 0 0110 0M4.5 7a4 4 0 015 0" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+                <div class="battery"><div class="fill"></div></div>
+              </div>
+            </div>
+            <div class="scr-h1">
+              <div class="greet">Bom dia, <em>Lucas</em></div>
+              <span class="alerts-chip">⚠ 2 alertas</span>
+            </div>
+            <div class="scr-quick">
+              <div class="q"><div class="q-circle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 14c1.5-2 1-5-1-6.5S13 6 12 8c-1-2-3.5-2-5.5-.5S5 12 6.5 14L12 19z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div><span class="q-label">Consulta</span></div>
+              <div class="q"><div class="q-circle amber"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 4l4 4-8 8H3v-4l8-8zM13 6l4 4M14 5l4 4-1 1" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div><span class="q-label">Vacinas</span></div>
+              <div class="q"><div class="q-circle clay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><span class="q-label">Receita</span></div>
+              <div class="q"><div class="q-circle ocean"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="13" r="1.5" fill="currentColor"/><circle cx="15" cy="13" r="1.5" fill="currentColor"/><path d="M8 3l4 3 4-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><span class="q-label">Luna</span></div>
+            </div>
+            <div class="scr-pet">
+              <div class="avatar">🐾</div>
+              <div>
+                <div class="name">Thor</div>
+                <div class="breed">LABRADOR · 3 ANOS</div>
+                <div class="status-pill">✓ EM DIA</div>
+              </div>
+              <svg class="ring" viewBox="0 0 46 46">
+                <circle cx="23" cy="23" r="18" fill="none" stroke="var(--surface-2)" stroke-width="4"/>
+                <circle cx="23" cy="23" r="18" fill="none" stroke="var(--sage)" stroke-width="4" stroke-dasharray="113" stroke-dashoffset="34" stroke-linecap="round" transform="rotate(-90 23 23)"/>
+                <text x="23" y="27" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="600" fill="var(--text)">70%</text>
+              </svg>
+            </div>
+            <div class="scr-upcoming">
+              <div class="label">PRÓXIMA CONSULTA</div>
+              <div class="title">Vacina V10 <span class="warn-dot"></span></div>
+              <div class="meta">Clínica Clyvo Vet · 24 jun · em 3 dias</div>
+              <button class="btn">Confirmar</button>
+            </div>
+            <div class="scr-luna">
+              <div class="row1"><span class="dot"></span>Luna está disponível</div>
+              <div class="sub">Descreva sintomas do seu pet</div>
+              <div class="input">Digite ou tire uma foto…</div>
+            </div>
+            <div class="scr-tabbar">
+              <div class="tab active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 12l8-7 8 7v8h-5v-6h-6v6H4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Home</div>
+              <div class="tab"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Pets</div>
+              <div class="tab"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Agenda</div>
+              <div class="tab"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Perfil</div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-home"></div>
+      </div>
+
+      <!-- Phone 2 — Luna Chat -->
+      <div class="phone-frame tilt-r">
+        <div class="phone-shell"></div>
+        <div class="phone-side-btn left"></div>
+        <div class="phone-side-btn b1"></div>
+        <div class="phone-side-btn b2"></div>
+        <div class="phone-island"></div>
+        <div class="phone-screen">
+          <div class="scr-luna-chat">
+            <div class="scr-statusbar">
+              <span>09:43</span>
+              <div class="icons">
+                <svg width="14" height="9" viewBox="0 0 14 9"><rect x="0" y="6" width="2" height="3" rx=".5" fill="currentColor"/><rect x="3" y="4" width="2" height="5" rx=".5" fill="currentColor"/><rect x="6" y="2" width="2" height="7" rx=".5" fill="currentColor"/><rect x="9" y="0" width="2" height="9" rx=".5" fill="currentColor"/></svg>
+                <svg width="14" height="10" viewBox="0 0 14 10"><path d="M7 8a1 1 0 110-2 1 1 0 010 2zM2 5a7 7 0 0110 0M4.5 7a4 4 0 015 0" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>
+                <div class="battery"><div class="fill"></div></div>
+              </div>
+            </div>
+            <div class="scr-luna-head">
+              <div class="av">🤖</div>
+              <div style="flex:1;">
+                <div class="title">Luna IA</div>
+                <div class="status"><span class="dot"></span>ONLINE · TRIAGEM</div>
+              </div>
+            </div>
+            <div class="scr-chat-body">
+              <div class="scr-bubble user">Thor está com olho vermelho e secreção há 2 dias</div>
+              <div class="scr-bubble luna">
+                <div class="lh">Análise preliminar</div>
+                Isso pode indicar <strong>conjuntivite</strong>.
+                <ul>
+                  <li>Infecção bacteriana</li>
+                  <li>Alergia ambiental</li>
+                </ul>
+                <div class="warn">⚠ Recomendo consulta em até 48h.</div>
+              </div>
+              <div class="scr-bubble luna" style="max-width:60%;">Deseja agendar agora?</div>
+            </div>
+            <div class="scr-chat-actions">
+              <button class="btn primary">Sim, agendar</button>
+              <button class="btn">Mais sintomas</button>
+            </div>
+            <div class="scr-chat-foot">
+              <div class="cam-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="13" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 6l1.5-2h5L16 6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+              <span>Tirar foto do olho · CV</span>
+            </div>
+            <div style="height:14px; background:transparent;"></div>
+          </div>
+        </div>
+        <div class="phone-home"></div>
+      </div>
+    </div>
+
+    <!-- Narrative -->
+    <div class="narrative">
+      <span class="kicker anim-up delay-1">Kura App · Tutor</span>
+      <h2 class="headline anim-up delay-2">O pet na palma da mão<br/>do tutor — <em>sempre</em></h2>
+
+      <p class="body anim-up delay-3">
+        O Kura App é o primeiro ponto de contato do tutor com o ecossistema. Construído em <strong>React Native</strong> com sincronização em tempo real e Firebase Push, ele entrega quatro coisas que nenhum sistema fragmentado entrega junto.
+      </p>
+
+      <ul class="feat-list anim-up delay-4">
+        <li><strong>Dashboard de saúde</strong> com status de vacinação em tempo real e progresso por pet.</li>
+        <li><strong>Agendamento online</strong> direto no calendário da clínica — sem WhatsApp, sem ligação.</li>
+        <li><strong>Histórico clínico</strong> completo (prontuários, receitas, exames) versionado e auditável.</li>
+        <li><strong>Luna IA</strong> — triagem por texto e foto antes da consulta, sempre com disclaimer clínico.</li>
+      </ul>
+
+      <p class="body anim-up delay-5" style="font-size:13px; line-height:1.55;">
+        Luna usa <strong>YOLOv8n + MobileNetV3</strong> para análise por Computer Vision. Ela não substitui o veterinário — ela torna a consulta mais preparada e eficiente. Cada interação gera dados estruturados que enriquecem o prontuário.
+      </p>
+
+      <div class="anchor-mono anim-up delay-6">React Native · kura-tutor Java/Spring · Firebase · JWT + Refresh Token</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 06 — CLÍNICA DEMO ═════════════════════════ -->
+<section class="slide s6" data-slide="6" data-screen-label="06 Kura Clínica">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.18"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.7"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Kura Clínica · Sistema B2B</span>
+    <h2 class="headline anim-up delay-2">O sistema que a clínica<br/><em>nunca teve</em> — mas sempre precisou</h2>
+  </div>
+
+  <div class="content-z desktop-frame anim-up delay-3">
+    <div class="desktop-chrome">
+      <div class="light" style="background:#E07D62;"></div>
+      <div class="light" style="background:#E89C20;"></div>
+      <div class="light" style="background:#8FB088;"></div>
+      <div class="url">app.kura.vet/clinica/dashboard</div>
+      <div style="width:60px;"></div>
+    </div>
+    <div class="desktop-screen">
+      <!-- Sidebar -->
+      <div class="cd-sidebar">
+        <div class="logo">
+          <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity=".85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity=".85"/></svg>
+          <span class="wm">Ku<em>ra</em></span>
+        </div>
+        <div class="cd-nav-item active"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="7" height="9" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="3" width="7" height="5" stroke="currentColor" stroke-width="1.8"/><rect x="14" y="12" width="7" height="9" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="16" width="7" height="5" stroke="currentColor" stroke-width="1.8"/></svg>Dashboard</div>
+        <div class="cd-nav-item"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M4 9h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.8"/></svg>Agenda</div>
+        <div class="cd-nav-item"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-3.5 4.5-5 8-5s6.5 1.5 8 5" stroke="currentColor" stroke-width="1.8"/></svg>Pacientes</div>
+        <div class="cd-nav-item"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="3" width="14" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="1.8"/></svg>Prontuários</div>
+        <div class="cd-nav-item"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="13" r="1.5" fill="currentColor"/><circle cx="15" cy="13" r="1.5" fill="currentColor"/></svg>Luna IA</div>
+        <div class="cd-nav-item"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Configurações</div>
+        <div class="cd-user">
+          <div class="av">MV</div>
+          <div>
+            <div class="un">Dr. Mariana V.</div>
+            <div class="ur">VETERINÁRIA</div>
+          </div>
+        </div>
+      </div>
+      <!-- Main -->
+      <div class="cd-main">
+        <div class="cd-top">
+          <h1>Dashboard</h1>
+          <span class="sub">SEGUNDA · 24 JUN 2026</span>
+        </div>
+        <div class="cd-metrics">
+          <div class="cd-metric"><div class="val">47</div><div class="l">Consultas · mês</div></div>
+          <div class="cd-metric amber"><div class="val">R$28,4k</div><div class="l">Receita · mês</div></div>
+          <div class="cd-metric ocean"><div class="val">89%</div><div class="l">Taxa de retorno</div></div>
+          <div class="cd-metric clay"><div class="val">12</div><div class="l">Alertas pendentes</div></div>
+        </div>
+        <div class="cd-bottom">
+          <div class="cd-agenda">
+            <h3>Agenda de hoje</h3>
+            <div class="cd-appt">
+              <div class="time">09:00</div>
+              <div class="who"><div>Thor · Labrador <span style="color:var(--text-mute);">— Vacina V10</span></div><div class="vet">DR. MARIANA</div></div>
+              <span class="tag sage">Confirmado</span>
+            </div>
+            <div class="cd-appt">
+              <div class="time">10:30</div>
+              <div class="who"><div>Mia · Siamês <span style="color:var(--text-mute);">— Consulta geral</span></div><div class="vet">DR. PEDRO</div></div>
+              <span class="tag amber">Pendente</span>
+            </div>
+            <div class="cd-appt">
+              <div class="time">14:00</div>
+              <div class="who"><div>Rex · Pastor Alemão <span style="color:var(--text-mute);">— Pós-op</span></div><div class="vet">DR. MARIANA</div></div>
+              <span class="tag ocean">Retorno</span>
+            </div>
+            <div class="cd-appt">
+              <div class="time">16:30</div>
+              <div class="who"><div>Luna · SRD <span style="color:var(--text-mute);">— Castração</span></div><div class="vet">DR. CARLA</div></div>
+              <span class="tag sage">Confirmado</span>
+            </div>
+          </div>
+          <div class="cd-luna">
+            <div class="head">
+              <span class="dot"></span>
+              <h3>Luna · Triagem Ativa</h3>
+            </div>
+            <div class="cd-luna-row">
+              <div class="t">Thor: conjuntivite provável (CV 87%)</div>
+              <div class="when">HÁ 2H · CONSULTA AGENDADA</div>
+            </div>
+            <div class="cd-luna-row">
+              <div class="t">Mia: tosse seca há 3 dias</div>
+              <div class="when">HÁ 5H · AGUARDANDO TRIAGEM</div>
+            </div>
+            <div class="cd-luna-row">
+              <div class="t">Bobi: alergia recorrente</div>
+              <div class="when">ONTEM · ENCAMINHADO</div>
+            </div>
+            <div class="see-all">→ Ver todos os alertas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pills-row content-z">
+    <div class="pill anim-up delay-4">
+      <div class="l">Agenda Inteligente</div>
+      <div class="d">Visualização semanal com identificação automática de conflitos via <strong style="color:#F0E8D8;">Optimistic Locking</strong>. Dois usuários nunca agendam no mesmo slot — nem que sejam de sistemas diferentes.</div>
+    </div>
+    <div class="pill anim-up delay-5">
+      <div class="l">Luna Integrada</div>
+      <div class="d">O painel de Luna mostra alertas de triagem <strong style="color:#F0E8D8;">já processados antes da consulta</strong>. O veterinário chega preparado — não surpreso.</div>
+    </div>
+    <div class="pill anim-up delay-6">
+      <div class="l">Prontuário SOAP</div>
+      <div class="d">Anotações no formato SOAP com <strong style="color:#F0E8D8;">receita digital via WhatsApp</strong> — sem imprimir, sem perder papel, sem redigitar.</div>
+    </div>
+  </div>
+
+  <div class="anchor-mono anim-up delay-6">.NET / C# · Oracle 19c · Flyway Migrations · OpenAPI/Swagger · Azure VM</div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 07 — PRONTUÁRIO & LUNA ═════════════════════════ -->
+<section class="slide s7-prontuario" data-slide="7" data-screen-label="07 Prontuário e Luna">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Inteligência Clínica</span>
+    <h2 class="headline anim-up delay-2">Prontuário SOAP + IA de triagem<br/><em>nativamente integrados</em></h2>
+  </div>
+
+  <div class="content-z layout">
+    <div class="frame-wrap anim-up delay-3">
+      <div class="desktop-frame">
+        <div class="desktop-chrome">
+          <div class="light" style="background:#E07D62;"></div>
+          <div class="light" style="background:#E89C20;"></div>
+          <div class="light" style="background:#8FB088;"></div>
+          <div class="url">app.kura.vet/clinica/prontuario/thor</div>
+          <div style="width:60px;"></div>
+        </div>
+        <div class="desktop-screen" style="flex-direction:column;">
+          <div class="pr-head">
+            <h3>Prontuário — Thor <span style="font-style:italic; color:var(--text-mute); font-size:13px; font-weight:400;">Labrador · 3a</span></h3>
+            <span class="meta">ÚLTIMA CONSULTA · 15 JUN</span>
+          </div>
+          <div class="pr-body">
+            <div class="pr-tl">
+              <div class="pr-tl-l">TIMELINE · THOR</div>
+              <div class="pr-tl-item"><div class="dot"></div><div><div class="d">2026-06-15</div><div class="t">Vacina V10 ✓</div></div></div>
+              <div class="pr-tl-item"><div class="dot"></div><div><div class="d">2026-03-02</div><div class="t">Consulta geral — otite leve</div></div></div>
+              <div class="pr-tl-item"><div class="dot"></div><div><div class="d">2025-11-10</div><div class="t">Castração — sem intercorrências</div></div></div>
+              <div class="pr-tl-item"><div class="dot"></div><div><div class="d">2025-08-01</div><div class="t">Primeira consulta</div></div></div>
+            </div>
+            <div class="pr-soap">
+              <div class="pr-soap-row">
+                <div class="l">S · Subjetivo</div>
+                <div class="d">Tutor relata olho vermelho há 2 dias, com secreção purulenta matinal. Pet apresenta coceira recorrente no olho direito.</div>
+              </div>
+              <div class="pr-soap-row">
+                <div class="l">O · Objetivo</div>
+                <div class="d">Hiperemia conjuntival OD, secreção mucopurulenta moderada.</div>
+                <div class="pr-vitals">
+                  <div class="v"><div class="lbl">PESO</div><div class="nm">28 kg</div></div>
+                  <div class="v"><div class="lbl">TEMP</div><div class="nm">38.5°C</div></div>
+                  <div class="v"><div class="lbl">FC</div><div class="nm">88 bpm</div></div>
+                </div>
+              </div>
+              <div class="pr-soap-row">
+                <div class="l">A · Avaliação</div>
+                <div class="d">Conjuntivite bacteriana — confirma análise preliminar Luna (CV 87%).</div>
+              </div>
+              <div class="pr-soap-row">
+                <div class="l">P · Plano</div>
+                <div class="d">Colírio Tobramicina 3×/dia · Retorno em 7 dias para reavaliação.</div>
+              </div>
+              <button class="pr-send">📨 Enviar receita via WhatsApp</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="lcard anim-up delay-3">
+        <div class="l">Luna Computer Vision</div>
+        <div class="t">YOLOv8n detecta condições visuais</div>
+        <div class="d">Conjuntivite, feridas, postura anormal em fotos do tutor. Resultado chega ao prontuário antes da consulta, com disclaimer obrigatório: <em style="color:var(--ocean-soft);">"avaliação preliminar — confirme com seu veterinário."</em></div>
+        <div class="meta">Meta · > 80% acurácia · Sprint 2</div>
+      </div>
+      <div class="lcard sage anim-up delay-4">
+        <div class="l">Histórico Longitudinal</div>
+        <div class="t">Acumulado, nunca substituído</div>
+        <div class="d">Cada consulta, vacina, exame e receita registrada em <strong>Oracle 19c</strong> com schema versionado por Flyway. O veterinário vê a vida inteira do pet em uma tela — não em pastas físicas.</div>
+        <div class="meta">Versionado · Flyway · Auditável</div>
+      </div>
+      <div class="lcard amber anim-up delay-5">
+        <div class="l">Receita Digital + WhatsApp</div>
+        <div class="t">Assina e envia em um clique</div>
+        <div class="d">O veterinário assina digitalmente e a receita vai via WhatsApp diretamente para o tutor — sem impressão, sem PDF por e-mail. Integração com <strong>Evolution API v2</strong>, mesmo stack validado em produção.</div>
+        <div class="meta">Evolution API v2 · Sem papel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 08 — BENCHMARK ═════════════════════════ -->
+<section class="slide s8" data-slide="8" data-screen-label="08 Benchmarking">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Análise Competitiva</span>
+    <h2 class="headline anim-up delay-2">Nenhum competidor resolve<br/><em>a continuidade completa</em></h2>
+  </div>
+
+  <div class="content-z layout">
+    <div class="bench-table anim-up delay-3">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left; padding-left:16px;">Critério</th>
+            <th>VetSmart</th>
+            <th>PetLove</th>
+            <th>Clínica<br/>em Nuvem</th>
+            <th>WhatsApp</th>
+            <th class="kura">KURA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="criteria">Portal B2B Clínica</td><td class="check">✓</td><td class="x">✗</td><td class="check">✓</td><td class="x">✗</td><td class="kura">✓</td></tr>
+          <tr><td class="criteria">Portal B2C Tutor</td><td class="x">✗</td><td class="check">✓</td><td class="x">✗</td><td class="x">✗</td><td class="kura">✓</td></tr>
+          <tr><td class="criteria">IA de triagem (CV)</td><td class="x">✗</td><td class="x">✗</td><td class="x">✗</td><td class="x">✗</td><td class="kura">✓</td></tr>
+          <tr><td class="criteria">IoT internações</td><td class="x">✗</td><td class="x">✗</td><td class="x">✗</td><td class="x">✗</td><td class="kura">✓</td></tr>
+          <tr><td class="criteria">Notificações ativas</td><td class="x">✗</td><td class="check">✓</td><td class="x">✗</td><td class="x">✗</td><td class="kura">✓</td></tr>
+          <tr><td class="criteria">Custo PME</td><td class="check">✓</td><td class="x">N/A</td><td class="x">✗</td><td class="check">✓</td><td class="kura">✓</td></tr>
+          <tr><td class="criteria">LGPD nativo</td><td class="x">✗</td><td class="check">✓</td><td class="x">✗</td><td class="x">✗</td><td class="kura">✓</td></tr>
+          <tr class="score"><td class="criteria">Score Total</td><td>2/7</td><td>3/7</td><td>2/7</td><td>1/7</td><td class="kura">7/7</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quadrant-wrap anim-up delay-4">
+      <div class="label">Posicionamento Competitivo</div>
+      <svg class="quadrant-svg" viewBox="0 0 380 380">
+        <!-- Axes -->
+        <line x1="40" y1="340" x2="360" y2="340" stroke="var(--border-strong)" stroke-width="1.5"/>
+        <line x1="40" y1="20" x2="40" y2="340" stroke="var(--border-strong)" stroke-width="1.5"/>
+        <!-- Quadrant grid -->
+        <line x1="200" y1="20" x2="200" y2="340" stroke="var(--border)" stroke-dasharray="3 3"/>
+        <line x1="40" y1="180" x2="360" y2="180" stroke="var(--border)" stroke-dasharray="3 3"/>
+        <!-- Axis labels -->
+        <text x="200" y="365" text-anchor="middle" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="var(--text-mute)">ALCANCE DO TUTOR →</text>
+        <text x="20" y="180" transform="rotate(-90 20 180)" text-anchor="middle" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="var(--text-mute)">PROFUNDIDADE CLÍNICA →</text>
+        <!-- Competitor dots -->
+        <g>
+          <circle cx="100" cy="220" r="9" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="115" y="224" font-family="Lexend" font-size="11" fill="var(--text)">VetSmart</text>
+        </g>
+        <g>
+          <circle cx="240" cy="270" r="9" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="255" y="274" font-family="Lexend" font-size="11" fill="var(--text)">PetLove</text>
+        </g>
+        <g>
+          <circle cx="120" cy="160" r="9" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="135" y="164" font-family="Lexend" font-size="11" fill="var(--text)">C. Nuvem</text>
+        </g>
+        <g>
+          <circle cx="290" cy="310" r="9" fill="var(--clay-pale)" stroke="var(--clay)" stroke-width="1.5"/>
+          <text x="305" y="314" font-family="Lexend" font-size="11" fill="var(--text)">WhatsApp</text>
+        </g>
+        <!-- KURA -->
+        <g>
+          <circle cx="300" cy="80" r="22" fill="var(--sage)" opacity="0.18"/>
+          <circle cx="300" cy="80" r="14" fill="var(--sage)"/>
+          <text x="300" y="84" text-anchor="middle" font-family="Cormorant" font-size="14" font-weight="500" fill="#FFFCF7" letter-spacing="-.5">K</text>
+          <text x="300" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="600" letter-spacing="2" fill="var(--sage)">KURA</text>
+        </g>
+        <!-- corner labels -->
+        <text x="56" y="36" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="var(--text-mute)" opacity=".7">CLÍNICA-ONLY</text>
+        <text x="220" y="36" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="var(--sage)" opacity=".9">ECOSSISTEMA</text>
+        <text x="56" y="335" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="var(--text-mute)" opacity=".7">FERRAMENTAS</text>
+        <text x="220" y="335" font-family="JetBrains Mono" font-size="8" letter-spacing="1.5" fill="var(--text-mute)" opacity=".7">MARKETPLACE</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="callout anim-up delay-6 content-z">
+    O mercado veterinário brasileiro tem ferramentas fragmentadas. Kura é a primeira plataforma que une os dois lados do ecossistema em uma infraestrutura única — com IA e IoT.
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 09 — MODELO ═════════════════════════ -->
+<section class="slide s9" data-slide="9" data-screen-label="09 Modelo de Negócio">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+  <div class="blob blob-amber"></div>
+  <div class="blob blob-sage"></div>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1" style="align-self:center;">Modelo de Negócio</span>
+    <h2 class="headline anim-up delay-2">B2B2C · Assinatura por clínica<br/><em>Gratuito para tutores</em></h2>
+    <p class="lede anim-up delay-3">
+      O tutor nunca paga — isso maximiza a adoção e o valor para a clínica. A clínica paga pela infraestrutura que resolve o problema de retenção dela.
+    </p>
+  </div>
+
+  <div class="content-z pricing-grid">
+    <div class="tier-card anim-up delay-3">
+      <div class="nm">Starter</div>
+      <div class="price">R$ 197<span class="per"> / mês</span></div>
+      <ul>
+        <li>Até 200 atendimentos/mês</li>
+        <li>kura-api + portal do tutor</li>
+        <li>Alertas automáticos (WhatsApp + Push)</li>
+        <li>Prontuário digital básico</li>
+      </ul>
+      <div class="ideal">IDEAL PARA<br/>Clínicas com 1–2 veterinários</div>
+    </div>
+
+    <div class="tier-card featured anim-up delay-4">
+      <span class="ribbon">Recomendado</span>
+      <div class="nm">Professional</div>
+      <div class="price">R$ 397<span class="per"> / mês</span></div>
+      <ul>
+        <li>Até 800 atendimentos/mês</li>
+        <li>Tudo do Starter +</li>
+        <li>Luna IA (texto + foto)</li>
+        <li>Dashboard analítico de retenção</li>
+        <li>Agenda com optimistic locking</li>
+      </ul>
+      <div class="ideal">IDEAL PARA<br/>Clínicas estabelecidas com múltiplos profissionais</div>
+    </div>
+
+    <div class="tier-card ocean anim-up delay-5">
+      <div class="nm">Enterprise</div>
+      <div class="price">R$ 797<span class="per"> / mês</span></div>
+      <ul>
+        <li>Atendimentos ilimitados</li>
+        <li>Tudo do Professional +</li>
+        <li>IoT: monitoramento de internações (ESP32)</li>
+        <li>Score de risco preditivo do pet</li>
+        <li>Relatório LGPD Art. 18 automatizado</li>
+        <li>SLA 99.9% + suporte dedicado</li>
+      </ul>
+      <div class="ideal">IDEAL PARA<br/>Redes e hospitais veterinários</div>
+    </div>
+  </div>
+
+  <div class="revenue-chart anim-up delay-6 content-z">
+    <div class="l">Projeção de MRR · 24 meses</div>
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <!-- baseline -->
+      <line x1="40" y1="100" x2="1180" y2="100" stroke="var(--border-strong)" stroke-width="1"/>
+      <!-- bars -->
+      <g>
+        <rect x="80" y="98" width="80" height="2" fill="var(--text-mute)" rx="2"/>
+        <text x="120" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--text-mute)" letter-spacing="1">SPRINT 1</text>
+        <text x="120" y="92" text-anchor="middle" font-family="Cormorant" font-size="16" font-weight="500" fill="var(--text-mute)">R$ 0</text>
+      </g>
+      <g>
+        <rect x="340" y="78" width="80" height="22" fill="var(--sage)" rx="2"/>
+        <text x="380" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--text-mute)" letter-spacing="1">SPRINT 4</text>
+        <text x="380" y="72" text-anchor="middle" font-family="Cormorant" font-size="16" font-weight="500" fill="var(--sage)">R$ 15k</text>
+      </g>
+      <g>
+        <rect x="600" y="36" width="80" height="64" fill="var(--sage)" rx="2"/>
+        <text x="640" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--text-mute)" letter-spacing="1">12 MESES</text>
+        <text x="640" y="30" text-anchor="middle" font-family="Cormorant" font-size="16" font-weight="500" fill="var(--sage)">R$ 60k</text>
+      </g>
+      <g>
+        <rect x="860" y="-20" width="80" height="120" fill="var(--amber)" rx="2"/>
+        <text x="900" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="var(--text-mute)" letter-spacing="1">24 MESES</text>
+        <text x="900" y="-5" text-anchor="middle" font-family="Cormorant" font-size="16" font-weight="500" fill="var(--amber)">R$ 200k</text>
+        <text x="900" y="11" text-anchor="middle" font-family="JetBrains Mono" font-size="8" letter-spacing="2" fill="var(--amber)">BREAKEVEN</text>
+      </g>
+      <!-- trend line -->
+      <path d="M120 99 L380 88 L640 68 L900 16" stroke="var(--amber)" stroke-width="1.5" fill="none" stroke-dasharray="4 3" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="bottom-line anim-up delay-6 content-z">Setup fee R$ 500 · Manutenção inclusa · Cancelamento a qualquer momento</div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 10 — TRAÇÃO / SPRINT 1 ═════════════════════════ -->
+<section class="slide s10" data-slide="10" data-screen-label="10 Tração Sprint 1">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Sprint 1 · Evidências</span>
+    <h2 class="headline anim-up delay-2">Construído, testado e<br/><em>rodando em produção</em></h2>
+  </div>
+
+  <div class="content-z layout">
+    <div>
+      <div class="anim-up delay-3" style="font-family:var(--font-mono); font-size:10px; letter-spacing:.20em; text-transform:uppercase; color:var(--text-mute); margin-bottom:12px;">Entregáveis Validados</div>
+      <div class="checklist">
+        <div class="check-item anim-up delay-3"><div class="check">✓</div><div><code>kura-api</code> (.NET 10) — CRUD pets, tutores, eventos, agenda, prontuário, IoT endpoint</div></div>
+        <div class="check-item anim-up delay-3"><div class="check">✓</div><div><code>kura-tutor</code> (Java/Spring) — portal do tutor, JWT + refresh token, optimistic locking</div></div>
+        <div class="check-item anim-up delay-4"><div class="check">✓</div><div>Oracle 19c FIAP — schema compartilhado entre ambas as APIs via <code>Flyway migrations</code></div></div>
+        <div class="check-item anim-up delay-4"><div class="check">✓</div><div><code>OpenAPI/Swagger</code> — 100% dos endpoints documentados e testáveis via Swagger UI</div></div>
+        <div class="check-item anim-up delay-5"><div class="check">✓</div><div>Docker containers — deploy em Azure VM Ubuntu 22.04 (<code>Standard_B2s</code>)</div></div>
+        <div class="check-item anim-up delay-5"><div class="check">✓</div><div>LGPD compliance — consentimentos idempotentes + endpoint de revogação Art. 18</div></div>
+        <div class="check-item anim-up delay-6"><div class="check">✓</div><div>Testes unitários — &gt;70% cobertura nas camadas de serviço (<code>mvn test</code> + <code>dotnet test</code>)</div></div>
+      </div>
+
+      <div class="evidence-bar anim-up delay-6">
+        <span class="l">EVIDÊNCIAS</span>
+        <span class="item"><span class="ch">✓</span>Postman Collection</span>
+        <span class="item"><span class="ch">✓</span>Azure Live</span>
+        <span class="item"><span class="ch">✓</span>mvn test</span>
+        <span class="item"><span class="ch">✓</span>dotnet test</span>
+        <span class="item"><span class="ch">✓</span>Swagger UI</span>
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="kpi-panel anim-up delay-4">
+        <div class="top-label">AO VIVO · AZURE VM</div>
+        <div class="kpi-grid">
+          <div class="kpi-cell">
+            <div class="k-label">P95 LATÊNCIA</div>
+            <div class="k-value">&lt; 200ms</div>
+            <div class="k-sub">Endpoints de leitura</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="k-label">COBERTURA</div>
+            <div class="k-value">&gt; 70%</div>
+            <div class="k-sub">Camadas de serviço</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="k-label">SWAGGER</div>
+            <div class="k-value">100%</div>
+            <div class="k-sub">Endpoints documentados</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="k-label">ERRO 5XX</div>
+            <div class="k-value">0%</div>
+            <div class="k-sub">Demonstração ao vivo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout-sage anim-up delay-6">
+        Não é um protótipo. É uma API em <strong style="font-style:normal; color:var(--sage);">produção</strong>, com banco real, autenticação real e dois sistemas distintos (.NET e Java) falando com o mesmo Oracle.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 11 — ARQUITETURA ═════════════════════════ -->
+<section class="slide s11" data-slide="11" data-screen-label="11 Arquitetura">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Arquitetura</span>
+    <h2 class="headline anim-up delay-2" style="font-size:54px;">Cinco camadas. Um <em>ecossistema</em> integrado.<br/>Sem single point of failure.</h2>
+  </div>
+
+  <div class="content-z layout">
+    <div class="arch-layers">
+      <div class="arch-layer amber anim-up delay-3">
+        <div class="tag">Mobile</div>
+        <div class="body">
+          <div class="modules">
+            <span class="mod-chip">kura-tutor-app</span>
+            <span class="arrow">⇄</span>
+            <span class="mod-chip">kura-clinica-app</span>
+            <span class="mod-chip">React Native</span>
+          </div>
+          <div class="desc">Onboarding por convite · Offline-first · Firebase Push</div>
+        </div>
+      </div>
+      <div class="arch-layer anim-up delay-3">
+        <div class="tag">APIs</div>
+        <div class="body">
+          <div class="modules">
+            <span class="mod-chip">kura-api .NET (8080)</span>
+            <span class="arrow">⇄</span>
+            <span class="mod-chip">kura-tutor Java (8081)</span>
+          </div>
+          <div class="desc">JWT stateless · Optimistic Locking · Rate limiting · CORS</div>
+        </div>
+      </div>
+      <div class="arch-layer ocean anim-up delay-4">
+        <div class="tag">IA</div>
+        <div class="body">
+          <div class="modules">
+            <span class="mod-chip">luna-service Python (8082)</span>
+            <span class="mod-chip">YOLOv8n + MobileNetV3</span>
+          </div>
+          <div class="desc">Consome kura-api via API Key · Sempre inclui disclaimer clínico</div>
+        </div>
+      </div>
+      <div class="arch-layer clay anim-up delay-4">
+        <div class="tag">IoT</div>
+        <div class="body">
+          <div class="modules">
+            <span class="mod-chip">ESP32</span>
+            <span class="arrow">→</span>
+            <span class="mod-chip">POST /api/v1/iot/leituras</span>
+          </div>
+          <div class="desc">API Key auth · Temperatura de internações · Buffer offline</div>
+        </div>
+      </div>
+      <div class="arch-layer mute anim-up delay-5">
+        <div class="tag">Dados</div>
+        <div class="body">
+          <div class="modules">
+            <span class="mod-chip">Oracle 19c FIAP</span>
+            <span class="mod-chip">Flyway versionado</span>
+          </div>
+          <div class="desc">Schema compartilhado · Ownership por tabela · Backup diário FIAP</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-side">
+      <div class="compliance anim-up delay-5">
+        <div class="l">Compliance & Stack</div>
+        <div class="grid">
+          <div class="b">JWT <span class="ch">✓</span></div>
+          <div class="b">LGPD <span class="ch">✓</span></div>
+          <div class="b">OpenAPI <span class="ch">✓</span></div>
+          <div class="b">Docker <span class="ch">✓</span></div>
+          <div class="b">Flyway <span class="ch">✓</span></div>
+          <div class="b">H2 fallback <span class="ch">✓</span></div>
+        </div>
+      </div>
+      <div class="decisions">
+        <div class="dec-card anim-up delay-5">
+          <div class="l">Decisão 01</div>
+          <div class="t">Schema compartilhado, sem API Gateway</div>
+          <div class="d">kura-api e kura-tutor falam diretamente com o mesmo Oracle. Elimina latência extra, simplifica o stack universitário e mantém sincronização em tempo real sem cache intermediário.</div>
+        </div>
+        <div class="dec-card anim-up delay-6">
+          <div class="l">Decisão 02</div>
+          <div class="t">Optimistic Locking Cross-API</div>
+          <div class="d">Agendamentos usam ETag + 409 Conflict. Se o app do tutor e o sistema da clínica tentam marcar o mesmo horário, apenas um vence — sem corrida de dados, sem ghost bookings.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 12 — RISCOS ═════════════════════════ -->
+<section class="slide s12" data-slide="12" data-screen-label="12 Riscos">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Gestão de Riscos</span>
+    <h2 class="headline anim-up delay-2">Mapeados antes de virar<br/><em>incidente de produção</em></h2>
+  </div>
+
+  <div class="content-z layout">
+    <div class="matrix-wrap anim-up delay-3">
+      <div class="l">Matriz de Risco · Probabilidade × Impacto</div>
+      <svg class="matrix-svg" viewBox="0 0 400 360">
+        <!-- Grid 3x3 -->
+        <g stroke="var(--border-strong)" stroke-width="1" fill="none">
+          <line x1="60" y1="40" x2="360" y2="40"/>
+          <line x1="60" y1="140" x2="360" y2="140"/>
+          <line x1="60" y1="240" x2="360" y2="240"/>
+          <line x1="60" y1="340" x2="360" y2="340"/>
+          <line x1="60" y1="40" x2="60" y2="340"/>
+          <line x1="160" y1="40" x2="160" y2="340"/>
+          <line x1="260" y1="40" x2="260" y2="340"/>
+          <line x1="360" y1="40" x2="360" y2="340"/>
+        </g>
+        <!-- cell backgrounds: 9 cells with heat gradient -->
+        <g opacity="0.45">
+          <!-- low impact column (green) -->
+          <rect x="60" y="40" width="100" height="100" fill="var(--amber-pale)"/>
+          <rect x="60" y="140" width="100" height="100" fill="var(--sage-pale)"/>
+          <rect x="60" y="240" width="100" height="100" fill="var(--sage-pale)"/>
+          <!-- mid impact -->
+          <rect x="160" y="40" width="100" height="100" fill="var(--clay-pale)"/>
+          <rect x="160" y="140" width="100" height="100" fill="var(--amber-pale)"/>
+          <rect x="160" y="240" width="100" height="100" fill="var(--sage-pale)"/>
+          <!-- high impact -->
+          <rect x="260" y="40" width="100" height="100" fill="var(--clay-pale)"/>
+          <rect x="260" y="140" width="100" height="100" fill="var(--clay-pale)"/>
+          <rect x="260" y="240" width="100" height="100" fill="var(--amber-pale)"/>
+        </g>
+        <!-- Y labels (Probability) -->
+        <text x="50" y="95" text-anchor="end" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5" fill="var(--text-mute)">ALTA</text>
+        <text x="50" y="195" text-anchor="end" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5" fill="var(--text-mute)">MÉDIA</text>
+        <text x="50" y="295" text-anchor="end" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5" fill="var(--text-mute)">BAIXA</text>
+        <text x="35" y="195" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="var(--text-mute)" transform="rotate(-90 35 195)">PROBABILIDADE</text>
+
+        <!-- X labels (Impact) -->
+        <text x="110" y="355" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5" fill="var(--text-mute)">BAIXO</text>
+        <text x="210" y="355" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5" fill="var(--text-mute)">MÉDIO</text>
+        <text x="310" y="355" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5" fill="var(--text-mute)">ALTO</text>
+        <text x="210" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2" fill="var(--text-mute)">IMPACTO →</text>
+
+        <!-- Risk dots -->
+        <g>
+          <circle cx="310" cy="80" r="9" fill="var(--clay)"/>
+          <text x="324" y="84" font-family="Lexend" font-size="10" fill="var(--text)">Schema conflict</text>
+        </g>
+        <g>
+          <circle cx="310" cy="190" r="9" fill="var(--clay)"/>
+          <text x="324" y="194" font-family="Lexend" font-size="10" fill="var(--text)">Luna falso positivo</text>
+        </g>
+        <g>
+          <circle cx="310" cy="170" r="9" fill="var(--clay)" opacity=".8"/>
+          <text x="324" y="155" font-family="Lexend" font-size="10" fill="var(--text)">Oracle FIAP down</text>
+        </g>
+        <g>
+          <circle cx="210" cy="200" r="8" fill="var(--amber)"/>
+          <text x="138" y="220" font-family="Lexend" font-size="10" fill="var(--text)">JWT expirado</text>
+        </g>
+        <g>
+          <circle cx="310" cy="290" r="8" fill="var(--amber)"/>
+          <text x="324" y="294" font-family="Lexend" font-size="10" fill="var(--text)">LGPD revogação</text>
+        </g>
+        <g>
+          <circle cx="110" cy="300" r="7" fill="var(--sage)"/>
+          <text x="124" y="304" font-family="Lexend" font-size="10" fill="var(--text)">Azure custo</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="risk-cards">
+      <div class="risk-card anim-up delay-3">
+        <div class="risk-l">Risco Crítico</div>
+        <div class="risk-t">Conflito de Schema</div>
+        <div class="risk-m">Flyway migrations versionadas com política de ownership por tabela. Cada API tem domínio declarado. Migração conflitante requer aprovação cruzada — documentado no README.</div>
+      </div>
+      <div class="risk-card anim-up delay-4">
+        <div class="risk-l">Risco Crítico</div>
+        <div class="risk-t">Luna Falso Positivo</div>
+        <div class="risk-m">Toda resposta da Luna inclui disclaimer obrigatório: <em>"análise preliminar — procure veterinário para diagnóstico definitivo."</em> O sistema é útil, não substituto clínico.</div>
+      </div>
+      <div class="risk-card amber anim-up delay-5">
+        <div class="risk-l">Risco Alto</div>
+        <div class="risk-t">Oracle FIAP Indisponível</div>
+        <div class="risk-m">Dockerfile com H2 in-memory como fallback de desenvolvimento e demo. Plano de produção: Oracle Cloud ou PostgreSQL hospedado na própria Azure VM.</div>
+      </div>
+      <div class="risk-card amber anim-up delay-6">
+        <div class="risk-l">Risco Alto</div>
+        <div class="risk-t">LGPD — Revogação de Consentimento</div>
+        <div class="risk-m">Endpoint <code style="font-family:var(--font-mono); font-size:10px; background:var(--surface-2); padding:1px 5px; border-radius:3px;">POST /api/v1/lgpd/revogar</code> com idempotência. Chamadas duplicadas sem efeito colateral. Anonimização em cascata.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 13 — ROADMAP ═════════════════════════ -->
+<section class="slide s13" data-slide="13" data-screen-label="13 Roadmap">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">Roadmap · 4 Sprints</span>
+    <h2 class="headline anim-up delay-2">Da fundação à <em>monetização</em><br/>— um sprint de cada vez</h2>
+  </div>
+
+  <div class="content-z roadmap-wrap">
+    <div class="roadmap-timeline anim-up delay-3">
+      <div class="roadmap-line"></div>
+      <div class="roadmap-line-fill"></div>
+      <div class="roadmap-nodes">
+        <div class="roadmap-node active"><span class="sprint-label">Sprint 1</span><span class="dot">1</span></div>
+        <div class="roadmap-node"><span class="sprint-label">Sprint 2</span><span class="dot">2</span></div>
+        <div class="roadmap-node"><span class="sprint-label">Sprint 3</span><span class="dot">3</span></div>
+        <div class="roadmap-node"><span class="sprint-label">Sprint 4</span><span class="dot">4</span></div>
+      </div>
+    </div>
+
+    <div class="roadmap-cards">
+      <div class="rm-card active anim-up delay-3">
+        <div class="rm-head"><span class="rm-sprint">Sprint 1</span><span class="rm-status">✓ AO VIVO</span></div>
+        <div class="rm-title">Fundação</div>
+        <ul>
+          <li><code style="font-family:var(--font-mono); font-size:10px;">kura-api</code> + <code style="font-family:var(--font-mono); font-size:10px;">kura-tutor</code></li>
+          <li>Oracle 19c · Docker · LGPD</li>
+          <li>Cobertura &gt; 70% nos serviços</li>
+          <li>OpenAPI 100% documentado</li>
+        </ul>
+        <div class="rm-kpi">P95 &lt; 300ms · 0% 5xx · Postman 100% ✓</div>
+      </div>
+      <div class="rm-card anim-up delay-4">
+        <div class="rm-head"><span class="rm-sprint">Sprint 2</span><span class="rm-status">◯ Em curso</span></div>
+        <div class="rm-title">Inteligência</div>
+        <ul>
+          <li>Luna MVP: YOLOv8n + MobileNetV3</li>
+          <li>IoT ESP32 → leituras de temperatura</li>
+          <li>App Mobile RN (tutor + clínica)</li>
+          <li>Firebase Push: alertas ativos</li>
+        </ul>
+        <div class="rm-kpi">Luna &gt; 80% acurácia · IoT &lt; 500ms · TestFlight</div>
+      </div>
+      <div class="rm-card anim-up delay-5">
+        <div class="rm-head"><span class="rm-sprint">Sprint 3</span><span class="rm-status">◯ Planejada</span></div>
+        <div class="rm-title">Dados &amp; Retenção</div>
+        <ul>
+          <li>Dashboard analítico para clínicas</li>
+          <li>Score de risco preditivo do pet</li>
+          <li>Teste de carga: 50 clínicas simultâneas</li>
+          <li>Luna refinada · dataset BR expandido</li>
+        </ul>
+        <div class="rm-kpi">Retenção simulada &gt; 60% vs. 35% baseline</div>
+      </div>
+      <div class="rm-card anim-up delay-6">
+        <div class="rm-head"><span class="rm-sprint">Sprint 4</span><span class="rm-status">◯ Planejada</span></div>
+        <div class="rm-title">Monetização</div>
+        <ul>
+          <li>Assinatura via Stripe / PagSeguro</li>
+          <li>Marketplace de parceiros veterinários</li>
+          <li>Relatório LGPD Art. 18 automatizado</li>
+          <li>SLA documentado · escala horizontal</li>
+        </ul>
+        <div class="rm-kpi">MRR · 50 clínicas: R$15k · 200 clínicas: R$60k</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 14 — EQUIPE ═════════════════════════ -->
+<section class="slide s14" data-slide="14" data-screen-label="14 Equipe">
+  <a class="kura-logo">
+    <svg viewBox="0 0 40 48" fill="none"><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.15"/><circle cx="20" cy="8" r="3.5" fill="currentColor"/><circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/><path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/></svg>
+    <span class="wordmark">Ku<em>ra</em></span>
+  </a>
+
+  <div class="content-z head">
+    <span class="kicker anim-up delay-1">A Equipe</span>
+    <h2 class="headline anim-up delay-2">Cinco fundadores técnicos —<br/><em>um problema que conhecemos por dentro</em></h2>
+  </div>
+
+  <div class="content-z layout">
+    <div class="team-grid">
+      <div class="team-card anim-up delay-3">
+        <div class="av">FF</div>
+        <div class="nm">Felipe Ferrete</div>
+        <div class="rm-id">RM 562999</div>
+        <div class="role">Tech Lead · Arquitetura & IA</div>
+        <div class="desc">Responsável pela arquitetura do sistema, design system Kura e integração Luna (Python/CV).</div>
+        <div class="stack"><span class="ch">.NET</span><span class="ch">Python</span><span class="ch">n8n</span><span class="ch">Oracle</span><span class="ch">Docker</span></div>
+      </div>
+      <div class="team-card amber anim-up delay-3">
+        <div class="av">NB</div>
+        <div class="nm">Nikolas Brisola</div>
+        <div class="rm-id">RM 564371</div>
+        <div class="role">Backend Java · Infra</div>
+        <div class="desc">Responsável pela camada de aplicação do kura-tutor (Java/Spring), configuração Oracle e pipeline de build.</div>
+        <div class="stack"><span class="ch">Java</span><span class="ch">Spring</span><span class="ch">Oracle</span><span class="ch">Git</span></div>
+      </div>
+      <div class="team-card ocean anim-up delay-4">
+        <div class="av">GS</div>
+        <div class="nm">Guilherme Sola</div>
+        <div class="rm-id">RM 563674</div>
+        <div class="role">Mobile · UX Design</div>
+        <div class="desc">Mobile do tutor e da clínica em React Native. Responsável pelo UX dos dois apps e flow de onboarding.</div>
+        <div class="stack"><span class="ch">React Native</span><span class="ch">Figma</span><span class="ch">TypeScript</span></div>
+      </div>
+      <div class="team-card clay anim-up delay-4">
+        <div class="av">GB</div>
+        <div class="nm">Gustavo Bosak</div>
+        <div class="rm-id">RM 566315</div>
+        <div class="role">QA · Frontend</div>
+        <div class="desc">Cobertura de testes &gt; 70% nos serviços. Frontend da clínica e validação E2E dos fluxos críticos.</div>
+        <div class="stack"><span class="ch">Cypress</span><span class="ch">Jest</span><span class="ch">React</span></div>
+      </div>
+      <div class="team-card anim-up delay-5">
+        <div class="av">CL</div>
+        <div class="nm">Clayton</div>
+        <div class="rm-id">RM 562285</div>
+        <div class="role">DevOps · Azure</div>
+        <div class="desc">Deploy, containerização Docker, configuração de Azure VM, NSG (firewall) e políticas de teardown pós-apresentação.</div>
+        <div class="stack"><span class="ch">Docker</span><span class="ch">Azure</span><span class="ch">Ubuntu</span><span class="ch">GitHub Actions</span></div>
+      </div>
+      <div class="team-card" style="background:var(--surface-2); display:flex; align-items:center; justify-content:center; padding:20px; text-align:center;">
+        <div style="font-family:var(--font-display); font-style:italic; font-size:30px; color:var(--sage); line-height:1.1;">"um time<br/>que entrega"</div>
+        <div style="font-family:var(--font-mono); font-size:9px; letter-spacing:.20em; color:var(--text-mute); text-transform:uppercase; margin-top:14px;">— Sprint 1 · Validado</div>
+      </div>
+    </div>
+
+    <div class="credibility anim-up delay-5">
+      <div class="l">Sinais de Credibilidade</div>
+      <div class="cred-item">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l10 5-10 5L2 8l10-5zM5 10v6c0 1.5 3 3 7 3s7-1.5 7-3v-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <div><div class="t">FIAP · ADS · GPA 9,0</div><div class="d">Cinco fundadores na mesma instituição, mesmo curso, sincronizados.</div></div>
+      </div>
+      <div class="cred-item amber">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M7 14h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><div class="t">Cerqueira Consultoria · em produção</div><div class="d">Automação WhatsApp com IA validada em cliente real (n8n · Evolution API · Groq · Gemini).</div></div>
+      </div>
+      <div class="cred-item ocean">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <div><div class="t">Design System Kura · GitHub público</div><div class="d">15+ componentes, light/dark mode, design tokens versionados.</div></div>
+      </div>
+      <div class="cred-item">
+        <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M2 12h20M12 3a14 14 0 010 18M12 3a14 14 0 000 18" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <div><div class="t">2 APIs em produção · Azure VM</div><div class="d">.NET 10 + Java/Spring com Oracle compartilhado, rodando agora.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════════ SLIDE 15 — ENCERRAMENTO ═════════════════════════ -->
+<section class="slide s15 bookend" data-slide="15" data-screen-label="15 Encerramento">
+  <div class="blob blob-amber" style="width:560px;height:560px;top:-160px;right:-160px;"></div>
+  <div class="blob blob-sage" style="width:480px;height:480px;bottom:-180px;left:-120px;"></div>
+
+  <div class="bookend-ring r3"></div>
+  <div class="bookend-ring r2"></div>
+
+  <div class="content-z" style="display:flex; flex-direction:column; align-items:center; gap:30px; max-width:1100px;">
+    <div class="anim-up delay-1" style="display:flex; align-items:center; gap:18px;">
+      <svg viewBox="0 0 40 48" width="60" height="72" fill="none" style="color:#8FB088;">
+        <path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" fill="currentColor" opacity="0.18"/>
+        <circle cx="20" cy="8" r="3.5" fill="currentColor"/>
+        <circle cx="13" cy="12" r="2.8" fill="currentColor" opacity="0.85"/>
+        <circle cx="27" cy="12" r="2.8" fill="currentColor" opacity="0.85"/>
+        <path d="M20 44 C8 44 4 34 4 24 C4 10 12 4 20 4 C28 4 36 10 36 24 C36 34 32 44 20 44Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.7"/>
+      </svg>
+      <span class="wordmark" style="font-size:80px;">Ku<em>ra</em></span>
+    </div>
+
+    <h2 class="display anim-up delay-2" style="font-size:120px; text-align:center; line-height:1.0;">
+      O cuidado <em>contínuo</em><br/>começa aqui.
+    </h2>
+
+    <p class="lede anim-up delay-3" style="text-align:center; max-width:820px; font-size:18px;">
+      Kura é a infraestrutura que o mercado veterinário brasileiro nunca teve — e que o crescimento do setor está exigindo agora. Construímos a fundação. O ecossistema está pronto para crescer.
+    </p>
+
+    <div class="summary-chips anim-up delay-4">
+      <span class="summary-chip">7 Entregáveis Validados ✓</span>
+      <span class="summary-chip">2 APIs em Produção</span>
+      <span class="summary-chip">4 Sprints Planejados</span>
+    </div>
+
+    <div class="stack-line anim-up delay-5">.NET 10 · Java/Spring · Python · React Native · Oracle 19c · Docker · Azure</div>
+
+    <div class="next-steps anim-up delay-5">
+      <div class="step"><span class="arrow">→</span><span><strong style="color:#F0E8D8;">Sprint 2</strong> · Luna em produção + App Mobile + IoT</span></div>
+      <div class="step"><span class="arrow">→</span><span><strong style="color:#F0E8D8;">Sprint 3</strong> · Dashboard analítico + Score de risco preditivo</span></div>
+      <div class="step"><span class="arrow">→</span><span><strong style="color:#F0E8D8;">Sprint 4</strong> · Monetização + Marketplace + LGPD report</span></div>
+    </div>
+
+    <div class="gh-link anim-up delay-6">github.com/FelipeFerrete/design-system-docs-KURA</div>
+
+    <div class="team-row anim-up delay-6" style="margin-top:8px;">
+      <span class="team-chip">Felipe Ferrete <span class="dot-sep">·</span> <span class="rm">562999</span></span>
+      <span class="team-chip">Nikolas Brisola <span class="dot-sep">·</span> <span class="rm">564371</span></span>
+      <span class="team-chip">Guilherme Sola <span class="dot-sep">·</span> <span class="rm">563674</span></span>
+      <span class="team-chip">Gustavo Bosak <span class="dot-sep">·</span> <span class="rm">566315</span></span>
+      <span class="team-chip">Clayton <span class="dot-sep">·</span> <span class="rm">562285</span></span>
+    </div>
+  </div>
+
+  <div class="footer-line" style="left:80px;">FIAP Challenge 2026 · Sprint 1 · Compliance & QA</div>
+  <div class="footer-line" style="right:80px; left:auto;">Uma empresa Clyvo Vet</div>
+</section>
+
+</div></div></div>
+
+<!-- ═══════ HUD ═══════ -->
+<div class="hud">
+  <button class="nav" id="prevBtn" aria-label="Anterior"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="dots" id="dots"></div>
+  <button class="nav" id="nextBtn" aria-label="Próximo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <span class="label" id="hudLabel">Kura · Sprint 1</span>
+  <span class="hint">N · Notas</span>
+</div>
+
+<!-- ═══════ SPEAKER NOTES PANEL ═══════ -->
+<div class="speaker-panel" id="speakerPanel">
+  <div class="notes-label">Notas do Apresentador</div>
+  <div id="notesText"></div>
+</div>
+
+<script>
+(() => {
+  // ── Stage scale-to-fit ────────────────────────────────
+  const canvas = document.getElementById('canvas');
+  const stage = document.getElementById('stage');
+  const BASE_W = 1920, BASE_H = 1080;
+  function fit() {
+    const s = Math.min(stage.clientWidth / BASE_W, stage.clientHeight / BASE_H);
+    const tx = (stage.clientWidth - BASE_W * s) / 2;
+    const ty = (stage.clientHeight - BASE_H * s) / 2;
+    canvas.style.transform = `translate(${tx}px, ${ty}px) scale(${s})`;
+  }
+  fit();
+  window.addEventListener('resize', fit);
+
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  // Speaker notes
+  let notes = [];
+  try { notes = JSON.parse(document.getElementById('speaker-notes').textContent); } catch(e) { notes = []; }
+  const speakerPanel = document.getElementById('speakerPanel');
+  const notesText = document.getElementById('notesText');
+  let notesVisible = false;
+
+  const dotsEl = document.getElementById('dots');
+  const slideNowEl = document.getElementById('slideNow');
+  const hudLabel = document.getElementById('hudLabel');
+
+  for (let i = 0; i < total; i++) {
+    const b = document.createElement('button');
+    b.className = 'dot';
+    b.setAttribute('aria-label', `Slide ${i+1}`);
+    b.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(b);
+  }
+  const dots = Array.from(dotsEl.children);
+
+  function activate(slide) {
+    slide.classList.add('active');
+    setTimeout(() => {
+      slide.querySelectorAll('.anim-up').forEach(el => el.classList.add('in'));
+    }, 50);
+  }
+  function deactivate(slide) {
+    slide.querySelectorAll('.anim-up').forEach(el => el.classList.remove('in'));
+    slide.classList.remove('active');
+  }
+
+  function updateHUD() {
+    slideNowEl.textContent = String(current + 1).padStart(2, '0');
+    dots.forEach((d, i) => {
+      d.classList.toggle('current', i === current);
+      d.classList.toggle('visited', i < current);
+    });
+    const lbl = slides[current].getAttribute('data-screen-label') || 'Kura';
+    hudLabel.textContent = lbl;
+    notesText.textContent = notes[current] || '';
+    try { window.parent.postMessage({slideIndexChanged: current}, '*'); } catch(e){}
+  }
+
+  function goTo(n) {
+    n = Math.max(0, Math.min(n, total - 1));
+    if (n === current) return;
+    const prev = slides[current];
+    deactivate(prev);
+    prev.classList.add('exit');
+    setTimeout(() => prev.classList.remove('exit'), 420);
+    current = n;
+    activate(slides[current]);
+    updateHUD();
+    try { localStorage.setItem('kura-deck-v2-slide', String(current)); } catch(e){}
+  }
+
+  function toggleNotes() {
+    notesVisible = !notesVisible;
+    speakerPanel.classList.toggle('visible', notesVisible);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.code === 'ArrowRight' || e.code === 'Space' || e.code === 'Enter' || e.code === 'PageDown') { goTo(current + 1); e.preventDefault(); }
+    else if (e.code === 'ArrowLeft' || e.code === 'Backspace' || e.code === 'PageUp') { goTo(current - 1); e.preventDefault(); }
+    else if (e.code === 'Home') goTo(0);
+    else if (e.code === 'End') goTo(total - 1);
+    else if (e.code === 'KeyN') { toggleNotes(); e.preventDefault(); }
+  });
+
+  document.getElementById('slides-container').addEventListener('click', e => {
+    if (e.target.closest('.hud, .theme-toggle, .speaker-panel, button, a, svg use, input, textarea')) return;
+    const x = e.clientX;
+    if (x < window.innerWidth * 0.15) goTo(current - 1);
+    else goTo(current + 1);
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+  // Theme toggle
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeLabel = document.getElementById('themeLabel');
+  function applyTheme(t) {
+    root.setAttribute('data-theme', t);
+    themeIcon.textContent = t === 'dark' ? '◐' : '☀';
+    themeLabel.textContent = t === 'dark' ? 'Escuro' : 'Claro';
+    try { localStorage.setItem('kura-deck-v2-theme', t); } catch(e){}
+  }
+  let saved = 'light';
+  try { saved = localStorage.getItem('kura-deck-v2-theme') || 'light'; } catch(e){}
+  applyTheme(saved);
+  themeBtn.addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+  // Restore slide
+  try {
+    const sv = parseInt(localStorage.getItem('kura-deck-v2-slide') || '0', 10);
+    if (sv && sv > 0 && sv < total) {
+      slides[0].classList.remove('active');
+      activate(slides[sv]);
+      current = sv;
+    } else {
+      activate(slides[0]);
+    }
+  } catch(e){ activate(slides[0]); }
+
+  updateHUD();
+})();
+</script>
+</body>
+</html>

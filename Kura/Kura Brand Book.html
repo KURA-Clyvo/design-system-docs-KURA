@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Kura · Brand Book — FIAP Challenge 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Lexend:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="kura-tokens.css"/>
+<link rel="stylesheet" href="brandbook.css"/>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#F8F2E6"/>
+  <circle cx="100" cy="90" r="34" fill="#4A6944"/>
+  <circle cx="100" cy="90" r="14" fill="#C8810D"/>
+  <text x="100" y="158" font-family="serif" font-style="italic" font-size="22" fill="#1B1006" text-anchor="middle">Brand</text>
+</svg>
+</template>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel" src="brandbook-logo.jsx"></script>
+<script type="text/babel" src="brandbook-youtube.jsx"></script>
+<script type="text/babel" src="brandbook-bloco2.jsx"></script>
+<script type="text/babel" src="brandbook-bloco4.jsx"></script>
+<script type="text/babel" src="brandbook-extras.jsx"></script>
+
+<script type="text/babel">
+
+// ─── HERO / TOC INTRO ─────────────────────────────────────
+function Hero() {
+  return (
+    <header className="bb-hero">
+      <div className="bb-hero-eyebrow">FIAP CHALLENGE 2026 · KURA · CLYVO VET</div>
+      <h1 className="bb-hero-title">Brand <em>Book</em>.</h1>
+      <p className="bb-hero-sub">
+        O sistema visual da Kura — logo, paleta, tipografia e aplicações.
+        Tudo o que o time precisa para criar peças consistentes.
+      </p>
+      <div className="bb-hero-grid">
+        <div className="bb-hero-stat"><span className="v">5</span><span className="k">Seções</span></div>
+        <div className="bb-hero-stat"><span className="v">4</span><span className="k">Banners YT</span></div>
+        <div className="bb-hero-stat"><span className="v">3</span><span className="k">Mascotes</span></div>
+        <div className="bb-hero-stat"><span className="v">v <em>1.0</em></span><span className="k">Sprint 1</span></div>
+      </div>
+    </header>
+  );
+}
+
+// ─── FOUNDATIONS: paleta, tipografia (denso) ─────────────
+function SectionFoundations() {
+  const colors = [
+    { name: 'Sage · primária',     hex: '#4A6944', token: '--sage',           role: 'CTA · identidade core' },
+    { name: 'Sage light',          hex: '#7B9E76', token: '--sage-light',     role: 'Hover · estado ativo' },
+    { name: 'Sage pale',           hex: '#E0ECDB', token: '--sage-pale',      role: 'Background sutil' },
+    { name: 'Amber · secundária',  hex: '#C8810D', token: '--amber',          role: 'Energia · afeto · destaques' },
+    { name: 'Amber bright',        hex: '#E89C20', token: '--amber-bright',   role: 'Acento vibrante' },
+    { name: 'Amber pale',          hex: '#FBF0DB', token: '--amber-pale',     role: 'Background warm' },
+    { name: 'Clay',                hex: '#D9624A', token: '--clay',           role: 'Alertas · urgências' },
+    { name: 'Ocean',               hex: '#1A3A52', token: '--ocean',          role: 'Confiança · dados · prontuário' },
+    { name: 'Areia · background',  hex: '#F8F2E6', token: '--bg',             role: 'Background padrão' },
+    { name: 'Surface',             hex: '#FFFCF7', token: '--surface',        role: 'Cards · modais · branco quente' },
+    { name: 'Casca · texto',       hex: '#1B1006', token: '--text',           role: 'Cor de texto primária' },
+    { name: 'Mute',                hex: '#8A7458', token: '--text-mute',      role: 'Captions · metadados' },
+  ];
+
+  return (
+    <section className="bb-section" id="foundations">
+      <div className="bb-section-head">
+        <div className="bb-section-eyebrow">
+          <span className="bb-section-num">00 · Fundações</span>
+          <span className="bb-section-tag">Tokens · Cor · Tipo</span>
+        </div>
+        <h2 className="bb-section-title">Cores e <em>tipografia</em>.</h2>
+        <p className="bb-section-lede">
+          Doze tokens de cor e três famílias tipográficas governam toda a marca. Não há cores fora dessa lista;
+          a hierarquia tipográfica usa Cormorant (emocional), Lexend (clareza) e JetBrains Mono (dados).
+        </p>
+      </div>
+
+      {/* PALETTE GRID */}
+      <div className="bb-block">
+        <div className="bb-block-head">
+          <h3 className="bb-block-title">Paleta · 12 tokens</h3>
+          <div className="bb-block-meta">light + dark · ver kura-tokens.css</div>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
+          {colors.map(c => (
+            <div className="bb-swatch" key={c.token}>
+              <div className="bb-swatch-bar" style={{ background: c.hex, borderBottom: c.hex === '#FFFCF7' ? '1px solid var(--border)' : 'none' }}/>
+              <div className="bb-swatch-info">
+                <span className="bb-swatch-name">{c.name}</span>
+                <span className="bb-swatch-hex">{c.hex} · <span style={{ color: 'var(--amber)' }}>{c.token}</span></span>
+                <span style={{ fontSize: 11.5, color: 'var(--text-mute)', marginTop: 4, lineHeight: 1.4 }}>{c.role}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CONTRAST PAIRS */}
+      <div className="bb-block">
+        <div className="bb-block-head">
+          <h3 className="bb-block-title">Pares de contraste · WCAG AA</h3>
+          <div className="bb-block-meta">≥ 4.5:1 para texto · ≥ 3:1 para UI</div>
+        </div>
+        <table className="bb-table">
+          <thead><tr><th>Combinação</th><th>Texto</th><th>Fundo</th><th>Ratio</th><th>Uso</th></tr></thead>
+          <tbody>
+            <tr><td><span className="swatch-dot" style={{ background:'#1B1006' }}/>Casca / Areia</td><td className="mono">#1B1006</td><td className="mono">#F8F2E6</td><td className="mono" style={{ color:'var(--sage)' }}>13.4 : 1</td><td>Body padrão · Headlines</td></tr>
+            <tr><td><span className="swatch-dot" style={{ background:'#FFFCF7' }}/>Surface / Sage</td><td className="mono">#FFFCF7</td><td className="mono">#4A6944</td><td className="mono" style={{ color:'var(--sage)' }}>6.1 : 1</td><td>Botões primários · CTA</td></tr>
+            <tr><td><span className="swatch-dot" style={{ background:'#1B1006' }}/>Casca / Amber</td><td className="mono">#1B1006</td><td className="mono">#C8810D</td><td className="mono" style={{ color:'var(--sage)' }}>4.8 : 1</td><td>Botões amber · destaque</td></tr>
+            <tr><td><span className="swatch-dot" style={{ background:'#4A6944' }}/>Sage / Sage pale</td><td className="mono">#4A6944</td><td className="mono">#E0ECDB</td><td className="mono" style={{ color:'var(--sage)' }}>4.9 : 1</td><td>Chips · Tags · badges</td></tr>
+            <tr><td><span className="swatch-dot" style={{ background:'#FFFCF7' }}/>Surface / Ocean</td><td className="mono">#FFFCF7</td><td className="mono">#1A3A52</td><td className="mono" style={{ color:'var(--sage)' }}>10.4 : 1</td><td>Slides técnicos · dados</td></tr>
+            <tr><td><span className="swatch-dot" style={{ background:'#4A6944' }}/>Sage / Surface</td><td className="mono">#4A6944</td><td className="mono">#FFFCF7</td><td className="mono" style={{ color:'var(--sage)' }}>6.4 : 1</td><td>Links · ações secundárias</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      {/* TYPE */}
+      <div className="bb-block">
+        <div className="bb-block-head">
+          <h3 className="bb-block-title">Famílias tipográficas</h3>
+          <div className="bb-block-meta">3 famílias · 9 estilos canônicos</div>
+        </div>
+        <div className="bb-grid-3">
+          <div className="bb-spec">
+            <div className="bb-spec-stage no-grid" style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between', padding: 32, minHeight: 240, gap: 18 }}>
+              <span className="bb-mono" style={{ color: 'var(--amber)' }}>DISPLAY · EMOCIONAL</span>
+              <span style={{ fontFamily: 'var(--font-display)', fontSize: 80, lineHeight: 0.95, color: 'var(--text)', fontWeight: 400, letterSpacing: '-0.025em' }}>Cor<em style={{ fontStyle: 'italic', color: 'var(--sage)' }}>morant</em></span>
+              <span style={{ fontSize: 12, color: 'var(--text-mute)' }}>Pesos: 300, 400, 500 + italic. Usar para títulos, números grandes, nomes de pets.</span>
+            </div>
+            <div className="bb-spec-foot"><span className="label">CORMORANT</span><span className="dim">var(--font-display)</span></div>
+          </div>
+          <div className="bb-spec">
+            <div className="bb-spec-stage no-grid" style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between', padding: 32, minHeight: 240, gap: 18 }}>
+              <span className="bb-mono" style={{ color: 'var(--amber)' }}>BODY · CLAREZA</span>
+              <span style={{ fontFamily: 'var(--font-body)', fontSize: 64, lineHeight: 1, color: 'var(--text)', fontWeight: 500, letterSpacing: '-0.01em' }}>Lexend</span>
+              <span style={{ fontSize: 12, color: 'var(--text-mute)' }}>Pesos: 400, 500, 600. Usar para corpo, UI, textos longos. Escolhida por reduzir fadiga em leitura clínica.</span>
+            </div>
+            <div className="bb-spec-foot"><span className="label">LEXEND</span><span className="dim">var(--font-body)</span></div>
+          </div>
+          <div className="bb-spec">
+            <div className="bb-spec-stage no-grid" style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between', padding: 32, minHeight: 240, gap: 18 }}>
+              <span className="bb-mono" style={{ color: 'var(--amber)' }}>MONO · DADOS</span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 52, lineHeight: 1, color: 'var(--text)', fontWeight: 500, letterSpacing: '-0.02em' }}>JetBrains</span>
+              <span style={{ fontSize: 12, color: 'var(--text-mute)' }}>Pesos: 400, 500, 600. IDs, timestamps, kickers, código, metadados.</span>
+            </div>
+            <div className="bb-spec-foot"><span className="label">JETBRAINS MONO</span><span className="dim">var(--font-mono)</span></div>
+          </div>
+        </div>
+      </div>
+
+      {/* TYPE SCALE */}
+      <div className="bb-block">
+        <div className="bb-block-head">
+          <h3 className="bb-block-title">Escala tipográfica</h3>
+          <div className="bb-block-meta">10 níveis · hierarquia canônica</div>
+        </div>
+        <table className="bb-table">
+          <thead><tr><th>Estilo</th><th>Família</th><th>Tamanho</th><th>Line-height</th><th>Tracking</th></tr></thead>
+          <tbody>
+            <tr><td>Display Hero</td><td>Cormorant 400-500</td><td className="mono">96-200 px</td><td className="mono">0.92-1.00</td><td className="mono">-0.025em</td></tr>
+            <tr><td>H1</td><td>Cormorant 500</td><td className="mono">56 px</td><td className="mono">1.02</td><td className="mono">-0.022em</td></tr>
+            <tr><td>H2</td><td>Cormorant 500</td><td className="mono">44 px</td><td className="mono">1.10</td><td className="mono">-0.02em</td></tr>
+            <tr><td>H3</td><td>Lexend 600</td><td className="mono">22 px</td><td className="mono">1.30</td><td className="mono">-0.01em</td></tr>
+            <tr><td>Lead</td><td>Cormorant italic 300</td><td className="mono">26-32 px</td><td className="mono">1.30</td><td className="mono">0</td></tr>
+            <tr><td>Body</td><td>Lexend 400</td><td className="mono">15 px</td><td className="mono">1.55</td><td className="mono">0</td></tr>
+            <tr><td>Body small</td><td>Lexend 400</td><td className="mono">13 px</td><td className="mono">1.50</td><td className="mono">0</td></tr>
+            <tr><td>Kicker</td><td>JetBrains Mono 500</td><td className="mono">10-12 px</td><td className="mono">1.20</td><td className="mono">0.20em · UPPERCASE</td></tr>
+            <tr><td>Mono data</td><td>JetBrains Mono 400</td><td className="mono">13 px</td><td className="mono">1.45</td><td className="mono">0</td></tr>
+            <tr><td>Caption</td><td>Lexend 400</td><td className="mono">11 px</td><td className="mono">1.50</td><td className="mono">0.04em</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+// ─── SIDEBAR NAV ──────────────────────────────────────────
+function Sidebar({ active, onPick }) {
+  const items = [
+    { id: 'foundations',  n: '00', t: 'Fundações' },
+    { id: 'logo',         n: '01', t: 'Logo · Identidade' },
+    { id: 'youtube',      n: '02', t: 'YouTube · Canal' },
+    { id: 'icons',        n: '06', t: 'Iconografia' },
+    { id: 'photography',  n: '07', t: 'Fotografia' },
+    { id: 'illustrations',n: '08', t: 'Ilustrações' },
+    { id: 'motion',       n: '09', t: 'Motion · Micro' },
+    { id: 'mascot',       n: '03', t: 'Mascote · Exploração' },
+    { id: 'linkedin',     n: '04', t: 'LinkedIn · Carousel' },
+    { id: 'deck',         n: '05', t: 'Deck Master' },
+  ];
+  return (
+    <aside className="bb-sidebar">
+      <div>
+        <div className="bb-side-brand">
+          <KuraMark size={36} color="var(--sage)"/>
+          <div>
+            <div className="bb-side-brand-word">Ku<em>ra</em></div>
+            <div className="bb-side-brand-meta">Brand Book · v1.0</div>
+          </div>
+        </div>
+      </div>
+      <div className="bb-side-section">
+        <div className="bb-side-title">Sumário</div>
+        {items.map(it => (
+          <a key={it.id} className={`bb-side-link ${active === it.id ? 'active' : ''}`}
+             href={`#${it.id}`}
+             onClick={e => { onPick && onPick(it.id); }}>
+            <span><span className="idx">{it.n}</span>  {it.t}</span>
+          </a>
+        ))}
+      </div>
+      <div className="bb-side-section">
+        <div className="bb-side-title">Diretrizes</div>
+        <div style={{ padding: '0 10px', fontSize: 12.5, color: 'var(--text-soft)', lineHeight: 1.55 }}>
+          Toda peça da Kura segue este sistema. Em caso de dúvida sobre tom, cor ou tipo,
+          consulte primeiro — não invente.
+        </div>
+      </div>
+      <div className="bb-side-foot">
+        FIAP CHALLENGE 2026<br/>
+        SPRINT 1 · v1.0<br/>
+        © KURA · CLYVO VET
+      </div>
+    </aside>
+  );
+}
+
+// ─── APP ROOT ─────────────────────────────────────────────
+function App() {
+  const [active, setActive] = React.useState('foundations');
+
+  React.useEffect(() => {
+    const ids = ['foundations','logo','youtube','icons','photography','illustrations','motion','mascot','linkedin','deck'];
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > 0.15) {
+          setActive(e.target.id);
+        }
+      });
+    }, { rootMargin: '-30% 0px -50% 0px', threshold: [0, 0.15, 0.5] });
+    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div className="bb-shell">
+      <Sidebar active={active} onPick={setActive}/>
+      <main className="bb-main">
+        <Hero/>
+        <SectionFoundations/>
+        <SectionLogo/>
+        <SectionYouTube/>
+        <SectionIcons/>
+        <SectionPhotography/>
+        <SectionIllustrations/>
+        <SectionMotion/>
+        <SectionMascot/>
+        <SectionLinkedIn/>
+        <SectionDeck/>
+      </main>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+</script>
+
+</body>
+</html>
